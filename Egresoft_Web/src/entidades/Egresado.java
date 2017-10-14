@@ -1,5 +1,5 @@
 package entidades;
-// Generated 11/10/2017 03:41:20 PM by Hibernate Tools 5.2.3.Final
+// Generated 13/10/2017 09:42:26 PM by Hibernate Tools 5.2.3.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -39,15 +39,6 @@ public class Egresado implements java.io.Serializable {
 		this.nombres = nombres;
 		this.apellidos = apellidos;
 		this.emailPrincipal = emailPrincipal;
-	}
-	
-	public Egresado(long idEgresado, String tipoDocumento, String nombres, String apellidos, String emailPrincipal, String telefonoPrincipal) {
-		this.idEgresado = idEgresado;
-		this.tipoDocumento = tipoDocumento;
-		this.nombres = nombres;
-		this.apellidos = apellidos;
-		this.emailPrincipal = emailPrincipal;
-		this.telefonoPrincipal=telefonoPrincipal;
 	}
 
 	public Egresado(long idEgresado, String tipoDocumento, String nombres, String apellidos, String telefonoPrincipal,
