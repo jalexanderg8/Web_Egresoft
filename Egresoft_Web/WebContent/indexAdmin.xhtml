@@ -1,0 +1,82 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateAdministrador/AdminTemplate.xhtml">
+	<ui:define name="admin">
+		<h:head></h:head>
+		<h:body>
+			<div class="container">
+				<br></br> <br />
+				<div class="row">
+					<div class="col s12 m4">
+						<div class="center promo">
+							<a href=""> <i class="material-icons uno">save</i></a>
+							<h5>Cargar Bd</h5>
+							<p>
+								Permitira al administrador subir aprendices<br></br> ala base de
+								datos solo adjuntando el archivo
+							</p>
+
+						</div>
+					</div>
+					<div class="col s12 m4">
+						<div class="center promo">
+							<a href=""> <i class="material-icons dos">poll</i></a>
+							<h5>Gestionar Noticia/Evento</h5>
+							<p>
+								Permitira al Administrador crear noticias,eventos<br /> a si
+								como actualizar la informacion de los mismos y eliminarlos
+							</p>
+						</div>
+					</div>
+					<div class="col s12 m4">
+						<div class="center promo">
+							<a href=""> <i class="material-icons tres">business_center</i></a>
+							<h5>Gestionar Convenios</h5>
+							<p>
+								Permitira al admnistrador crear convenios asi como actualizar <br></br>
+								los convenios y eliminarlos
+							</p>
+						</div>
+					</div>
+				</div>
+				<br /> <br></br>
+				<div class="row">
+					<div class="col s12 m6">
+						<div class="center promo">
+							<a href=""> <i class="material-icons cuatro">email</i></a>
+							<h5>Enviar Correos Egresados</h5>
+							<p>
+								Permitira al Administrador enviar correos a los egresados<br />
+								segun lo disponga individual o por grupos
+							</p>
+
+						</div>
+					</div>
+					<div class="col s12 m6">
+						<div class="center promo">
+							<a href="crudEgresado.jsf"> <i class="material-icons cinco">mode_edit</i></a>
+							<h5>Gestionar Egresados</h5>
+							<p>
+								Permitira al administrador consultar la informacion del egresado
+								<br></br> asi como actualizarla y eliminar la informacion de los
+								egresados
+							</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<script type="text/javascript"
+				src="resources/js/jquery-3.2.1.min.js.js"></script>
+			<script type="text/javascript" src="resources/js/materialize.js"></script>
+		</h:body>
+	</ui:define>
+</ui:composition>
+
+</html>

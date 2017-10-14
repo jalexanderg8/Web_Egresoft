@@ -1,0 +1,196 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+
+<ui:composition xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateAdministrador/AdminTemplate.xhtml">
+	<ui:define name="admin">
+		<h:head></h:head>
+		<h:body>
+			<br></br>
+			<h4 class="green-text text-darken-5 center-align">Bienvenido a
+				la Gestion de Datos de Egresados</h4>
+				
+			<br></br>
+			<div class="container-fluid">
+				<h:form id="formConsulta">
+					<p:dataTable id="tablaConsulta" var="egre"
+						value="#{egresadoBean.listaEgresados}"
+						emptyMessage="No hay Egresados
+		Registrados" paginator="true"
+						paginatorPosition="top" rows="10">
+
+						<p:column headerText="Tipo de Documento"
+							filterBy="#{egre.tipoDocumento}">
+							<p:outputLabel value="#{egre.tipoDocumento}" />
+						</p:column>
+
+						<p:column headerText="Numero de cedula"
+							filterBy="#{egre.idEgresado}">
+							<p:outputLabel value="#{egre.idEgresado}" />
+						</p:column>
+
+						<p:column headerText="Nombres Completos"
+							filterBy="#{egre.nombres}">
+							<p:outputLabel value="#{egre.nombres}" />
+						</p:column>
+
+						<p:column headerText="Apellidos Completos"
+							filterBy="#{egre.apellidos}">
+							<p:outputLabel value="#{egre.apellidos}" />
+						</p:column>
+
+						<p:column headerText="Email Princioal"
+							filterBy="#{egre.emailPrincipal}">
+							<p:outputLabel value="#{egre.emailPrincipal}" />
+						</p:column>
+
+
+						<p:column headerText="Modificar">
+							<p:commandButton value="Modificar"
+								oncomplete="PF('dialogModificar').show();"
+								update=":formModificar">
+								<f:setPropertyActionListener target="#{egresadoBean.egresado}"
+									value="#{egre}" />
+							</p:commandButton>
+						</p:column>
+
+						<p:column headerText="Eliminar">
+							<p:commandButton value="Eliminar"
+								oncomplete="PF('dialogEliminar').show();" update=":formEliminar">
+								<f:setPropertyActionListener target="#{egresadoBean.egresado}"
+									value="#{egre}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</h:form>
+
+				<h:form id="formModificar">
+					<p:dialog id="dlgModificar" widgetVar="dialogModificar"
+						resizable="false" showEffect="explode" hideEffect="explode"
+						modal="true">
+						<p:panelGrid columns="6" style="margin: 0 auto;">
+
+							<p:outputLabel value="tipo de Documento" />
+							<p:inputText value="#{egresadoBean.egresado.tipoDocumento}"
+							required="true">
+								
+							</p:inputText>
+							
+
+							<p:outputLabel value="Numero de Documento" />
+							<p:inputText value="#{egresadoBean.egresado.idEgresado}"
+							required="true">
+								
+							</p:inputText>
+							
+
+							<p:outputLabel value="Nombres" />
+							<p:inputText value="#{egresadoBean.egresado.nombres}"
+							required="true">
+								
+								
+							</p:inputText>
+							
+
+							<p:outputLabel value="Apellidos" />
+							<p:inputText value="#{egresadoBean.egresado.apellidos}"
+							required="true">
+								
+							</p:inputText>
+							
+
+							<p:outputLabel value="Telefono Principal" />
+							<p:inputText value="#{egresadoBean.egresado.telefonoPrincipal}">
+								
+							</p:inputText>
+							
+
+							<p:outputLabel value="Telefono Alterno" id="telefonoAlterno" />
+							<p:inputText value="#{egresadoBean.egresado.telefonoAlterno}">
+							
+							</p:inputText>
+
+							<p:outputLabel value="Correo Principal" />
+							<p:inputText value="#{egresadoBean.egresado.emailPrincipal}"
+							required="true">
+								
+							</p:inputText>
+							
+
+							<p:outputLabel value="Correo Alterno" />
+							<p:inputText value="#{egresadoBean.egresado.emailAlterno}">
+								
+							</p:inputText>
+							
+
+							<p:outputLabel value="Contraseña" />
+							<p:inputText value="#{egresadoBean.egresado.contrasena}">
+								
+							</p:inputText>
+							
+
+							<p:outputLabel value="Ciudad de Residencia" />
+							<p:inputText value="#{egresadoBean.egresado.lugarResidencia}">
+								
+							</p:inputText>
+							
+
+							<p:outputLabel value="Modalidad" />
+							<p:inputText value="#{egresadoBean.egresado.modalidad}">
+								
+							</p:inputText>
+							
+
+							<p:outputLabel value="Fecha Inicio Formacion" />
+							<p:calendar id="fechaInicio"
+								value="#{egresadoBean.egresado.fechaInicio}"
+								pattern="dd-MM-yyyy" mask="true" />
+						
+
+							<p:outputLabel value="Fecha Fin Formacion" />
+							<p:calendar id="fechaFin"
+								value="#{egresadoBean.egresado.fechaFin}" pattern="dd-MM-yyyy"
+								mask="true" />
+							
+
+						</p:panelGrid>
+						<p:commandButton value="Guardar"
+							actionListener="#{egresadoBean.editarEgresado()}"
+							update=":formConsulta:tablaConsulta"
+							oncomplete="PF('dialogModificar').hide();" />
+						<p:commandButton value="Cancelar"
+							onclick="PF('dialogModificar').hide();" />
+					</p:dialog>
+				</h:form>
+
+				<h:form id="formEliminar">
+					<p:dialog id="dlgEliminar" widgetVar="dialogEliminar"
+						resizable="false" showEffect="explode" hideEffect="explode"
+						modal="true">
+						<h:outputText value="Desea eliminar este registro?" />
+						<p:commandButton value="SI"
+							actionListener="#{egresadoBean.eliminarEgresado()}"
+							update=":formConsulta:tablaConsulta"
+							oncomplete="PF('dialogEliminar').hide();" />
+						<p:commandButton value="No" onclick="PF('dialogEliminar').hide();" />
+					</p:dialog>
+
+				</h:form>
+			</div>
+			<!-- <script type="text/javascript"
+				src="resources/js/jquery-3.2.1.min.js.js"></script> -->
+			<script type="text/javascript" src="resources/js/materialize.js"></script>
+		</h:body>
+	</ui:define>
+</ui:composition>
+</html>
+
+
+
+
+
+

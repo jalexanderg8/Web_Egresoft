@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+<h:head>
+  		<meta charset="UTF-8"/>
+ 		  <link rel="stylesheet" href="resources/css/materialize.css"/>
+             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+             <link rel="stylesheet" href="resources/css/main.css"/>
+              <title><ui:insert name="title">Egresoft</ui:insert></title>
+</h:head>
+
+<h:body>
+
+
+<div id="header">
+    <ui:insert name="header">
+    	
+    	 <ui:include src="headerEgresado.xhtml"/> 
+    </ui:insert>
+</div>
+
+
+<div id="content">
+  <ui:insert name="content">
+    	
+    	
+  </ui:insert>
+</div>
+
+<div id="footer">
+  <ui:insert name="footer">
+    	
+		<ui:include src="footerEgresado.xhtml"/>
+  </ui:insert>
+</div>
+		 <script type="text/javascript" src="resources/js/jquery-3.2.1.min.js"></script>
+     			<script type="text/javascript" src="resources/js/materialize.js"></script>
+					<script >
+					$(function(){
+						$(".button-collapse").sideNav();
+						}); 
+							
+				</script>
+				<script >
+					$(function(){
+						$(".slider").slider({
+							height: 800,
+							transition: 200
+						});
+					});
+				</script>
+				<script>
+				$(function() block
+				$(".dropdown-button").dropdown();
+				});
+				</script>
+				<script>
+				$(function(){
+				$('.tooltipped').tooltip({delay: 50});	
+				});
+</script>
+	
+</h:body>
+
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateUsuario/UsuarioTemplate.xhtml">
+	<ui:define name="content">
+		<h:head></h:head>
+		<h:body>
+			<div class="container-fluid">
+
+				<p:panel>
+
+					<p:layoutUnit position="center">
+						<h:form>
+
+							<p:growl id="growl" sticky="true" showDetail="true" />
+
+							<p:wizard flowListener="#{userWizard.onFlowProcess}"
+								nextLabel="Siguiente" backLabel="Atras">
+								<p:tab id="personal" title="Verificación de Identidad">
+									<p:panel header="Verificación de Identidad">
+										<p:messages />
+										<h:panelGrid columns="2" columnClasses="label, value">
+
+											<p:fieldset legend="Verificación" toggleable="true"
+												toggleSpeed="500">
+												<center>
+													<img src="resources/imagenes/ofertaSENA.png" width="90px"
+														height="90px" />
+												</center>
+												<p:ajax event="toggle"
+													listener="#{fieldsetView.handleToggle}" update="" />
+												<h:panelGrid columns="2" cellpadding="5">
+
+
+													<h:outputText value="Numero de Documento: *" />
+													<p:inputText id="numeroDocumento" value="#{egresadoBean.dniEgresado}"
+														placeholder="cedula" required="true"
+														title="el campo de la cedula es requerido"
+														label="El campo cédula es requerido">
+														<f:validateLongRange minimum="1000000"
+															maximum="99999999999"></f:validateLongRange>
+													</p:inputText>
+													<p:tooltip  for="numeroDocumento"
+														value="Ingrese un numero de documento" showEffect="clip"
+														hideEffect="explode" data-position="left" />
+														
+														<p:commandButton  />
+
+												</h:panelGrid>
+											</p:fieldset>
+											<br />
+											<h:outputText value="Ir al ultimo paso: " />
+											<br />
+											<p:selectBooleanCheckbox value="#{userWizard.pasar}" />
+										</h:panelGrid>
+									</p:panel>
+								</p:tab>
+
+								<p:tab id="Estudio" title="Actualizar Datos">
+									<p:panel header="Actualizar Datos">
+										<p:messages />
+										<h:panelGrid columns="2" columnClasses="label, value">
+											<p:fieldset legend="Actualizar" toggleable="true"
+												toggleSpeed="500">
+												<p:ajax event="toggle"
+													listener="#{fieldsetView.handleToggle}" update="" />
+												<h:panelGrid columns="2" cellpadding="5">
+
+													<h:outputText value="Correo Alterno:" />
+													<p:inputText id="correo"
+														value="#{egresadoBean.egresado.emailAlterno}"
+														placeholder="correo" required="true"
+														title="El campo correo es requerido ejemplo: xxxx@domio.xx"
+														label="El campo correo es requerido ejemplo: xxxx@domio.xx">
+														<f:validateRegex
+															pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$" />
+													</p:inputText>
+
+
+
+
+													<h:outputText value="Teléfono Alterno: " />
+													<p:inputText id="telefono"
+														value="#{egresadoBean.egresado.telefonoAlterno}"
+														placeholder="telefono" required="true"
+														title="El telefono es requerido debe empezar por 3 y tener un total de 10 digitos"
+														label="El telefono es requerido debe empezar por 3
+                                                     y tener un total de 10 digitos">
+														<f:validateRegex pattern="^[3][0-9]{9}$" />
+													</p:inputText>
+
+
+
+
+													<h:outputText value="Lugar de Residencia: " />
+													<p:inputText
+														value="#{egresadoBean.egresado.lugarResidencia}"
+														placeholder="residencia" required="true"
+														title="El campo residencia es requerido"
+														label="El campo residencia es requerido" />
+
+
+													<h:outputText value="Fecha Inicio Formacion " />
+													<p:calendar id="FechaInicio" value="#{egresadoBean.egresado.fechaInicio}"
+													 pattern="dd-MM-yyyy" mask="true" />
+														
+
+													<h:outputText value="Fecha Fin Formacion " />
+													<p:calendar id="FechaFin" value="#{egresadoBean.egresado.fechaFin}"
+														 pattern="dd-MM-yyyy" mask="true" />
+
+												</h:panelGrid>
+											</p:fieldset>
+										</h:panelGrid>
+									</p:panel>
+								</p:tab>
+
+								<p:tab id="contraseña" title="Modificar Contraseña">
+									<p:panel header="Modificar Contraseña">
+										<p:messages />
+										<h:panelGrid columns="2" columnClasses="label, value">
+											<p:fieldset legend="Contraseña" toggleable="true"
+												toggleSpeed="500">
+												<p:ajax event="toggle"
+													listener="#{fieldsetView.handleToggle}" update="" />
+												<h:panelGrid columns="2" cellpadding="5">
+
+													<h:outputText value="Contraseña: " size="20"
+														required="true"
+														label="El campo Password es requerido, y Requiere una cadena de 6 a 
+                    20 caracteres con al menos un dígito, una letra mayúscula, una letra minúscula y un símbolo especial (@ # $%)" />
+													<h:inputSecret id="password"
+														title="El campo Password es requerido, y Requiere una cadena de 6 a 20 caracteres con al menos un dígito, una letra mayúscula, una letra minúscula y un símbolo especial (@ # $%)"
+														value="#{egresadoBean.egresado.contrasena}" size="20"
+														required="true"
+														label="El campo Contraseña es requerido, y Requiere una cadena de 6 a 20 caracteres con al menos un dígito, una letra mayúscula, una letra minúscula y un símbolo especial (@ # $%)">
+
+													</h:inputSecret>
+													<h:message for="password" style="color:red"></h:message>
+													<br />
+
+													<h:outputText value="Confirmar Contraseña: " />
+													<h:inputSecret id="confirmar"
+														value="#{egresadoBean.egresado.contrasena}" size="20"
+														required="true"
+														title="El campo Password es requerido, y Requiere una cadena de 6 a 20 caracteres con al menos un dígito, una letra mayúscula, una letra minúscula y un símbolo especial (@ # $%)"
+														label="El campo Confirmar Contraseña es requerido, y Requiere una cadena de 6 a 20 caracteres con al menos un dígito, una letra mayúscula, una letra minúscula y un símbolo especial (@ # $%)">
+
+													</h:inputSecret>
+													<h:message for="confirmar" style="color:red"></h:message>
+
+												</h:panelGrid>
+											</p:fieldset>
+										</h:panelGrid>
+									</p:panel>
+								</p:tab>
+
+								<p:tab id="encuesta" title="Encuesta Egresados">
+									<p:panel header="Encuesta Egresados">
+										<p:messages />
+										<object
+											data="https://docs.google.com/forms/d/e/1FAIpQLSc5DD-QbL-ROx1juW7N0RQYbfb85k6xvpVxRb978_nYMbH12g/viewform"
+											width="1200px" height="300px"></object>
+
+									</p:panel>
+								</p:tab>
+
+								<p:tab id="confirma" title="Confirmación">
+									<p:panel header="Confirmación">
+										<h:panelGrid id="confirmation" columns="3"
+											columnClasses="grid,grid,grid">
+											<h:panelGrid columns="2" columnClasses="label, value">
+
+												<h:outputText value="1. Tipo de Documento: " />
+												<h:inputText value="#{userData.data}"
+													styleClass="outputLabel" disabled="true" />
+
+												<h:outputText value="2. Numero de Documento: " />
+												<h:inputText value="#{egresadoBean.egresado.idEgresado}"
+													styleClass="outputLabel" disabled="true" />
+
+												<h:outputText value="3. Correo Alterno: " />
+												<h:inputText value="#{egresadoBean.egresado.emailAlterno}"
+													styleClass="outputLabel" disabled="true" />
+
+												<h:outputText value="4. Telefono Alterno: " />
+												<h:inputText
+													value="#{egresadoBean.egresado.telefonoAlterno}"
+													styleClass="outputLabel" disabled="true" />
+
+											</h:panelGrid>
+
+											<h:panelGrid columns="2" columnClasses="label, value">
+												<h:outputText value="5. Lugar de Residencia: " />
+												<h:inputText
+													value="#{egresadoBean.egresado.lugarResidencia}"
+													styleClass="outputLabel" disabled="true" />
+
+												<h:outputText value="6. Contraseña: " />
+												<h:inputText value="#{egresadoBean.egresado.contrasena}"
+													styleClass="outputLabel" disabled="true" />
+
+
+												<h:outputText value="7. Confirmar Contraseña: " />
+												<h:inputText value="#{egresadoBean.egresado.contrasena}"
+													styleClass="outputLabel" disabled="true" />
+
+												<h:outputText value="8. Fecha Inicio Formacion: " />
+												<h:inputText value="#{egresadoBean.egresado.fechaInicio}"
+													styleClass="outputLabel" disabled="true" />
+
+												<h:outputText value="9. Fecha Fin Formacion: " />
+												<h:inputText value="#{egresadoBean.egresado.fechaFin}"
+													styleClass="outputLabel" disabled="true" />
+
+											</h:panelGrid>
+										</h:panelGrid>
+
+										<p:commandButton value="Actualizar"
+											actionListener="#{egresadoBean.nuevoEgresado()}" update="growl"
+											process="@this" />
+									</p:panel>
+								</p:tab>
+							</p:wizard>
+
+						</h:form>
+					</p:layoutUnit>
+
+
+				</p:panel>
+			</div>
+
+			<!--  <script type="text/javascript"
+				src="resources/js/jquery-3.2.1.min.js.js"></script> -->
+			<script type="text/javascript" src="resources/js/materialize.js"></script>
+		</h:body>
+	</ui:define>
+</ui:composition>
+</html>

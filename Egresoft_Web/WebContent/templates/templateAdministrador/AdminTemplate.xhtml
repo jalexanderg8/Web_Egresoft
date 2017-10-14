@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="resources/css/materialize.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="resources/css/main.css" />
+	<title><ui:insert name="title">Egresoft</ui:insert></title>
+</h:head>
+
+<h:body>
+
+
+	<div id="header">
+		<ui:insert name="header">
+
+			<ui:include src="headerAdmin.xhtml" />
+
+		</ui:insert>
+	</div>
+
+
+	<div id="admin">
+		<ui:insert name="admin">
+
+		</ui:insert>
+	</div>
+
+	<div id="footer">
+		<ui:insert name="footer">
+
+			<ui:include src="footerAdmin.xhtml" />
+
+		</ui:insert>
+	</div>
+
+	<script>
+					$(function(){
+						$(".button-collapse").sideNav();
+						}); 
+					</script>
+	<script>
+				$(function() block
+				$(".dropdown-button").dropdown();
+				});
+				</script>
+	<script>
+				$(function(){
+				$('.tooltipped').tooltip({delay: 50});	
+				});
+				</script>
+	<script>
+				 $(function() {
+					    $('.select').material_select();
+					  });
+
+				</script>
+
+</h:body>
+
+</html>
