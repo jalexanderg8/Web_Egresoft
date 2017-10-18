@@ -97,13 +97,14 @@ public class EgresadoDao {
 					System.out.println("5");
 
 					
-					String consulta = "UPDATE egresado SET telefono_alterno=?, email_alterno=? , "
+					String consulta = "UPDATE egresado SET telefono_principal=?, telefono_alterno=?, email_alterno=? , "
 							+ "lugar_residencia=? ,contrasena=? ,fecha_inicio=? , fecha_fin=? WHERE idEgresado= ? ";
 
 					System.out.println("6");
 					
 					System.out.println("sentencia: "+consulta);
 					String datos="";
+					datos+="tel principal -"+egresado.getTelefonoPrincipal();
 					datos+="tel alterno - "+egresado.getTelefonoAlterno();
 					datos+="email alterno - "+egresado.getEmailAlterno();
 					datos+="residencia - "+egresado.getLugarResidencia();
@@ -118,14 +119,14 @@ public class EgresadoDao {
 
 					System.out.println("7");
 
-					
-					statement.setString(1, egresado.getTelefonoAlterno());
-					statement.setString(2, egresado.getEmailAlterno());
-					statement.setString(3, egresado.getLugarResidencia());
-					statement.setString(4, egresado.getContrasena());
-					statement.setDate(5,(Date) fechaInicio);
-					statement.setDate(6, (Date) fechaFin);
-					statement.setLong(7, egresado.getIdEgresado());
+					statement.setString(1, egresado.getTelefonoPrincipal());
+					statement.setString(2, egresado.getTelefonoAlterno());
+					statement.setString(3, egresado.getEmailAlterno());
+					statement.setString(4, egresado.getLugarResidencia());
+					statement.setString(5, egresado.getContrasena());
+					statement.setDate(6,(Date) fechaInicio);
+					statement.setDate(7, (Date) fechaFin);
+					statement.setLong(8, egresado.getIdEgresado());
 
 					System.out.println("8");
 
