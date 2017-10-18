@@ -37,19 +37,12 @@
 					<br></br>
 					<br></br>
 					<br></br>
-					<p:fileUpload uploadLabel="Cargar" cancelLabel="Cancelar"
-						label="Seleccionar archivo"
-						fileUploadListener="#{fileUploadView.uploadAttachment}"
-						mode="advanced" dragDropSupport="false" multiple="true"
-						update="messages1" sizeLimit="2500000" fileLimit="3" auto="false"
-						allowTypes="/(\.|\/)(gif|jpe?g|png|doc|docx|xls|xlsx|pdf|ppt|pptx)$/"
-						invalidFileMessage="Solamente esta permitido cargar archivos con extensión .gif, .jpg, .png, .doc, .docx, .xls, .xlsx, .pdf, .ppt . pptx" />
 					<br></br>
 					<br></br>
 					<br></br>
 					<div class="center-align">
 						<p:commandButton value="Enviar"
-							action="#{correoBean.enviarCorreoAdjunto()}" />
+							action="#{correoBean.enviarCorreo()}" />
 						<p:spacer width="50" height="10" />
 						<p:commandButton value="Cancelar" />
 					</div>
