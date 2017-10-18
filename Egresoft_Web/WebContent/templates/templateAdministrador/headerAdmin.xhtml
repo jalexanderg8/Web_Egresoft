@@ -1,69 +1,94 @@
-<div class="navbar-fixed  ">
-	<nav class=" green darken-1 ">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
-		<div class="nav-wrapper ">
-			<a href="indexAdmin.jsf"><img class="responsive-img "
-				src="resources/imagenes/logoEgresoft.png" /></a>
+<h:head>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="resources/css/materialize.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="resources/css/main.css" />
+	<title><ui:insert name="title">Egresoft</ui:insert></title>
+</h:head>
+
+<h:body>
+
+	<div class="navbar-fixed  ">
+		<nav class=" green darken-1 ">
+
+			<div class="nav-wrapper ">
+				<a href="indexAdmin.jsf"><img class="responsive-img "
+					src="resources/imagenes/logoEgresoft.png" /></a>
 
 
-			<ul class="right hide-on-med-and-down">
-
-				<li><a class="z-depth-3" href="subirExcel.jsf"><i
-						class="material-icons left">save</i>Cargar BD</a></li>
-				<li><a class="z-depth-3"><i class="material-icons left">poll</i>Gestionar
-						Noticia/Evento </a>
-					<ul>
-						<li><a href="gestionarEvento.jsf"
-							class="teal-text text-accent-4"> Gestionar Evento</a>
+				<ul class="right hide-on-med-and-down">
+					<h:form>
+						<li><a class="z-depth-3" href="subirExcel.jsf"><i
+								class="material-icons left">save</i>Cargar BD</a></li>
+						<li><a class="z-depth-3"><i class="material-icons left">poll</i>Gestionar
+								Noticia/Evento </a>
 							<ul>
-								<li><a href="gestionarNoticia.jsf"
-									class="teal-text text-accent-4"> Gestionar Noticia</a></li>
+								<li><a href="gestionarEvento.jsf"
+									class="teal-text text-accent-4"> Gestionar Evento</a>
+									<ul>
+										<li><a href="gestionarNoticia.jsf"
+											class="teal-text text-accent-4"> Gestionar Noticia</a></li>
+									</ul></li>
 							</ul></li>
-					</ul></li>
-				<li><a class="z-depth-3" href="gestionarConvenios.jsf"><i
-						class="material-icons left">business_center</i>Gestionar Convenios</a></li>
+						<li><a class="z-depth-3" href="gestionarConvenios.jsf"><i
+								class="material-icons left">business_center</i>Gestionar
+								Convenios</a></li>
 
-				<li><a class="z-depth-3" href=""><i
-						class="material-icons left">mail</i>Enviar Correos</a>
-					<ul>
-						<li><a href="enviarCorreosPersonas.jsf"
-							class="material-icons left  green darken-1">person</a>
+						<li><a class="z-depth-3" href=""><i
+								class="material-icons left">mail</i>Enviar Correos</a>
 							<ul>
-								<li><a href="enviarCorreosGrupos.jsf"
-									class="material-icons left  green darken-1 ">people</a></li>
+								<li><a href="enviarCorreosPersonas.jsf"
+									class="material-icons left  green darken-1">person</a>
+									<ul>
+										<li><a href="enviarCorreosGrupos.jsf"
+											class="material-icons left  green darken-1 ">people</a></li>
+									</ul></li>
 							</ul></li>
-					</ul></li>
 
 
-				<li><a class="z-depth-3" href="crudEgresado.jsf"><i
-						class="material-icons left">mode_edit</i>Gestionar Egresado</a></li>
+						<li><a class="z-depth-3" href="crudEgresado.jsf"><i
+								class="material-icons left">mode_edit</i>Gestionar Egresado</a></li>
 
-				<li><a class="cerrar" href="mobile.html"><i
-						class="material-icons left">school</i>Cerrar Sesion</a></li>
+						<p:spacer width="25px" height="10px"></p:spacer>
+						<p:commandButton id="cerrar" icon="fa fa-fw fa-power-off"
+							actionListener="#{logicaNavegacion.cerrarSesion()}"
+							value="Cerrar Sesión" />
+						<p:spacer width="25px" height="10px"></p:spacer>
+					</h:form>
 
 
-			</ul>
-			<ul id="slide-out" class="side-nav">
-				<li><div class="user-view">
-						<div class="background">
-							<img src="images/office.jpg" />
-						</div>
-						<a href="#!user"><img class="circle" src="images/yuna.jpg" /></a>
-						<a href="#!name"><span class="white-text name">John Doe</span></a>
-						<a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
-					</div></li>
-				<li><a href="#!"><i class="material-icons">cloud</i>First
-						Link With Icon</a></li>
-				<li><a href="#!">Second Link</a></li>
-				<li><div class="divider"></div></li>
-				<li><a class="subheader">Subheader</a></li>
-				<li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
-			</ul>
-			<a href="#" data-activates="slide-out" class="button-collapse"><i
-				class="material-icons">menu</i></a>
+				</ul>
+				<ul id="slide-out" class="side-nav">
+					<li><div class="user-view">
+							<div class="background">
+								<img src="images/office.jpg" />
+							</div>
+							<a href="#!user"><img class="circle" src="images/yuna.jpg" /></a>
+							<a href="#!name"><span class="white-text name">John
+									Doe</span></a> <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
+						</div></li>
+					<li><a href="#!"><i class="material-icons">cloud</i>First
+							Link With Icon</a></li>
+					<li><a href="#!">Second Link</a></li>
+					<li><div class="divider"></div></li>
+					<li><a class="subheader">Subheader</a></li>
+					<li><a class="waves-effect" href="#!">Third Link With
+							Waves</a></li>
+				</ul>
+				<a href="#" data-activates="slide-out" class="button-collapse"><i
+					class="material-icons">menu</i></a>
 
-		</div>
+			</div>
 
-	</nav>
-</div>
+		</nav>
+	</div>
+</h:body>
+</html>
 

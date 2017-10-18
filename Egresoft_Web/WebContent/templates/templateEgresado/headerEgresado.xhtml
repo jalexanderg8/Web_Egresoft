@@ -1,49 +1,74 @@
-<div class="navbar-fixed  ">
-	<nav class="#2e7d32 green darken-1 ">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
-		<div class="nav-wrapper">
-			<a href="index.jsf"><img class="responsive-img"
-				src="resources/imagenes/logoEgresoft.png" /></a>
+<h:head>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="resources/css/materialize.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="resources/css/main.css" />
+	<title><ui:insert name="title">Egresoft</ui:insert></title>
+</h:head>
+
+<h:body>
+
+	<div class="navbar-fixed  ">
+		<nav class="#2e7d32 green darken-1 ">
+
+			<div class="nav-wrapper">
+				<a href="indexEgresado.jsf"><img class="responsive-img"
+					src="resources/imagenes/logoEgresoft.png" /></a>
 
 
-			<ul class="right hide-on-med-and-down">
-				
-							<li><a class="z-depth-3" href="#P_Academico"><i
-						class="material-icons left">thumbs_up_down</i>Portal Academico</a></li>
+				<ul class="right hide-on-med-and-down">
+						<h:form>
+					<li><a class="z-depth-3" href="#P_lABORAL"><i
+							class="material-icons left">create</i>Portal Laboral</a></li>
 
-				<li><a class="z-depth-3" href="#convenios"><i
-						class="material-icons left">thumbs_up_down</i>Convenios</a></li>
-				<li><a class="z-depth-3" href="#noticias_y_eventos"><i
-						class="material-icons left">event_available</i>Noticias y Eventos</a></li>
-						
-						<li><a class="z-depth-3" href="#P_lABORAL"><i
-						class="material-icons left">thumbs_up_down</i>Portal Laboral</a></li>
-						
-						<li><a class="z-depth-3" href="#contactarAdmin"><i
-						class="material-icons left">thumbs_up_down</i>Contactar Administrador</a></li>
+					<li><a class="z-depth-3" href="#P_Academico"><i
+							class="material-icons left">public</i>Portal Academico</a></li>
+
+					<li><a class="z-depth-3" href="#convenios"><i
+							class="material-icons left">thumbs_up_down</i>Convenios</a></li>
+
+					<li><a class="z-depth-3 " href="#noticias_y_eventos"><i
+							class="material-icons left">event_available</i>Noticias y Eventos</a></li>
+							
+					<p:spacer width="140px" height="10px"></p:spacer>
+					<p:commandButton id="cerrar" icon="fa fa-fw fa-power-off"
+						actionListener="#{logicaNavegacion.cerrarSesion()}" value="Cerrar Sesión"  />
+						<p:spacer width="50px" height="10px"></p:spacer>
+					</h:form>
+				</ul>
+				<ul id="slide-out" class="side-nav">
+					<li><div class="user-view">
+							<div class="background">
+								<img src="images/office.jpg" />
+							</div>
+							<a href="#!user"><img class="circle" src="images/yuna.jpg" /></a>
+							<a href="#!name"><span class="white-text name">John
+									Doe</span></a> <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
+						</div></li>
+					<li><a href="#!"><i class="material-icons">cloud</i>First
+							Link With Icon</a></li>
+					<li><a href="#!">Second Link</a></li>
+					<li><div class="divider"></div></li>
+					<li><a class="subheader">Subheader</a></li>
+					<li><a class="waves-effect" href="#!">Third Link With
+							Waves</a></li>
+				</ul>
+				<a href="#" data-activates="slide-out" class="button-collapse"><i
+					class="material-icons">menu</i></a>
+
+			</div>
+
+		</nav>
+	</div>
+	</h:body>
+	</html>
 
 
-			</ul>
-			<ul id="slide-out" class="side-nav">
-				<li><div class="user-view">
-						<div class="background">
-							<img src="images/office.jpg" />
-						</div>
-						<a href="#!user"><img class="circle" src="images/yuna.jpg" /></a>
-						<a href="#!name"><span class="white-text name">John Doe</span></a>
-						<a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
-					</div></li>
-				<li><a href="#!"><i class="material-icons">cloud</i>First
-						Link With Icon</a></li>
-				<li><a href="#!">Second Link</a></li>
-				<li><div class="divider"></div></li>
-				<li><a class="subheader">Subheader</a></li>
-				<li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
-			</ul>
-			<a href="#" data-activates="slide-out" class="button-collapse"><i
-				class="material-icons">menu</i></a>
 
-		</div>
-
-	</nav>
-</div>

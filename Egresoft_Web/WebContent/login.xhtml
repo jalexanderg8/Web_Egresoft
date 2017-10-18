@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta charset="UTF-8" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="resources/css/main.css" />
+	<title><ui:insert name="title">Egresoft</ui:insert></title>
+
+</h:head>
+
+<h:body >
+	<section class="back">
+	
+		<h:form id="fm">
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" severity="error,fatal,info,warn" life="5200" />
+
+			<center>
+				<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+				<br /> <br /> <br />
+				<p:panelGrid columns="2">
+					<p:outputLabel value="Nombre de Usuario :" />
+					<p:inputText value="#{logicaNavegacion.usuario}" required="true" />
+
+
+					<p:outputLabel value="Contraseña:" />
+					<p:password value="#{logicaNavegacion.contraseña}" required="true" />
+
+
+					<p:commandButton value="Iniciar Sesion"
+						action="#{logicaNavegacion.iniciarSesion}" icon="fa fa-user" />
+					<p:button value="Cancelar" outcome="index.jsf"
+						icon="fa fa-window-close" />
+
+				</p:panelGrid>
+
+				<p:separator />
+
+				<p:column />
+				<p:link outcome="registrarEgresado.jsf" value="Registrarse" />
+				<p:spacer width="100px" height="10px"></p:spacer>
+				<p:column />
+				<p:link value="Recuperar Contraseña" />
+
+			</center>
+		</h:form>
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+	</section>
+	<!-- <script type="text/javascript"
+				src="resources/js/jquery-3.2.1.min.js.js"></script> -->
+	<script type="text/javascript" src="resources/js/materialize.js"></script>
+
+</h:body>
+
+
+</html>

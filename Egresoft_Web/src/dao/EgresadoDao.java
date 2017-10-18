@@ -1,14 +1,23 @@
 package dao;
 
 
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-
+import org.hibernate.HibernateException;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import com.mysql.jdbc.PreparedStatement;
+
+import conexion.Conexion;
 import conexion.HibernateUtil;
 import entidades.Egresado;
 
@@ -24,6 +33,7 @@ public class EgresadoDao {
 	public void registrar(Egresado egresado) {
 
 		Session s = null;
+		
 	
 		try {
 			s = HibernateUtil.sessionFactory.openSession();
@@ -40,9 +50,8 @@ public class EgresadoDao {
 			}
 		}
 	}
-
-
-	public void editar(Egresado egresado) {
+////administrador editar egresado//////
+	public void editarEgresadoDesdeAdmin(Egresado egresado) {
 
 		Session s = null;
 
@@ -63,6 +72,93 @@ public class EgresadoDao {
 		}
 
 	}
+	// editaaar egresado desde egresado////
+	public boolean editaEgresadoFromEgresado(Egresado egresado) {
+		System.out.println("1");
+
+				Conexion conex = new Conexion();
+				
+				System.out.println("2");
+
+				boolean B=false;
+				
+				System.out.println("3");
+
+				
+				java.sql.Date  fechaInicio = new Date(egresado.getFechaInicio().getTime());
+				java.sql.Date  fechaFin = new Date(egresado.getFechaFin().getTime());
+				
+				System.out.println("lo que ingreso en la pagina: "+egresado.getFechaInicio()+" convertido a sqldate: "+ fechaFin);
+
+				System.out.println("4");
+
+				
+				try {
+					System.out.println("5");
+
+					
+					String consulta = "UPDATE egresado SET telefono_alterno=?, email_alterno=? , "
+							+ "lugar_residencia=? ,contrasena=? ,fecha_inicio=? , fecha_fin=? WHERE idEgresado= ? ";
+
+					System.out.println("6");
+					
+					System.out.println("sentencia: "+consulta);
+					String datos="";
+					datos+="tel alterno - "+egresado.getTelefonoAlterno();
+					datos+="email alterno - "+egresado.getEmailAlterno();
+					datos+="residencia - "+egresado.getLugarResidencia();
+					datos+="contrato - "+egresado.getContrasena();
+					datos+="fecha inicio - "+((Date) fechaInicio);
+					datos+="fecha fin - "+((Date) fechaFin);
+					datos+="id - "+egresado.getIdEgresado();
+					System.out.println(datos);
+
+					
+					PreparedStatement statement = (PreparedStatement) conex.getConnection().prepareStatement(consulta);
+
+					System.out.println("7");
+
+					
+					statement.setString(1, egresado.getTelefonoAlterno());
+					statement.setString(2, egresado.getEmailAlterno());
+					statement.setString(3, egresado.getLugarResidencia());
+					statement.setString(4, egresado.getContrasena());
+					statement.setDate(5,(Date) fechaInicio);
+					statement.setDate(6, (Date) fechaFin);
+					statement.setLong(7, egresado.getIdEgresado());
+
+					System.out.println("8");
+
+					
+					statement.executeUpdate();
+
+					System.out.println("9");
+
+					
+					B=true;
+
+					System.out.println("10");
+
+					
+					statement.close();
+					conex.desconectar();
+
+					System.out.println("11");
+
+				} catch (SQLException e) {
+
+					System.out.println(e);
+			
+		           System.out.println("error de sql");
+		           
+		           B=false;
+		           
+				}
+				return B;
+
+			}
+
+	
 
 	public void eliminar(Egresado egresado) {
 
@@ -92,7 +188,7 @@ public class EgresadoDao {
 		List<Egresado> listaDeEgresados = null;
 		Session s = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = s.beginTransaction();
-		String consulta = "from Egresado";
+		String consulta = "FROM Egresado";
 
 		try {
 
@@ -126,8 +222,133 @@ public class EgresadoDao {
 	public void setListaEgresados(List<Egresado> listaEgresados) {
 		this.listaEgresados = listaEgresados;
 	}
+	 
 
+	//CONSULTA PARA QUE EL WIZARD CONTINUE
 
+	public boolean consultarDoc(long idEgresado){
+		long usuario = 0;		
+		Conexion conexion=new Conexion();
+
+		try {
+			System.out.println("en el try");
+			PreparedStatement consulta = (PreparedStatement) conexion.getConnection().prepareStatement("SELECT *  FROM egresado WHERE idEgresado=?");
+			consulta.setLong(1, idEgresado);
+			ResultSet res = consulta.executeQuery();
+			System.out.println("despues de executeQyery");
+
+			if (res.next())
+			{
+				 usuario=res.getLong("idEgresado");
+			}
+			
+			System.out.println("dfespues de asignar valores a variables internas");
+		
+			res.close();
+			System.out.println("cerró resultset");
+			conexion.desconectar();
+			System.out.println("cerro la BD");
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		if (usuario==idEgresado) {
+System.out.println("true");
+			return true;
+
+		}else{
+			System.out.println("false");
+
+			return false;
+		}
+		
+	}
+	/*public Egresado consultarEgresado(String Usuario,String Contraseña){
+	String contraseña="";
+	String usuario="";
+	
+	Conexion conexion=new Conexion();
+	System.out.println("usuario "+Usuario+" contraseña "+Contraseña);
+	
+	try {
+		System.out.println("en el try");
+		PreparedStatement consulta = (PreparedStatement) conexion.getConnection().prepareStatement("SELECT * FROM egresado WHERE email_principal=? AND contrasena=?");
+		//PreparedStatement consulta = (PreparedStatement) conexion.getConnection().prepareStatement("SELECT * FROM Egresado WHERE idEgresado= "+Usuario+" AND contrasena= '"+Contraseña+"'");
+		consulta.setString(1, Usuario);
+		consulta.setString(2,Contraseña);		
+		ResultSet res = consulta.executeQuery();
+		System.out.println("despues de executeQyery");
+		 //JOptionPane.showMessageDialog(null, " Se ha Eliminado Correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
+
+		if (res.next())
+		{
+			 usuario=res.getString("email_principal");
+				contraseña=res.getString("contrasena");
+		}
+		
+		System.out.println("dfespues de asignar valores a variables internas");
+	
+		res.close();
+		System.out.println("cerró resultset");
+		conexion.desconectar();
+		System.out.println("cerro la BD");
+
+	} catch (SQLException e) {
+		System.out.println(e.getMessage());
+	}
+	
+	System.out.println("usuario ingresado: "+Usuario+" contraseña ingresada:  "+Contraseña+" usuario de bd: "+usuario+" contraseña bd: "+contraseña);
+	
+	if (usuario.equals(Usuario) && contraseña.equals(Contraseña)) {
+		System.err.println("verdadero");
+		return true;
+
+	}else{
+		System.err.println("false");
+
+		return false;
+	}
+	
+}*/
+
+	
+//CONSULTA PARA EL LOGIN
+	public Egresado consultarEgresado(String emailPrincipal, String contrasena) {
+		System.out.println("Entro al dao a buscar un usuario por nombre y contraseña ");
+		Egresado egre = null;
+		
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		Transaction t=null;
+		System.out.println("Abro conexion para buscar");
+		try {
+			t = s.beginTransaction();
+			String sql = "SELECT * FROM egresado WHERE email_principal = :email_principal and contrasena = :contrasena ";
+			SQLQuery query = s.createSQLQuery(sql);
+			query.addEntity(Egresado.class);
+			query.setParameter("email_principal", emailPrincipal);
+			query.setParameter("contrasena", contrasena);
+			List results = query.list();
+			
+			for (Iterator iterator = results.iterator(); iterator.hasNext();) {
+				egre = (Egresado) iterator.next();
+				
+			}
+			
+		} catch (HibernateException e) {
+			if (t != null)
+				t.rollback();
+			e.printStackTrace();
+		} finally {
+			s.close();
+		}
+		return egre;
+	}
 }
+	
+	
+		
+	
+
 
 

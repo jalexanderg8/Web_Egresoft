@@ -59,8 +59,9 @@ background-image: url("imagenes/fondoEgresoft.jpg");
 .iniciar{
 	 margin-left: 210px;
 }
-.cerrar{
-	margin-left:50px;
+#cerrar{
+	margin-right:30px;
+	margin-left:210px;
 }
 .uno{
 	font-size:15rem;
@@ -81,4 +82,9 @@ background-image: url("imagenes/fondoEgresoft.jpg");
 .cinco{
 	font-size:15rem;
 	color:#18ffff ;
+}
+.back{
+	background-image: url("../imagenes/fondoEgresoft.jpg");
+	background-size: 100%;
+	
 }

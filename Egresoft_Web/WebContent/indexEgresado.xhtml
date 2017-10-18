@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+
+
+<f:metadata>
+<f:event listener="#{logicaNavegacion.verificarSesion()}"
+		type="preRenderView"></f:event></f:metadata>  
+   <h:head>
+       		  <link rel="stylesheet" href="resources/css/main.css"/>
+   </h:head>
+
+	<ui:composition xmlns:p="http://primefaces.org/ui" template="templates/templateEgresado/EgresadoTemplate.xhtml">
+	<ui:define name="content">
+	
+	<body class="indexEgresado">
+	
+		<div class="row">
+				<div class="slider">
+					<ul class="slides">
+						<li><img src="resources/imagenes/Fachada.png" />
+							<div class="caption center-align">
+								<h3 class="teal-text text-accent-2">Eventos</h3>
+							</div></li>
+						<li><img src="resources/imagenes/Lego2.png" />
+							<div class="caption center-align">
+								<h3 class="teal-text text-accent-2">Noticias</h3>
+							</div></li>
+						<li><img src="resources/imagenes/Vive digital1.png" />
+							<div class="caption center-align">
+								<h3 class="teal-text text-accent-2">Convenios</h3>
+							</div></li>
+						<li><img src="resources/imagenes/Sala instructores.png" />
+							<div class="caption center-align">
+								<h3 class="teal-text text-accent-2">Portales</h3>
+							</div></li>
+						<li><img src="resources/imagenes/Lego3.png" />
+							<div class="caption center-align">
+								<h3 class="teal-text text-accent-2">Egresados</h3>
+							</div></li>
+					</ul>
+				</div>
+			</div>
+	
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	
+	<!-- PORTAL ACADEMICO -->
+	<div id="P_Academico">
+	<ui:include  src="/Egresado_PortalAcademico.xhtml">
+          <ui:define name="Egresado_P_Academico">
+          
+          </ui:define>
+          </ui:include>  
+</div>   
+
+    <br/>
+	<br/>
+	<br/>
+	<br/>  
+	
+	
+		<!-- PORTAL CONVENIOS -->
+	
+	<div id="convenios">
+	<ui:include  src="/Egrasado_Convenios.xhtml">
+          <ui:define name="Convenios_Egresado">
+          
+          </ui:define>
+          </ui:include>  
+</div>   
+
+    <br/>
+	<br/>
+	<br/>
+	<br/>  
+
+	<!-- PORTAL NOTICIAS Y EVENTOS -->
+
+	<div id="noticias_y_eventos">
+	<ui:include  src="/Egresado_NoticiasEventos.xhtml">
+          <ui:define name="Egresado_NoticiasYEventos">
+          
+          </ui:define>
+          </ui:include>  
+</div>   
+  <br/>
+	<br/>
+	<br/>
+	<br/>    <br/>
+	<br/>
+	<br/>
+	<br/>  
+
+	<!-- PORTAL LABORAL -->
+	<div id="P_lABORAL">
+	<ui:include  src="/Egresado_PortalLaboral.xhtml">
+          <ui:define name="Egresado_P_Laboral">
+          
+          </ui:define>
+          </ui:include>  
+</div>   
+
+    <br/>
+	<br/>
+	<br/>
+	<br/>  
+	
+		<!-- PORTAL DESARROLLADORES -->
+	
+	<div class="desarrolladores" id="desarrolladores">
+	 <h3 class="green-text text-darken-5 center-align">Desarrolladores de Egresoft</h3>
+    <br /><br />
+	   <div class="row">
+			<div class="col s12 m4">
+				<div class="center promo">
+			      <img src="resources/imagenes/img3.jpg" class=" responsive-img circle"/>
+					 <h5 >Jhon Jairo Hincapie </h5>
+				    <p >Desarrollador</p>
+			
+			  </div>
+			</div>	
+			<div class="col s12 m4">
+				<div class="center promo">
+			      <img src="resources/imagenes/img2.jpg" class=" responsive-img circle"/>
+					 <h5 >Jaime Alexander Gomez </h5>
+				    <p >Scrum Master</p>
+			
+			  </div>
+			</div>	
+			<div class="col s12 m4">
+				<div class="center promo">
+			      <img src="resources/imagenes/img1.jpg" class=" responsive-img circle"/>
+					 <h5 >Miguel Angel Henao hOYOS </h5>
+				    <p >Desarrollador</p>
+			
+			  </div>
+			</div>	
+			<div class="col s12 m4">
+				<div class="center">
+	             <a href=""><img src="resources/imagenes/iconoAndroid.png" alt="" /></a>
+					<p:link>descarga nuestra app</p:link>	    
+			
+			  </div>
+			</div>	
+			
+		</div> 
+	</div>
+	
+	<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+	
+	<!-- CONTACTAR ADMIN -->
+	<div id="contactarAdmin">
+	<ui:include  src="/Egresado_ContactarAdmin.xhtml">
+          <ui:define name="Egresado_ContactarAdmin">
+          
+          </ui:define>
+          </ui:include>
+	</div>
+   
+
+	<script type="text/javascript"
+				src="resources/js/jquery-3.2.1.min.js.js"></script>
+			<script type="text/javascript" src="resources/js/materialize.js"></script>
+		</body>
+	</ui:define>
+</ui:composition>
+</html>

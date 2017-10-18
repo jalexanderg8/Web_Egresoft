@@ -18,8 +18,7 @@
 
 							<p:growl id="growl" sticky="true" showDetail="true" />
 
-							<p:wizard flowListener="#{userWizard.onFlowProcess}"
-								nextLabel="Siguiente" backLabel="Atras">
+							<p:wizard  flowListener="#{userWizard.onFlowProcess}" nextLabel	="Siguiente" backLabel="Atras">
 								<p:tab id="personal" title="Verificación de Identidad">
 									<p:panel header="Verificación de Identidad">
 										<p:messages />
@@ -35,39 +34,36 @@
 													listener="#{fieldsetView.handleToggle}" update="" />
 												<h:panelGrid columns="2" cellpadding="5">
 
-
 													<h:outputText value="Numero de Documento: *" />
-													<p:inputText id="numeroDocumento" value="#{egresadoBean.dniEgresado}"
+													<p:inputText id="numeroDocumento" value="#{egresadoBean.egresado.idEgresado}"
 														placeholder="cedula" required="true"
 														title="el campo de la cedula es requerido"
-														label="El campo cédula es requerido">
+														label="El campo del documento  es requerido">
 														<f:validateLongRange minimum="1000000"
-															maximum="99999999999"></f:validateLongRange>
+															maximum="9999999999999"></f:validateLongRange>
 													</p:inputText>
 													<p:tooltip  for="numeroDocumento"
 														value="Ingrese un numero de documento" showEffect="clip"
 														hideEffect="explode" data-position="left" />
-														
-														<p:commandButton  />
 
 												</h:panelGrid>
 											</p:fieldset>
-											<br />
+										<!-- 	<br />
 											<h:outputText value="Ir al ultimo paso: " />
 											<br />
-											<p:selectBooleanCheckbox value="#{userWizard.pasar}" />
+											<p:selectBooleanCheckbox value="#{userWizard.pasar}" /> -->
 										</h:panelGrid>
 									</p:panel>
 								</p:tab>
 
 								<p:tab id="Estudio" title="Actualizar Datos">
 									<p:panel header="Actualizar Datos">
-										<p:messages />
+									 <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"  severity="error,fatal,info,warn"   life="200" />
 										<h:panelGrid columns="2" columnClasses="label, value">
 											<p:fieldset legend="Actualizar" toggleable="true"
 												toggleSpeed="500">
 												<p:ajax event="toggle"
-													listener="#{fieldsetView.handleToggle}" update="" />
+													listener="#{fieldsetView.handleToggle}" update="" /> 
 												<h:panelGrid columns="2" cellpadding="5">
 
 													<h:outputText value="Correo Alterno:" />
@@ -80,9 +76,6 @@
 															pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$" />
 													</p:inputText>
 
-
-
-
 													<h:outputText value="Teléfono Alterno: " />
 													<p:inputText id="telefono"
 														value="#{egresadoBean.egresado.telefonoAlterno}"
@@ -94,8 +87,6 @@
 													</p:inputText>
 
 
-
-
 													<h:outputText value="Lugar de Residencia: " />
 													<p:inputText
 														value="#{egresadoBean.egresado.lugarResidencia}"
@@ -105,13 +96,14 @@
 
 
 													<h:outputText value="Fecha Inicio Formacion " />
-													<p:calendar id="FechaInicio" value="#{egresadoBean.egresado.fechaInicio}"
-													 pattern="dd-MM-yyyy" mask="true" />
-														
+													<p:calendar id="botonInicio" required="true"
+														value="#{egresadoBean.egresado.fechaInicio}"
+														showOn="button" />
 
 													<h:outputText value="Fecha Fin Formacion " />
-													<p:calendar id="FechaFin" value="#{egresadoBean.egresado.fechaFin}"
-														 pattern="dd-MM-yyyy" mask="true" />
+													<p:calendar id="botonFin" required="true"
+														value="#{egresadoBean.egresado.fechaFin}" showOn="button" />
+
 
 												</h:panelGrid>
 											</p:fieldset>
@@ -175,10 +167,6 @@
 											columnClasses="grid,grid,grid">
 											<h:panelGrid columns="2" columnClasses="label, value">
 
-												<h:outputText value="1. Tipo de Documento: " />
-												<h:inputText value="#{userData.data}"
-													styleClass="outputLabel" disabled="true" />
-
 												<h:outputText value="2. Numero de Documento: " />
 												<h:inputText value="#{egresadoBean.egresado.idEgresado}"
 													styleClass="outputLabel" disabled="true" />
@@ -221,7 +209,7 @@
 										</h:panelGrid>
 
 										<p:commandButton value="Actualizar"
-											actionListener="#{egresadoBean.nuevoEgresado()}" update="growl"
+											actionListener="#{egresadoBean.editarEgresado()}" update="growl"
 											process="@this" />
 									</p:panel>
 								</p:tab>
