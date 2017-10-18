@@ -11,7 +11,10 @@
 <ui:composition xmlns:p="http://primefaces.org/ui"
 	template="/templates/templateAdministrador/AdminTemplate.xhtml">
 	<ui:define name="admin">
-		<h:head></h:head>
+		<h:head>
+			<f:metadata><f:event listener="#{logicaNavegacion.verificarSesion()}"
+				type="preRenderView"></f:event></f:metadata>
+		</h:head>
 		<h:body>
 			<div class="container">
 				<br></br> <br />
@@ -75,7 +78,7 @@
 					</div>
 				</div>
 			</div>
-			 <!-- <script type="text/javascript"
+			<!-- <script type="text/javascript"
 				src="resources/js/jquery-3.2.1.min.js.js"></script>  -->
 			<script type="text/javascript" src="resources/js/materialize.js"></script>
 		</h:body>

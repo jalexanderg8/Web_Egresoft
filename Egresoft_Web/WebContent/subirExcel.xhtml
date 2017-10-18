@@ -10,7 +10,10 @@
 <ui:composition xmlns:p="http://primefaces.org/ui"
 	template="/templates/templateAdministrador/AdminTemplate.xhtml">
 	<ui:define name="admin">
-		<h:head></h:head>
+		<h:head>
+			<f:metadata><f:event listener="#{logicaNavegacion.verificarSesion()}"
+				type="preRenderView"></f:event></f:metadata>
+		</h:head>
 
 		<h:body>
 			<div class="container">
@@ -48,9 +51,9 @@
 								<p:graphicImage name="/demo/images/ajaxloadingbar.gif" />
 							</p:dialog>
 
-						
-							
-							
+
+
+
 
 							<p:column headerText="Numero del Documento" style="width:15%">
 								<h:outputText value="#{row.srNo}" title="No" />

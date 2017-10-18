@@ -94,25 +94,39 @@ public class LogicaNavegacion implements Serializable {
 	    try {
 	    	
 	    	FacesContext context = FacesContext.getCurrentInstance();	
-			Object usuario = context.getExternalContext().getSessionMap().get("egresado");
-			Object administrador= context.getExternalContext().getSessionMap().get("admin");
-
+			Egresado usuario = (Egresado) context.getExternalContext().getSessionMap().get("egresado");
+			Administrador administrador= (Administrador) context.getExternalContext().getSessionMap().get("admin");
 			
 			
-			if (usuario==null) {
+			
+			
+				if (usuario==null&&administrador==null) {
 					context.getExternalContext().redirect("login.jsf");
-					System.out.println("usuario vacion egre");
+					System.out.println("usuario vacio validacion");
+	                //mensajes.fatal("no a iniciado sesion");
+				}
+				else{
+					
+					System.out.println("no esta vacio");
+				}
+		
+				
+				
+			
+		/*	if (usuario==null) {
+					context.getExternalContext().redirect("login.jsf");
+					System.out.println("usuario vacio egre");
 	                //mensajes.fatal("no a iniciado sesion");
 					
-			if(administrador==null){
+			 if(administrador==null){
 				context.getExternalContext().redirect("login.jsf");	
-				System.out.println("usuario vacion admin");
-			}
+				System.out.println("usuario vacio admin");
+			 }
 			}
 			else{
 				
 				System.out.println("no esta vacio");
-			}
+			}*/
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

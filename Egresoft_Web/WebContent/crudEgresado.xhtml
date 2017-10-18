@@ -8,12 +8,15 @@
 <ui:composition xmlns:p="http://primefaces.org/ui"
 	template="/templates/templateAdministrador/AdminTemplate.xhtml">
 	<ui:define name="admin">
-		<h:head></h:head>
+		<h:head>
+			<f:metadata><f:event listener="#{logicaNavegacion.verificarSesion()}"
+				type="preRenderView"></f:event></f:metadata>
+		</h:head>
 		<h:body>
 			<br></br>
 			<h4 class="green-text text-darken-5 center-align">Bienvenido a
 				la Gestion de Datos de Egresados</h4>
-				
+
 			<br></br>
 			<div class="container-fluid">
 				<h:form id="formConsulta">
@@ -76,86 +79,86 @@
 
 							<p:outputLabel value="tipo de Documento" />
 							<p:inputText value="#{egresadoBean.egresado.tipoDocumento}"
-							required="true">
-								
+								required="true">
+
 							</p:inputText>
-							
+
 
 							<p:outputLabel value="Numero de Documento" />
 							<p:inputText value="#{egresadoBean.egresado.idEgresado}"
-							required="true">
-								
+								required="true">
+
 							</p:inputText>
-							
+
 
 							<p:outputLabel value="Nombres" />
 							<p:inputText value="#{egresadoBean.egresado.nombres}"
-							required="true">
-								
-								
+								required="true">
+
+
 							</p:inputText>
-							
+
 
 							<p:outputLabel value="Apellidos" />
 							<p:inputText value="#{egresadoBean.egresado.apellidos}"
-							required="true">
-								
+								required="true">
+
 							</p:inputText>
-							
+
 
 							<p:outputLabel value="Telefono Principal" />
 							<p:inputText value="#{egresadoBean.egresado.telefonoPrincipal}">
-								
+
 							</p:inputText>
-							
+
 
 							<p:outputLabel value="Telefono Alterno" id="telefonoAlterno" />
 							<p:inputText value="#{egresadoBean.egresado.telefonoAlterno}">
-							
+
 							</p:inputText>
 
 							<p:outputLabel value="Correo Principal" />
 							<p:inputText value="#{egresadoBean.egresado.emailPrincipal}"
-							required="true">
-								
+								required="true">
+
 							</p:inputText>
-							
+
 
 							<p:outputLabel value="Correo Alterno" />
 							<p:inputText value="#{egresadoBean.egresado.emailAlterno}">
-								
+
 							</p:inputText>
-							
+
 
 							<p:outputLabel value="Contraseña" />
 							<p:inputText value="#{egresadoBean.egresado.contrasena}">
-								
+
 							</p:inputText>
-							
+
 
 							<p:outputLabel value="Ciudad de Residencia" />
 							<p:inputText value="#{egresadoBean.egresado.lugarResidencia}">
-								
+
 							</p:inputText>
-							
+
 
 							<p:outputLabel value="Modalidad" />
 							<p:inputText value="#{egresadoBean.egresado.modalidad}">
-								
+
 							</p:inputText>
-							
+
 
 							<p:outputLabel value="Fecha Inicio Formacion" />
 							<p:calendar id="fechaInicio"
 								value="#{egresadoBean.egresado.fechaInicio}"
 								pattern="dd-MM-yyyy" mask="true" />
-						
+
 
 							<p:outputLabel value="Fecha Fin Formacion" />
 							<p:calendar id="fechaFin"
 								value="#{egresadoBean.egresado.fechaFin}" pattern="dd-MM-yyyy"
 								mask="true" />
-							
+
 
 						</p:panelGrid>
 						<p:commandButton value="Guardar"
