@@ -88,7 +88,7 @@ public class EgresadoBean implements Serializable {
 		
 		if (DaoEgresado.editaEgresadoFromEgresado(egresado)) {
 			System.out.println("editó al egresado");
-	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Hecho", "se editó al egresadpo"));
+	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Hecho", "se editó al egresado"));
 			
 		}else{
 			System.err.println("no lo edito");

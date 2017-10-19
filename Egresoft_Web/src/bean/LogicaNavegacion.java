@@ -45,7 +45,7 @@ public class LogicaNavegacion implements Serializable {
 
 	public String iniciarSesion() throws Exception{
 		
-		System.out.println("en iniciar cecsion  usuario "+usuario+" contraseña "+contraseña);
+		System.out.println("en iniciar cesion  usuario "+usuario+" contraseña "+contraseña);
 		
 		String redireccion=null;
 		
@@ -57,7 +57,7 @@ public class LogicaNavegacion implements Serializable {
 		 Administrador admin=miAdminDao.consultarAdmin(usuario,contraseña);
 		 
 		 if (egre!=null) {
-			
+		
 			 System.out.println("en la consulta egresado");
 			 redireccion="indexEgresado";
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("egresado", egre);
