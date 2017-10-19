@@ -5,6 +5,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+
+import org.primefaces.component.wizard.Wizard;
 import org.primefaces.event.FlowEvent;
 
 import dao.EgresadoDao;
@@ -17,7 +19,7 @@ public class UserWizard implements Serializable {
 	EgresadoDao miDao = new EgresadoDao();
 	// EgresadoBean Egresado= new EgresadoBean();
 
-	int contadorNext = 0;
+	// int contadorNext = 0;
 
 	public static long idEgresado;
 
@@ -53,65 +55,67 @@ public class UserWizard implements Serializable {
 
 	public String onFlowProcess(FlowEvent event) {
 
-		String evento = null;
+		Wizard wizard = (Wizard) event.getComponent();
+		String vistaActual = wizard.getStep();
+
+		String evento = "";
+		String siguiente = event.getNewStep();
+		String antes = event.getOldStep();
 
 		if (!verificado) {// si no esta verificado lo verifica ,incrementa 1 al
-							// presionar siguiente y verificar que esta en BD
+							// // presionar siguiente y verificar que esta en BD
 			if (verificar(idEgresado)) {
 				verificado = true;
-				contadorNext++;
-				System.out.println("el usuario se acaba de  verificar y pasaa a la siguiente vista, el contador es: "
-						+ contadorNext);
-				evento = event.getNewStep();
+				// contadorNext++;
+				System.out.println("el usuario se acaba de  verificar y pasaa a la siguiente vista ");
+				evento = siguiente;
 			} else {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
-						"Egresado no registrado... ", "registrece"));
-				evento = event.getOldStep();
+						"Parce ud no existe en este sistema... ", "registrece"));
+				evento = antes;
 			}
 
-		} else if (contadorNext == 2) {// se hace la validacion para poder
-										// cambiar a la otra vista del wizard
-
-			System.out.println("esta en confirmar contraseña y no a confirmado");
-
-			try {
-				if (!primeraContraseña.equals(segundaContraseña)) {
-					System.out.println("las contraseñas no coinciden");
-					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"Las contraseñas no coinciden ", "vuelva a intentarlo"));
-					//contadorNext--;
-					evento = event.getOldStep();
-
-				} else {
-					evento = event.getNewStep();
-				}
-			} catch (Exception e) {
-				System.out.println("error");
-				
-				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage(FacesMessage.SEVERITY_ERROR,
-								"no deje campos vacios, si desea ir a actualizar datos, le toca refrescar",
-								"vuelva a intentarlo"));
-				evento = event.getOldStep();
-
-				
-
-			}
-
-		} else if (verificado) {// esta verificado
-			contadorNext++;
-			System.out.println(
-					"el usuario esta verificado y pasaa a la siguiente vista, el contador va en : " + contadorNext);
-			evento = event.getNewStep();
 		} else {
-			contadorNext--;
-			System.out.println("esta en el default, contador en: " + contadorNext);
-			evento = event.getOldStep();
-		}
-		if (!evento.equals(event.getNewStep())) {
-			contadorNext--;
-			System.out.println("esta en diferente de el siguientecontador en: " + contadorNext);
-			evento = event.getOldStep();
+			if (siguiente.equals("Estudio")) {
+				// contadorNext=1;
+				System.out.println("en estudio");
+			} else if (siguiente.equals("contraseña")) {
+				// contadorNext=2;
+				System.out.println("en contraseñ");
+			} else if (siguiente.equals("encuesta")) {
+
+				try {
+					if (!primeraContraseña.equals(segundaContraseña)) {
+						System.out.println("las contraseñas no coincidend contraseña1: " + primeraContraseña
+								+ " contraseña2: " + segundaContraseña);
+						FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+								"Las contraseñas no coinciden ", "vuelva a intentarlo"));
+						siguiente = "contraseña";
+						evento = siguiente;
+					} else {
+						System.out.println("las contraseñas si coincidend contraseña1: " + primeraContraseña
+								+ " contraseña2: " + segundaContraseña);
+
+						evento = event.getNewStep();
+					}
+				} catch (Exception e) {
+					System.out.println("error");
+
+					FacesContext.getCurrentInstance().addMessage(null,
+							new FacesMessage(FacesMessage.SEVERITY_ERROR,
+									"no deje campos vacios, si desea ir a actualizar datos, le toca refrescar",
+									"vuelva a intentarlo"));
+					evento = antes;
+
+				}
+
+				System.out.println("en encuesta");
+			} else if (siguiente.equals("confirma")) {
+				System.out.println("en confirma");
+
+			}
+			evento = siguiente;
+
 		}
 
 		return evento;
