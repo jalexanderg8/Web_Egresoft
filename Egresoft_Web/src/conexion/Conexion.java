@@ -43,5 +43,9 @@ public class Conexion {
 	public void desconectar(){
 		conexion=null;
 	}
+	public java.sql.Connection conexion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

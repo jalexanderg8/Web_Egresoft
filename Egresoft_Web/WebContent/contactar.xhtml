@@ -20,7 +20,7 @@
 
 					<p:panelGrid columns="2">
 						<p:outputLabel value="Para:" />
-						<p:inputText value="#{correoBean.correo.para}" required="true"
+						<p:inputText value="#{correoBean.correo.para}" required="true" disabled="true"
 							validatorMessage="e-mail… incorrecto, si va a colocar varios separelos por coma y sin espacio">
 							<f:validateRegex
 								pattern="^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$" />

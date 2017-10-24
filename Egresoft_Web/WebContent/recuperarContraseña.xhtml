@@ -31,7 +31,7 @@
 					</div>
 					<div class="campoformulario">
 						<h:inputText id="username"
-							value="#{recoverPasswordController.username}" class="field w300"></h:inputText>
+							value="#{recuperarContraseña.nombres}" class="field w300"></h:inputText>
 					</div>
 					<div class="mensajeformulario">
 						<h:message for="username" errorClass="error" infoClass="ok" />
@@ -43,7 +43,7 @@
 								value="correo electrónico (*):" /></label>
 					</div>
 					<div class="campoformulario">
-						<h:inputText id="email" value="#{recoverPasswordController.email}"
+						<h:inputText id="email" value="#{recuperarContraseña.contraseña}"
 							class="field w300"></h:inputText>
 					</div>
 					<div class="mensajeformulario">
@@ -52,7 +52,7 @@
 				</div>
 				<div class="botonbuscador">
 					<h:commandButton type="submit"
-						action="#{recoverPasswordController.recoverPassword}" id="enviar"
+						action="#{recuperarContraseña}" id="enviar"
 						value="Enviar" class="button big" />
 				</div>
 			</h:form>
