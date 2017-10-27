@@ -81,7 +81,7 @@ public class UserWizard implements Serializable {
 				System.out.println("en estudio");
 			} else if (siguiente.equals("contraseña")) {
 				// contadorNext=2;
-				System.out.println("en contraseñ");
+				System.out.println("en contraseña");
 			} else if (siguiente.equals("encuesta")) {
 
 				try {

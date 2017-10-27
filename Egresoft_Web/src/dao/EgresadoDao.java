@@ -1,14 +1,22 @@
 package dao;
 
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
@@ -265,6 +273,7 @@ System.out.println("true");
 		}
 		
 	}
+	
 	/*public Egresado consultarEgresado(String Usuario,String Contraseña){
 	String contraseña="";
 	String usuario="";
