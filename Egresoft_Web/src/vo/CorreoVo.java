@@ -3,7 +3,7 @@ package vo;
 public class CorreoVo {
 
 	
-	private String para = "pruebaegresado@gmail.com";
+	private String para = "jagomez6605@misena.edu.co";
 	private String asunto, cuerpo;
 
 	public String getPara() {

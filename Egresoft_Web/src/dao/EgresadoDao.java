@@ -32,16 +32,18 @@ import entidades.Egresado;
 
 
 
+
 public class EgresadoDao {
 	
     
     private Egresado egresado;
     private List<Egresado> listaEgresados;
+    private Egresado listaAtributos;
 	
 	public void registrar(Egresado egresado) {
 
 		Session s = null;
-		
+						
 	
 		try {
 			s = HibernateUtil.sessionFactory.openSession();
@@ -62,6 +64,7 @@ public class EgresadoDao {
 	public void editarEgresadoDesdeAdmin(Egresado egresado) {
 
 		Session s = null;
+		
 
 		try {
 			
@@ -263,7 +266,7 @@ public class EgresadoDao {
 		}
 		
 		if (usuario==idEgresado) {
-System.out.println("true");
+			System.out.println("true");
 			return true;
 
 		}else{
@@ -354,6 +357,44 @@ System.out.println("true");
 		}
 		return egre;
 	}
+	
+	
+	
+	@SuppressWarnings("unchecked")
+	public Egresado buscarEgresado(long dniEgresado) {
+	
+	
+		Egresado listaAtributos=null;
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		Transaction t=null;
+		
+		
+		try{
+			t = s.beginTransaction();
+			listaAtributos=(Egresado)s.get(Egresado.class, dniEgresado);
+			t.commit();
+			
+			
+		}catch (Exception e) {
+			
+			if (t != null)
+				t.rollback();
+			e.printStackTrace();
+		}finally {
+			s.close();
+		}
+		
+		return listaAtributos;
+	}
+	
+	public Egresado getListaAtributos() {
+		return listaAtributos;
+	}
+	public void setListaAtributos(Egresado listaAtributos) {
+		this.listaAtributos = listaAtributos;
+	}
+	
+	
 }
 	
 	

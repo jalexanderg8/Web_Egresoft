@@ -9,8 +9,10 @@
 	template="/templates/templateAdministrador/AdminTemplate.xhtml">
 	<ui:define name="admin">
 		<h:head>
-			<f:metadata><f:event listener="#{logicaNavegacion.verificarSesion()}"
-				type="preRenderView"></f:event></f:metadata>
+			<f:metadata>
+				<f:event listener="#{logicaNavegacion.verificarSesion()}"
+					type="preRenderView"></f:event>
+			</f:metadata>
 		</h:head>
 		<h:body>
 			<br></br>
@@ -18,173 +20,322 @@
 				la Gestion de Datos de Egresados</h4>
 
 			<br></br>
-			<div class="container-fluid">
-				<h:form id="formConsulta">
-					<p:dataTable id="tablaConsulta" var="egre"
-						value="#{egresadoBean.listaEgresados}"
-						emptyMessage="No hay Egresados
-		Registrados" paginator="true"
-						paginatorPosition="top" rows="10">
+			
+				<div class="container">
+                    <h:form>
+					<p:panel>
+						<div class="row">
+							<div class="input-field col s12 m8 ">
+								<i class="material-icons prefix">account_circle</i>
 
-						<p:column headerText="Tipo de Documento"
-							filterBy="#{egre.tipoDocumento}">
-							<p:outputLabel value="#{egre.tipoDocumento}" />
-						</p:column>
+								<p:inputText id="uno" value="#{egresadoBean.dniEgresado}">
 
-						<p:column headerText="Numero de cedula"
-							filterBy="#{egre.idEgresado}">
-							<p:outputLabel value="#{egre.idEgresado}" />
-						</p:column>
+								</p:inputText>
+								<label for="uno">Numero De Documento</label>
+							</div>
+							<div class="col s12 m4">
 
-						<p:column headerText="Nombres Completos"
-							filterBy="#{egre.nombres}">
-							<p:outputLabel value="#{egre.nombres}" />
-						</p:column>
+								<p:commandButton value="Buscar" icon="fa fa-fw fa-search"
+									update=":formularioConsulta:tablaConsulta"
+									actionListener="#{egresadoBean.bucarEgresado()}">
 
-						<p:column headerText="Apellidos Completos"
-							filterBy="#{egre.apellidos}">
-							<p:outputLabel value="#{egre.apellidos}" />
-						</p:column>
-
-						<p:column headerText="Email Princioal"
-							filterBy="#{egre.emailPrincipal}">
-							<p:outputLabel value="#{egre.emailPrincipal}" />
-						</p:column>
+								</p:commandButton>
+								<p:tooltip for="uno" value="Ingrese un numero de documento"
+									showEffect="clip" hideEffect="explode" data-position="left" />
 
 
-						<p:column headerText="Modificar">
-							<p:commandButton value="Modificar"
+							</div>
+						</div>
+					</p:panel>
+					</h:form>
+					<p:spacer width="10px" height="10px"></p:spacer>
+					<h:form id="formularioConsulta">
+					
+						<p:dataList id="tablaConsulta"
+							emptyMessage="No hay Egresado "
+							value="#{egresadoBean.listaAtributos}" var="egre">
+							<p:panel>
+							<div class="row">
+								<div class="input-field col s12 m8 ">
+									<i class="material-icons prefix">fingerprint</i>
+
+									<p:inputText id="uno" disabled="true"
+										value="#{egre.tipoDocumento}">
+
+									</p:inputText>
+									<label class="active" for="uno">Tipo De Documento</label>
+								</div>
+
+
+							</div>
+							<div class="row">
+								<div class="input-field col s12 m8 ">
+									<i class="material-icons prefix">format_list_numbered</i>
+
+									<p:inputText id="dos" disabled="true"
+										value="#{egre.idEgresado}">
+
+									</p:inputText>
+									<label class="active" for="dos">Numero De Documento</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 m8 ">
+									<i class="material-icons prefix">perm_identity</i>
+
+									<p:inputText id="tres" disabled="true" value="#{egre.nombres}">
+
+									</p:inputText>
+									<label class="active" for="tres">Nombres Egresado</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 m8 ">
+									<i class="material-icons prefix">person</i>
+
+									<p:inputText id="cuatro" disabled="true"
+										value="#{egre.apellidos}">
+
+									</p:inputText>
+									<label class="active" for="cuatro">Apellidos Egresado</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 m8 ">
+									<i class="material-icons prefix">email</i>
+
+									<p:inputText id="cinco" disabled="true"
+										value="#{egre.emailPrincipal}">
+
+									</p:inputText>
+									<label class="active" for="cinco">Email Egresado</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 m8 ">
+									<i class="material-icons prefix">phone_in_talk</i>
+
+									<p:inputText id="seix" disabled="true"
+										value="#{egre.telefonoPrincipal}">
+
+									</p:inputText>
+									<label class="active" for="seix">Numero De Telefono
+										Egresado</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 m8 ">
+									<i class="material-icons prefix">phone_forwarded</i>
+
+									<p:inputText id="siete" disabled="true"
+										value="#{egre.telefonoAlterno}">
+
+									</p:inputText>
+									<label class="active" for="siete">Numero Alterno
+										Egresado</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 m8 ">
+									<i class="material-icons prefix">drafts</i>
+
+									<p:inputText id="ocho" disabled="true"
+										value="#{egre.telefonoAlterno}">
+
+									</p:inputText>
+									<label class="active" for="ocho">Email Alterno
+										Egresado</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 m8 ">
+									<i class="material-icons prefix">lock_outline</i>
+
+									<p:inputText id="nueve" disabled="true"
+										value="#{egre.contrasena}">
+
+									</p:inputText>
+									<label class="active" for="nueve">Contraseña Egresado</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 m8 ">
+									<i class="material-icons prefix">business</i>
+
+									<p:inputText id="diez" disabled="true"
+										value="#{egre.lugarResidencia}">
+
+									</p:inputText>
+									<label class="active" for="diez">Ciudad de Residencia</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 m8 ">
+									<i class="material-icons prefix">business_center</i>
+
+									<p:inputText id="once" disabled="true"
+										value="#{egre.modalidad}">
+
+									</p:inputText>
+									<label class="active" for="once">Modalidad</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 m8 ">
+									<i class="material-icons prefix">event_available</i>
+
+									<p:inputText id="doce" disabled="true"
+										value="#{egre.fechaInicio}">
+
+									</p:inputText>
+									<label class="active" for="doce">Fecha Inicio
+										Formacion</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 m8 ">
+									<i class="material-icons prefix">event_busy</i>
+
+									<p:inputText id="trece" disabled="true"
+										value="#{egre.fechaFin}">
+
+									</p:inputText>
+									<label class="active" for="trece">Fecha Fin Formacion</label>
+								</div>
+							</div>
+							<p:spacer width="230px" height="10px"></p:spacer>
+							<p:commandButton value="Modificar" icon="fa fa-fw fa-edit"
 								oncomplete="PF('dialogModificar').show();"
 								update=":formModificar">
 								<f:setPropertyActionListener target="#{egresadoBean.egresado}"
 									value="#{egre}" />
 							</p:commandButton>
-						</p:column>
-
-						<p:column headerText="Eliminar">
-							<p:commandButton value="Eliminar"
+							<p:spacer width="200px" height="10px"></p:spacer>
+							<p:commandButton value="Eliminar" icon="fa fa-fw fa-remove"
 								oncomplete="PF('dialogEliminar').show();" update=":formEliminar">
 								<f:setPropertyActionListener target="#{egresadoBean.egresado}"
 									value="#{egre}" />
 							</p:commandButton>
-						</p:column>
-					</p:dataTable>
-				</h:form>
+							
+							</p:panel>
+						</p:dataList>
+				
+			</h:form>
 
-				<h:form id="formModificar">
-					<p:dialog id="dlgModificar" widgetVar="dialogModificar"
-						resizable="false" showEffect="explode" hideEffect="explode"
-						modal="true">
-						<p:panelGrid columns="6" style="margin: 0 auto;">
+			<h:form id="formModificar">
+				<p:dialog id="dlgModificar" widgetVar="dialogModificar"
+					resizable="false" showEffect="explode" hideEffect="explode"
+					modal="true">
+					<p:panelGrid columns="6" style="margin: 0 auto;">
 
-							<p:outputLabel value="tipo de Documento" />
-							<p:inputText value="#{egresadoBean.egresado.tipoDocumento}"
-								required="true">
+						<p:outputLabel value="tipo de Documento" />
+						<p:inputText value="#{egresadoBean.egresado.tipoDocumento}"
+							required="true">
 
-							</p:inputText>
-
-
-							<p:outputLabel value="Numero de Documento" />
-							<p:inputText value="#{egresadoBean.egresado.idEgresado}"
-								required="true">
-
-							</p:inputText>
+						</p:inputText>
 
 
-							<p:outputLabel value="Nombres" />
-							<p:inputText value="#{egresadoBean.egresado.nombres}"
-								required="true">
+						<p:outputLabel value="Numero de Documento" />
+						<p:inputText value="#{egresadoBean.egresado.idEgresado}"
+							required="true">
+
+						</p:inputText>
 
 
-							</p:inputText>
+						<p:outputLabel value="Nombres" />
+						<p:inputText value="#{egresadoBean.egresado.nombres}"
+							required="true">
 
 
-							<p:outputLabel value="Apellidos" />
-							<p:inputText value="#{egresadoBean.egresado.apellidos}"
-								required="true">
-
-							</p:inputText>
+						</p:inputText>
 
 
-							<p:outputLabel value="Telefono Principal" />
-							<p:inputText value="#{egresadoBean.egresado.telefonoPrincipal}">
+						<p:outputLabel value="Apellidos" />
+						<p:inputText value="#{egresadoBean.egresado.apellidos}"
+							required="true">
 
-							</p:inputText>
-
-
-							<p:outputLabel value="Telefono Alterno" id="telefonoAlterno" />
-							<p:inputText value="#{egresadoBean.egresado.telefonoAlterno}">
-
-							</p:inputText>
-
-							<p:outputLabel value="Correo Principal" />
-							<p:inputText value="#{egresadoBean.egresado.emailPrincipal}"
-								required="true">
-
-							</p:inputText>
+						</p:inputText>
 
 
-							<p:outputLabel value="Correo Alterno" />
-							<p:inputText value="#{egresadoBean.egresado.emailAlterno}">
+						<p:outputLabel value="Telefono Principal" />
+						<p:inputText value="#{egresadoBean.egresado.telefonoPrincipal}">
 
-							</p:inputText>
-
-
-							<p:outputLabel value="Contraseña" />
-							<p:inputText value="#{egresadoBean.egresado.contrasena}">
-
-							</p:inputText>
+						</p:inputText>
 
 
-							<p:outputLabel value="Ciudad de Residencia" />
-							<p:inputText value="#{egresadoBean.egresado.lugarResidencia}">
+						<p:outputLabel value="Telefono Alterno" id="telefonoAlterno" />
+						<p:inputText value="#{egresadoBean.egresado.telefonoAlterno}">
 
-							</p:inputText>
+						</p:inputText>
 
+						<p:outputLabel value="Correo Principal" />
+						<p:inputText value="#{egresadoBean.egresado.emailPrincipal}"
+							required="true">
 
-							<p:outputLabel value="Modalidad" />
-							<p:inputText value="#{egresadoBean.egresado.modalidad}">
-
-							</p:inputText>
-
-
-							<p:outputLabel value="Fecha Inicio Formacion" />
-							<p:calendar id="fechaInicio"
-								value="#{egresadoBean.egresado.fechaInicio}"
-								pattern="dd-MM-yyyy" mask="true" />
+						</p:inputText>
 
 
-							<p:outputLabel value="Fecha Fin Formacion" />
-							<p:calendar id="fechaFin"
-								value="#{egresadoBean.egresado.fechaFin}" pattern="dd-MM-yyyy"
-								mask="true" />
+						<p:outputLabel value="Correo Alterno" />
+						<p:inputText value="#{egresadoBean.egresado.emailAlterno}">
+
+						</p:inputText>
 
 
-						</p:panelGrid>
-						<p:commandButton value="Guardar"
-							actionListener="#{egresadoBean.editarEgresado()}"
-							update=":formConsulta:tablaConsulta"
-							oncomplete="PF('dialogModificar').hide();" />
-						<p:commandButton value="Cancelar"
-							onclick="PF('dialogModificar').hide();" />
-					</p:dialog>
-				</h:form>
+						<p:outputLabel value="Contraseña" />
+						<p:inputText value="#{egresadoBean.egresado.contrasena}">
 
-				<h:form id="formEliminar">
+						</p:inputText>
+
+
+						<p:outputLabel value="Ciudad de Residencia" />
+						<p:inputText value="#{egresadoBean.egresado.lugarResidencia}">
+
+						</p:inputText>
+
+
+						<p:outputLabel value="Modalidad" />
+						<p:inputText value="#{egresadoBean.egresado.modalidad}">
+
+						</p:inputText>
+
+
+						<p:outputLabel value="Fecha Inicio Formacion" />
+						<p:calendar id="fechaInicio"
+							value="#{egresadoBean.egresado.fechaInicio}" pattern="dd-MM-yyyy"
+							mask="true" />
+
+
+						<p:outputLabel value="Fecha Fin Formacion" />
+						<p:calendar id="fechaFin"
+							value="#{egresadoBean.egresado.fechaFin}" pattern="dd-MM-yyyy"
+							mask="true" />
+
+
+					</p:panelGrid>
+					<p:commandButton value="Guardar"
+						actionListener="#{egresadoBean.editarEgresado()}"
+						update=":formularioConsulta:tablaConsulta"
+						oncomplete="PF('dialogModificar').hide();" />
+
+					<p:commandButton value="Cancelar"
+						onclick="PF('dialogModificar').hide();" />
+				</p:dialog>
+			</h:form>
+			<h:form id="formEliminar">
 					<p:dialog id="dlgEliminar" widgetVar="dialogEliminar"
 						resizable="false" showEffect="explode" hideEffect="explode"
 						modal="true">
 						<h:outputText value="Desea eliminar este registro?" />
 						<p:commandButton value="SI"
 							actionListener="#{egresadoBean.eliminarEgresado()}"
-							update=":formConsulta:tablaConsulta"
+							update=":formularioConsulta:tablaConsulta"
 							oncomplete="PF('dialogEliminar').hide();" />
 						<p:commandButton value="No" onclick="PF('dialogEliminar').hide();" />
 					</p:dialog>
+			</h:form>
+		</div>
 
-				</h:form>
-			</div>
-			<!-- <script type="text/javascript"
+			<!--  <script type="text/javascript"
 				src="resources/js/jquery-3.2.1.min.js.js"></script> -->
 			<script type="text/javascript" src="resources/js/materialize.js"></script>
 		</h:body>

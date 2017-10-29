@@ -1,11 +1,15 @@
 package entidades;
-// Generated 13/10/2017 09:42:26 PM by Hibernate Tools 5.2.3.Final
+// Generated 28/10/2017 02:18:48 PM by Hibernate Tools 5.2.3.Final
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -17,12 +21,18 @@ public class TipoTitulacion implements java.io.Serializable {
 
 	private Integer idTipoTitulacion;
 	private String tipoTitulacion;
+	private Set<ProgramaFormacion> programaFormacions = new HashSet<ProgramaFormacion>(0);
 
 	public TipoTitulacion() {
 	}
 
 	public TipoTitulacion(String tipoTitulacion) {
 		this.tipoTitulacion = tipoTitulacion;
+	}
+
+	public TipoTitulacion(String tipoTitulacion, Set<ProgramaFormacion> programaFormacions) {
+		this.tipoTitulacion = tipoTitulacion;
+		this.programaFormacions = programaFormacions;
 	}
 
 	@Id
@@ -44,6 +54,15 @@ public class TipoTitulacion implements java.io.Serializable {
 
 	public void setTipoTitulacion(String tipoTitulacion) {
 		this.tipoTitulacion = tipoTitulacion;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoTitulacion")
+	public Set<ProgramaFormacion> getProgramaFormacions() {
+		return this.programaFormacions;
+	}
+
+	public void setProgramaFormacions(Set<ProgramaFormacion> programaFormacions) {
+		this.programaFormacions = programaFormacions;
 	}
 
 }

@@ -10,21 +10,32 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.management.Query;
 
 import dao.EgresadoDao;
 import entidades.Egresado;
 import mensajes.MessagesView;
 
-@ManagedBean
+@ManagedBean (name="egresadoBean", eager = true )
 @ViewScoped
 public class EgresadoBean implements Serializable {
 
 	private MessagesView msj = new MessagesView();
-	EgresadoDao DaoEgresado=new EgresadoDao();
+	EgresadoDao daoEgresado=new EgresadoDao();
 	private Egresado egresado = new Egresado();
 	private List<Egresado>listaEgresados;	
+	private Egresado listaAtributos;
+	private long dniEgresado;
 
 	
+	public long getDniEgresado() {
+		return dniEgresado;
+	}
+
+	public void setDniEgresado(long dniEgresado) {
+		this.dniEgresado = dniEgresado;
+	}
+
 	public Egresado getEgresado() {
 		return egresado;
 	}
@@ -40,11 +51,31 @@ public class EgresadoBean implements Serializable {
 	public void setMsj(MessagesView msj) {
 		this.msj = msj;
 	}
+	public Egresado bucarEgresado() throws Exception{
+		
+		try{
+			
+			listaAtributos=daoEgresado.buscarEgresado(dniEgresado);
+		}catch (Exception e) {
+		
+			throw e;
+		}
+		
+		return listaAtributos;	
+	}
+
+	public Egresado getListaAtributos() {
+		return listaAtributos;
+	}
+
+	public void setListaAtributos(Egresado listaAtributos) {
+		this.listaAtributos = listaAtributos;
+	}
 
 	public List<Egresado> getListaEgresados() {
 		
-		DaoEgresado=new EgresadoDao();
-		listaEgresados = DaoEgresado.listaEgresados();
+		daoEgresado=new EgresadoDao();
+		listaEgresados = daoEgresado.listaEgresados();
 
 		return listaEgresados;
 	}
@@ -58,8 +89,8 @@ public class EgresadoBean implements Serializable {
 	public void nuevoEgresado() {
 
 		try{
-			DaoEgresado=new EgresadoDao();
-			DaoEgresado.registrar(egresado);
+			daoEgresado=new EgresadoDao();
+			daoEgresado.registrar(egresado);
 			egresado=new Egresado();
 			
 			
@@ -68,12 +99,12 @@ public class EgresadoBean implements Serializable {
 			
 		}
 	}
-/*
-	public void editarEgresado() {
+
+	public void editarEgresadoAdmin() {
 
 		try{
-			aDao=new EgresadoDao();
-			aDao.editarEgresadoDesdeAdmin(egresado);
+			daoEgresado=new EgresadoDao();
+			daoEgresado.editarEgresadoDesdeAdmin(egresado);
 			egresado = new Egresado();
 			msj.info("Informacion actualizada exitosamente");
 			
@@ -81,12 +112,12 @@ public class EgresadoBean implements Serializable {
 			
 		}
 		
-	}*/
+	}
 	
 	public void editarEgresado(){
 		
 		
-		if (DaoEgresado.editaEgresadoFromEgresado(egresado)) {
+		if (daoEgresado.editaEgresadoFromEgresado(egresado)) {
 			System.out.println("editó al egresado");
 	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Hecho", "se editó al egresado"));
 			
@@ -102,8 +133,8 @@ public class EgresadoBean implements Serializable {
 	public void eliminarEgresado() {
 
 		try{
-			DaoEgresado=new EgresadoDao();
-			DaoEgresado.eliminar(egresado);
+			daoEgresado=new EgresadoDao();
+			daoEgresado.eliminar(egresado);
 			egresado = new Egresado();
 			msj.info("Egresado eliminado exitosamente ");
 			
@@ -114,12 +145,13 @@ public class EgresadoBean implements Serializable {
 	}
 
 	public EgresadoDao getEgreDao() {
-		return DaoEgresado;
+		return daoEgresado;
 	}
 
-	public void setEgreDao(EgresadoDao egreDao) {
-		this.DaoEgresado = egreDao;
+	public void setEgreDao(EgresadoDao daoEgresado) {
+		this.daoEgresado = daoEgresado;
 	}
+
 	
 	
 

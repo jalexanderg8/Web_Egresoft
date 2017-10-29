@@ -1,11 +1,17 @@
 package entidades;
-// Generated 13/10/2017 09:42:26 PM by Hibernate Tools 5.2.3.Final
+// Generated 28/10/2017 02:18:48 PM by Hibernate Tools 5.2.3.Final
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -16,15 +22,22 @@ import javax.persistence.Table;
 public class ProgramaFormacion implements java.io.Serializable {
 
 	private Integer idProgramaFormacion;
+	private TipoTitulacion tipoTitulacion;
 	private String nombreFormacion;
-	private int idtipoTitulacion;
+	private Set<NumeroFicha> numeroFichas = new HashSet<NumeroFicha>(0);
 
 	public ProgramaFormacion() {
 	}
 
-	public ProgramaFormacion(String nombreFormacion, int idtipoTitulacion) {
+	public ProgramaFormacion(TipoTitulacion tipoTitulacion, String nombreFormacion) {
+		this.tipoTitulacion = tipoTitulacion;
 		this.nombreFormacion = nombreFormacion;
-		this.idtipoTitulacion = idtipoTitulacion;
+	}
+
+	public ProgramaFormacion(TipoTitulacion tipoTitulacion, String nombreFormacion, Set<NumeroFicha> numeroFichas) {
+		this.tipoTitulacion = tipoTitulacion;
+		this.nombreFormacion = nombreFormacion;
+		this.numeroFichas = numeroFichas;
 	}
 
 	@Id
@@ -39,6 +52,16 @@ public class ProgramaFormacion implements java.io.Serializable {
 		this.idProgramaFormacion = idProgramaFormacion;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idtipo_titulacion", nullable = false)
+	public TipoTitulacion getTipoTitulacion() {
+		return this.tipoTitulacion;
+	}
+
+	public void setTipoTitulacion(TipoTitulacion tipoTitulacion) {
+		this.tipoTitulacion = tipoTitulacion;
+	}
+
 	@Column(name = "nombre_formacion", nullable = false, length = 55)
 	public String getNombreFormacion() {
 		return this.nombreFormacion;
@@ -48,13 +71,13 @@ public class ProgramaFormacion implements java.io.Serializable {
 		this.nombreFormacion = nombreFormacion;
 	}
 
-	@Column(name = "idtipo_titulacion", nullable = false)
-	public int getIdtipoTitulacion() {
-		return this.idtipoTitulacion;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "programaFormacion")
+	public Set<NumeroFicha> getNumeroFichas() {
+		return this.numeroFichas;
 	}
 
-	public void setIdtipoTitulacion(int idtipoTitulacion) {
-		this.idtipoTitulacion = idtipoTitulacion;
+	public void setNumeroFichas(Set<NumeroFicha> numeroFichas) {
+		this.numeroFichas = numeroFichas;
 	}
 
 }

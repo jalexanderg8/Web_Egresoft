@@ -1,12 +1,16 @@
 package entidades;
-// Generated 13/10/2017 09:42:26 PM by Hibernate Tools 5.2.3.Final
+// Generated 28/10/2017 02:18:48 PM by Hibernate Tools 5.2.3.Final
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,6 +28,7 @@ public class Evento implements java.io.Serializable {
 	private Date fechaEvento;
 	private String imagenEvento;
 	private String descripcionEvento;
+	private Set<ConfirmarEvento> confirmarEventos = new HashSet<ConfirmarEvento>(0);
 
 	public Evento() {
 	}
@@ -35,6 +40,16 @@ public class Evento implements java.io.Serializable {
 		this.fechaEvento = fechaEvento;
 		this.imagenEvento = imagenEvento;
 		this.descripcionEvento = descripcionEvento;
+	}
+
+	public Evento(String nombreEvento, String lugarEvento, Date fechaEvento, String imagenEvento,
+			String descripcionEvento, Set<ConfirmarEvento> confirmarEventos) {
+		this.nombreEvento = nombreEvento;
+		this.lugarEvento = lugarEvento;
+		this.fechaEvento = fechaEvento;
+		this.imagenEvento = imagenEvento;
+		this.descripcionEvento = descripcionEvento;
+		this.confirmarEventos = confirmarEventos;
 	}
 
 	@Id
@@ -93,6 +108,15 @@ public class Evento implements java.io.Serializable {
 
 	public void setDescripcionEvento(String descripcionEvento) {
 		this.descripcionEvento = descripcionEvento;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "evento")
+	public Set<ConfirmarEvento> getConfirmarEventos() {
+		return this.confirmarEventos;
+	}
+
+	public void setConfirmarEventos(Set<ConfirmarEvento> confirmarEventos) {
+		this.confirmarEventos = confirmarEventos;
 	}
 
 }

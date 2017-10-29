@@ -75,7 +75,7 @@ public class LogicaNavegacion implements Serializable {
 		}
 		else {
 			System.err.println("");
-	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "parce la contraseña o el usuario no son correctos, usted no es un egresado aun, o el administrador no a actualizado el sistema con sus datos... ", "contactelo"));
+	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Usuario no registrado revise sus credenciales ... ", "Contacte al Administrador del sistema "));
 		}
 		}catch (Exception e) {
 			
@@ -110,22 +110,6 @@ public class LogicaNavegacion implements Serializable {
 				}
 		
 				
-				
-			
-		/*	if (usuario==null) {
-					context.getExternalContext().redirect("login.jsf");
-					System.out.println("usuario vacio egre");
-	                //mensajes.fatal("no a iniciado sesion");
-					
-			 if(administrador==null){
-				context.getExternalContext().redirect("login.jsf");	
-				System.out.println("usuario vacio admin");
-			 }
-			}
-			else{
-				
-				System.out.println("no esta vacio");
-			}*/
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

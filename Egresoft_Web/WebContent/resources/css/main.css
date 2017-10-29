@@ -19,9 +19,7 @@ nav ul li:hover >ul{
 .login{
 background-image: url("imagenes/fondoEgresoft.jpg");
 }
-.indexEgresado{
-	background-color: black;
-} 
+
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
@@ -82,6 +80,10 @@ background-image: url("imagenes/fondoEgresoft.jpg");
 .cinco{
 	font-size:15rem;
 	color:#18ffff ;
+}
+.seis{
+	font-size:15rem;
+	color:#ffab40;
 }
 .back{
 	background-image: url("../imagenes/fondoEgresoft.jpg");

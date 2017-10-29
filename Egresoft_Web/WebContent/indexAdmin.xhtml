@@ -2,26 +2,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:f="http://java.sun.com/jsf/core">
 
-
+<h:head>
+	<f:metadata>
+		<f:event listener="#{logicaNavegacion.verificarSesion()}"
+			type="preRenderView"></f:event>
+	</f:metadata>
+</h:head>
 
 
 <ui:composition xmlns:p="http://primefaces.org/ui"
 	template="/templates/templateAdministrador/AdminTemplate.xhtml">
 	<ui:define name="admin">
-		<h:head>
-			<f:metadata><f:event listener="#{logicaNavegacion.verificarSesion()}"
-				type="preRenderView"></f:event></f:metadata>
-		</h:head>
-		<h:body>
+	
+		<body>
 			<div class="container">
 				<br></br> <br />
 				<div class="row">
 					<div class="col s12 m4">
 						<div class="center promo">
-							<a href=""> <i class="material-icons uno">save</i></a>
+							<a href="subirExcel.jsf"> <i class="material-icons uno">save</i></a>
 							<h5>Cargar Bd</h5>
 							<p>
 								Permitira al administrador subir aprendices<br></br> ala base de
@@ -32,17 +33,18 @@
 					</div>
 					<div class="col s12 m4">
 						<div class="center promo">
-							<a href=""> <i class="material-icons dos">poll</i></a>
-							<h5>Gestionar Noticia/Evento</h5>
+							<a href="gestionarNoticia.jsf"> <i class="material-icons dos">poll</i></a>
+							<h5>Gestionar Noticia</h5>
 							<p>
-								Permitira al Administrador crear noticias,eventos<br /> a si
+								Permitira al Administrador crear noticias<br /> a si
 								como actualizar la informacion de los mismos y eliminarlos
 							</p>
 						</div>
 					</div>
 					<div class="col s12 m4">
 						<div class="center promo">
-							<a href="gestionarConvenios.jsf"> <i class="material-icons tres">business_center</i></a>
+							<a href="gestionarConvenios.jsf"> <i
+								class="material-icons tres">business_center</i></a>
 							<h5>Gestionar Convenios</h5>
 							<p>
 								Permitira al admnistrador crear convenios asi como actualizar <br></br>
@@ -53,9 +55,9 @@
 				</div>
 				<br /> <br></br>
 				<div class="row">
-					<div class="col s12 m6">
+					<div class="col s12 m4">
 						<div class="center promo">
-							<a href=""> <i class="material-icons cuatro">email</i></a>
+							<a href=""> <i class="material-icons seis">email</i></a>
 							<h5>Enviar Correos Egresados</h5>
 							<p>
 								Permitira al Administrador enviar correos a los egresados<br />
@@ -64,7 +66,17 @@
 
 						</div>
 					</div>
-					<div class="col s12 m6">
+					<div class="col s12 m4">
+						<div class="center promo">
+							<a href="gestionarEvento.jsf"> <i class="material-icons cuatro">import_contacts</i></a>
+							<h5>Gestionar Evento</h5>
+							<p>
+								Permitira al Administrador crear eventos<br /> a si
+								como actualizar la informacion de los mismos y eliminarlos
+							</p>
+						</div>
+					</div>
+					<div class="col s12 m4">
 						<div class="center promo">
 							<a href="crudEgresado.jsf"> <i class="material-icons cinco">mode_edit</i></a>
 							<h5>Gestionar Egresados</h5>
@@ -78,10 +90,11 @@
 					</div>
 				</div>
 			</div>
-			<!-- <script type="text/javascript"
-				src="resources/js/jquery-3.2.1.min.js.js"></script>  -->
+			
+			<script type="text/javascript"
+				src="resources/js/jquery-3.2.1.min.js.js"></script>
 			<script type="text/javascript" src="resources/js/materialize.js"></script>
-		</h:body>
+		</body>
 	</ui:define>
 </ui:composition>
 

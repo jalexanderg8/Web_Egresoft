@@ -17,9 +17,11 @@ public class SendMailTLS {
 
 	public boolean enviar(CorreoVo correo) {
 		boolean seEnvio = false;
-		final String username = "jhonjairohincapie21@gmail.com";
-		final String password = "junior399";
+		final String username = "pruebaegresado@gmail.com";
+		final String password = "Egresoft2017"
+				+ "";
 
+		
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");

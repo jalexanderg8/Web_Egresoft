@@ -1,11 +1,14 @@
 package entidades;
-// Generated 13/10/2017 09:42:26 PM by Hibernate Tools 5.2.3.Final
+// Generated 28/10/2017 02:18:48 PM by Hibernate Tools 5.2.3.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -16,15 +19,15 @@ import javax.persistence.Table;
 public class ConfirmarEvento implements java.io.Serializable {
 
 	private Integer idConfirmarEvento;
-	private int idEvento;
-	private long idEgresado;
+	private Egresado egresado;
+	private Evento evento;
 
 	public ConfirmarEvento() {
 	}
 
-	public ConfirmarEvento(int idEvento, long idEgresado) {
-		this.idEvento = idEvento;
-		this.idEgresado = idEgresado;
+	public ConfirmarEvento(Egresado egresado, Evento evento) {
+		this.egresado = egresado;
+		this.evento = evento;
 	}
 
 	@Id
@@ -39,22 +42,24 @@ public class ConfirmarEvento implements java.io.Serializable {
 		this.idConfirmarEvento = idConfirmarEvento;
 	}
 
-	@Column(name = "idEvento", nullable = false)
-	public int getIdEvento() {
-		return this.idEvento;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idEgresado", nullable = false)
+	public Egresado getEgresado() {
+		return this.egresado;
 	}
 
-	public void setIdEvento(int idEvento) {
-		this.idEvento = idEvento;
+	public void setEgresado(Egresado egresado) {
+		this.egresado = egresado;
 	}
 
-	@Column(name = "idEgresado", nullable = false)
-	public long getIdEgresado() {
-		return this.idEgresado;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idEvento", nullable = false)
+	public Evento getEvento() {
+		return this.evento;
 	}
 
-	public void setIdEgresado(long idEgresado) {
-		this.idEgresado = idEgresado;
+	public void setEvento(Evento evento) {
+		this.evento = evento;
 	}
 
 }

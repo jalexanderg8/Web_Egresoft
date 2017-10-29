@@ -23,9 +23,10 @@ public class AdminDao {
 		private Administrador admin;
 		private List<Administrador>listaAdministradores;
 			
-		public void registrar(Administrador administrador) {
-
+		public void registrar(Administrador admin) {
+			
 			Session s = null;
+			
 			
 		
 			try {
@@ -44,7 +45,7 @@ public class AdminDao {
 			}
 		}
 		
-		public void editar(Administrador administrador) {
+		public void editar(Administrador admin) {
 
 			Session s = null;
 
@@ -52,7 +53,7 @@ public class AdminDao {
 				
 				s = HibernateUtil.sessionFactory.openSession();
 				s.beginTransaction();
-				s.update(administrador);
+				s.update(admin);
 				s.getTransaction().commit();
 			} catch (Exception e) {
 
@@ -66,7 +67,7 @@ public class AdminDao {
 
 		}
 		
-		public void eliminar(Administrador administrador) {
+		public void eliminar(Administrador admin) {
 
 			Session s = null;
 
@@ -74,7 +75,7 @@ public class AdminDao {
 
 				s = HibernateUtil.sessionFactory.openSession();
 				s.beginTransaction();
-				s.delete(administrador);
+				s.delete(admin);
 				s.getTransaction().commit();
 			} catch (Exception e) {
 
