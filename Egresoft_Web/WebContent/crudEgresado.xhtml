@@ -140,7 +140,7 @@
 									<i class="material-icons prefix">drafts</i>
 
 									<p:inputText id="ocho" disabled="true"
-										value="#{egre.telefonoAlterno}">
+										value="#{egre.emailAlterno}">
 
 									</p:inputText>
 									<label class="active" for="ocho">Email Alterno
@@ -313,7 +313,7 @@
 
 					</p:panelGrid>
 					<p:commandButton value="Guardar"
-						actionListener="#{egresadoBean.editarEgresado()}"
+						actionListener="#{egresadoBean.editarEgresadoAdmin()}"
 						update=":formularioConsulta:tablaConsulta"
 						oncomplete="PF('dialogModificar').hide();" />
 
