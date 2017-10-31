@@ -32,6 +32,7 @@ public class AdminDao {
 			try {
 				s = HibernateUtil.sessionFactory.openSession();
 				s.beginTransaction();
+				admin=new Administrador("administrador", "admin");
 				s.save(admin);
 				s.getTransaction().commit();
 			} catch (Exception e) {

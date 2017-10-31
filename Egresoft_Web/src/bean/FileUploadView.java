@@ -1,6 +1,5 @@
 package bean;
-
-
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -49,10 +48,10 @@ public class FileUploadView {
 	}
 
 	public void setDocumentList(ArrayList<DocumentModel> documentList) {
-		FileUploadView.documentList = documentList;
+		this.documentList = documentList;
 	}
 
-	
+	/// nuevo
 	public FileUploadView() {
 		try {
 			FileUploadView.documentList = initialize();
@@ -97,9 +96,26 @@ public class FileUploadView {
 		return list;
 	}
 
+//	public String addNewDoc() throws IOException {
+//
+//		ArrayList<DocumentModel> list = getDocumentList();
+//		// System.out.println("list count= " + list.size() +
+//		// list.get(list.size() - 1).srNo);
+//		DocumentModel obj = new DocumentModel();
+//		obj.setSrNo(list.size());
+//		obj.setDocumentName(getName());
+//		list.add(obj);
+//
+//		setDocumentList(list);
+//
+//		return null;
+//
+//	}
+
 	public String removeRow(DocumentModel row) {
 		documentList.remove(row);
 
+		// updates serial no.
 		int i = 0;
 		for (DocumentModel fl : documentList) {
 
@@ -131,22 +147,76 @@ public class FileUploadView {
 		tmpFile = new File(row.getDocumentUploadedPath());
 		System.out.println("nombre del archivo: " + tmpFile.getName());
 
-		if (tmpFile.delete()){
-			
+		// borramos el archivo
+		if (tmpFile.delete())
 			System.out.println("El fichero ha sido borrado satisfactoriamente");
-		}else{
-			
+		else
 			System.out.println("El fichero no puede ser borrado");
-		}
-			
 
 	}
 
+//	public String uploadDoc_Advanced(FileUploadEvent e) throws IOException {
+//
+//		DocumentModel docObj = (DocumentModel) e.getComponent().getAttributes().get("docObj");
+//
+//		file = e.getFile();
+//
+//		String fileName = "";
+//
+//		String filePath = "D:\\horario\\ANALISIS 7\\JEE\\entorno 2017\\wildfly\\wildfly-10.1.0.Final\\standalone\\deployments\\ProyectoWebCargaYDescargaArchivos.war\\resources\\cargados";
+//		byte[] bytes = null;
+//
+//		if (null != file) {
+//			bytes = file.getContents();
+//			fileName = FilenameUtils.getName(file.getFileName());
+//			System.out.println("file name" + fileName);
+//			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filePath + fileName)));
+//			stream.write(bytes);
+//			stream.close();
+//		}
+//
+//		docObj.setUploaded(true);
+//		docObj.setDocumentUploadedPath(filePath + fileName);
+//		documentList.set(documentList.indexOf(docObj), docObj);
+//
+//		System.out.println("File Uploaded");
+//
+//		return null;
+//	}
+
+//	public String updatePage() throws IOException {
+//
+//		ArrayList<DocumentModel> list = getDocumentList();
+//
+//		int i = 0;
+//
+//		StringBuffer resultTemp = new StringBuffer();
+//
+//		// DB (DAO) code may be called here to capture all document
+//		// details. I have not written this part of code.
+//
+//		for (DocumentModel fl : list) {
+//
+//			i++;
+//
+//			resultTemp.append(
+//					i + ". Document Name : " + fl.documentName + ", File Path: " + fl.getDocumentUploadedPath());
+//		}
+//
+//		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(resultTemp.toString()));
+//
+//		// setResult(resultTemp.toString());
+//
+//		return "success";
+//
+//	}
+
+	/// Hasta aqui
 
 	public void uploadAttachment(FileUploadEvent event) {
 		UploadedFile file = event.getFile();
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-		String filePath = ec.getRealPath(String.format("/resources/archivosbd/%s", file.getFileName()));
+		String filePath = ec.getRealPath(String.format("/resources/archivosBd/%s", file.getFileName()));
 		try {
 			FileOutputStream fos = new FileOutputStream(filePath);
 			fos.write(file.getContents());
@@ -164,5 +234,4 @@ public class FileUploadView {
 		}
 
 	}
-
-}
+	}

@@ -1,5 +1,5 @@
 package entidades;
-// Generated 28/10/2017 02:18:48 PM by Hibernate Tools 5.2.3.Final
+// Generated 30/10/2017 08:29:39 PM by Hibernate Tools 5.2.3.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -48,24 +48,12 @@ public class Egresado implements java.io.Serializable {
 	}
 	
 	public Egresado(long idEgresado, String tipoDocumento, String nombres, String apellidos, String emailPrincipal,
-			String telefonoPrincipal) {
-		
+			String contrasena) {
 		this.idEgresado = idEgresado;
 		this.tipoDocumento = tipoDocumento;
 		this.nombres = nombres;
 		this.apellidos = apellidos;
 		this.emailPrincipal = emailPrincipal;
-		this.telefonoPrincipal=telefonoPrincipal;
-	}
-	public Egresado(long idEgresado, String tipoDocumento, String nombres, String apellidos, String emailPrincipal,
-			String telefonoPrincipal,String contrasena) {
-		
-		this.idEgresado = idEgresado;
-		this.tipoDocumento = tipoDocumento;
-		this.nombres = nombres;
-		this.apellidos = apellidos;
-		this.emailPrincipal = emailPrincipal;
-		this.telefonoPrincipal=telefonoPrincipal;
 		this.contrasena = contrasena;
 	}
 
@@ -73,7 +61,6 @@ public class Egresado implements java.io.Serializable {
 			String telefonoAlterno, String emailPrincipal, String emailAlterno, String lugarResidencia,
 			String contrasena, String modalidad, Date fechaInicio, Date fechaFin, Set<NumeroFicha> numeroFichas,
 			Set<ConfirmarEvento> confirmarEventos) {
-		
 		this.idEgresado = idEgresado;
 		this.tipoDocumento = tipoDocumento;
 		this.nombres = nombres;

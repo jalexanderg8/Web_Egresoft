@@ -9,9 +9,8 @@ import vo.CorreoVo;
 
 @ManagedBean
 @RequestScoped
+public class CorreoBean {
 
-	public class CorreoBean {
-		
 	private CorreoVo correo = new CorreoVo();
 
 	private MessagesView msj = new MessagesView();
