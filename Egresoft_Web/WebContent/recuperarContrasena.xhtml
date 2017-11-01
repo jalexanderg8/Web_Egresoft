@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+<ui:composition
+	template="/templates/templateUsuario/UsuarioTemplate.xhtml">
+	<ui:define name="title">
+
+		<h:outputText value="Recuperar Contraseña" />
+	</ui:define>
+	<ui:define name="content">
+		<br></br>
+		<div class="container">
+			<p:panel>
+				<h1 class="center-align">recuperar contraseña</h1>
+				<p>Si ha perdido su contraseña solo tiene que introducir a
+					continuación su correo electrónico. En el caso que el correo
+					electrónico coincida con el registrado en el sistema recibirá su
+					nueva contraseña.</p>
+				<h:form id="recover_password">
+					<p:growl id="message" showDetail="true" />
+					<p:messages id="messages" showDetail="true" autoUpdate="true"
+						closable="true" severity="error,fatal,info,warn" life="5200" />
+					<div>
+						<h:message for="recover_password" errorClass="error"
+							infoClass="ok" />
+					</div>
+					<div class="center-align">
+						<div class="labelformulario w200">
+							<label for="email"><h:outputText
+									value="correo electrónico (*):" /></label>
+						</div>
+						<div class="input-fiel col s12 m6 center-align">
+							<p:inputText id="email" value="#{egresadoBean.direccionEmail}"
+								required="true" class="field w300">
+							</p:inputText>
+						</div>
+						<div>
+							<h:message for="email" errorClass="error" infoClass="ok" />
+						</div>
+					</div>
+					<br />
+					<div class="center-align">
+						<p:commandButton type="submit"
+							actionListener="#{egresadoBean.bucarEmail()}" id="enviar"
+							update="recover_password" value="Enviar" class="button big" />
+					</div>
+				</h:form>
+			</p:panel>
+		</div>
+		<!--  <script type="text/javascript"
+				src="resources/js/jquery-3.2.1.min.js.js"></script> -->
+		<script type="text/javascript" src="resources/js/materialize.js"></script>
+
+	</ui:define>
+
+
+</ui:composition>
+</html>

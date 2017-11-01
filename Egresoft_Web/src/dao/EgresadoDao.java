@@ -39,7 +39,8 @@ public class EgresadoDao {
     
     private Egresado egresado;
     private List<Egresado> listaEgresados;
-    private Egresado listaAtributos;
+    private Egresado egresadoAtributos;
+    private Egresado egresadoMail;
 	
 	public void registrar(Egresado egresado) {
 
@@ -365,14 +366,14 @@ public class EgresadoDao {
 	public Egresado buscarEgresado(long dniEgresado) {
 	
 	
-		Egresado listaAtributos=null;
+		Egresado egresadoAtributos=null;
 		Session s = HibernateUtil.getSessionFactory().openSession();
 		Transaction t=null;
 		
 		
 		try{
 			t = s.beginTransaction();
-			listaAtributos=(Egresado)s.get(Egresado.class, dniEgresado);
+			egresadoAtributos=(Egresado)s.get(Egresado.class, dniEgresado);
 			t.commit();
 			
 			
@@ -385,14 +386,50 @@ public class EgresadoDao {
 			s.close();
 		}
 		
-		return listaAtributos;
+		return egresadoAtributos;
 	}
 	
-	public Egresado getListaAtributos() {
-		return listaAtributos;
+	public Egresado buscarMail(String direccionEmail) {
+	
+		egresadoMail = null;
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		Transaction t=null;
+		System.out.println("Abro conexion para buscar");
+		
+		try {
+			t = s.beginTransaction();
+			String sql = "SELECT * FROM egresado WHERE email_principal = :email_principal";
+			System.out.println("estoy en la busqueda");
+			SQLQuery query = s.createSQLQuery(sql);
+			query.addEntity(Egresado.class);
+			query.setParameter("email_principal", direccionEmail);
+			List results = query.list();
+			
+			for (Iterator iterator = results.iterator(); iterator.hasNext();) {
+				egresadoMail = (Egresado) iterator.next();
+				
+			}
+			} catch (HibernateException e) {
+			if (t != null)
+				t.rollback();
+			e.printStackTrace();
+			} finally {
+			s.close();
+			}
+		System.out.println("devuelvo el objeto");		
+		return egresadoMail;
 	}
-	public void setListaAtributos(Egresado listaAtributos) {
-		this.listaAtributos = listaAtributos;
+	public Egresado getEgresadoAtributos() {
+		return egresadoAtributos;
+	}
+	public void setEgresadoAtributos(Egresado egresadoAtributos) {
+		this.egresadoAtributos = egresadoAtributos;
+	}
+	public Egresado getEgresadoMail() {
+		return egresadoMail;
+	}
+	public void setEgresadoMail(Egresado egresadoMail) {
+		this.egresadoMail = egresadoMail;
 	}
 	
 	

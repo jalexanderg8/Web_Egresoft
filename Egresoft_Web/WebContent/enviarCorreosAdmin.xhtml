@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+<ui:composition xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateAdministrador/AdminTemplate.xhtml">
+	<ui:define name="admin">
+		<h:head>
+			<f:metadata>
+				<f:event listener="#{logicaNavegacion.verificarSesion()}"
+					type="preRenderView"></f:event>
+			</f:metadata>
+		</h:head>
+		<h:body>
+		<h4 class="green-text text-darken-5 center-align">Bienvenido a
+				Enviar correos a egresados</h4>
+			<div class="container-fluid">
+				<h:form id="formConsulta">
+					<p:dataTable id="tablaConsulta" var="egre"
+						value="#{egresadoBean.listaEgresados}"
+						emptyMessage="No hay Egresados
+		Registrados" paginator="true"
+						paginatorPosition="top" rows="10">
+
+						<p:column headerText="Numero de cedula"
+							filterBy="#{egre.idEgresado}">
+							<p:outputLabel value="#{egre.idEgresado}" />
+						</p:column>
+
+						<p:column headerText="Nombres Completos"
+							filterBy="#{egre.nombres}">
+							<p:outputLabel value="#{egre.nombres}" />
+						</p:column>
+
+						<p:column headerText="Apellidos Completos"
+							filterBy="#{egre.apellidos}">
+							<p:outputLabel value="#{egre.apellidos}" />
+						</p:column>
+
+						<p:column headerText="Email Princioal"
+							filterBy="#{egre.emailPrincipal}">
+							<p:outputLabel value="#{egre.emailPrincipal}" />
+						</p:column>
+					</p:dataTable>
+				</h:form>
+			</div>
+		</h:body>
+	</ui:define>
+</ui:composition>
+</html>

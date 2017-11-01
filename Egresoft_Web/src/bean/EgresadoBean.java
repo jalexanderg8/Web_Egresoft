@@ -3,13 +3,20 @@ package bean;
 
 import java.io.Serializable;
 import java.util.List;
-
+import java.util.Properties;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.management.Query;
 
 import dao.EgresadoDao;
@@ -24,10 +31,22 @@ public class EgresadoBean implements Serializable {
 	EgresadoDao daoEgresado=new EgresadoDao();
 	private Egresado egresado = new Egresado();
 	private List<Egresado>listaEgresados;	
-	private Egresado listaAtributos;
+	private Egresado egresadoAtributos;
+	private Egresado egresadoMail;
 	private long dniEgresado;
+	private String direccionEmail;
 
 	
+	
+
+	public String getDireccionEmail() {
+		return direccionEmail;
+	}
+
+	public void setDireccionEmail(String direccionEmail) {
+		this.direccionEmail = direccionEmail;
+	}
+
 	public long getDniEgresado() {
 		return dniEgresado;
 	}
@@ -51,25 +70,99 @@ public class EgresadoBean implements Serializable {
 	public void setMsj(MessagesView msj) {
 		this.msj = msj;
 	}
-	public Egresado bucarEgresado() throws Exception{
+	
+	public Egresado bucarEmail() throws Exception{
 		
 		try{
 			
-			listaAtributos=daoEgresado.buscarEgresado(dniEgresado);
+			egresadoMail=daoEgresado.buscarMail(direccionEmail);
+			System.out.println("llego al bean");
+			
+			if(egresadoMail!=null){
+				
+				System.out.println("instacio la clase");
+				
+				final String username = "pruebaegresado@gmail.com";
+				final String password = "Egresoft2017";
+				String contra;
+				
+				contra=egresadoMail.getContrasena();
+
+				Properties props = new Properties();
+				props.put("mail.smtp.auth", "true");
+				props.put("mail.smtp.starttls.enable", "true");
+				props.put("mail.smtp.host", "smtp.gmail.com");
+				props.put("mail.smtp.port", "587");
+				props.put("mail.smtp.ssl.trust", "*");
+
+				Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+					protected PasswordAuthentication getPasswordAuthentication() {
+						return new PasswordAuthentication(username, password);
+					}
+				});
+
+				try {
+
+					Message message = new MimeMessage(session);
+					message.setFrom(new InternetAddress(username));
+					message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(direccionEmail));
+					message.setSubject("Recuperar Contraseña");
+					//message.setText("Texto de prueba," + "\n\n cuerpo del correo");
+					message.setText("Su contraseña es "+contra);
+
+					Transport.send(message);
+
+					System.out.println("enviado");
+					msj.info("Correo enviado exitosamente");
+					
+					
+				} catch (MessagingException e) {
+					throw new RuntimeException(e);
+				}
+				
+				
+			}else {
+				System.out.println("NO instacio la clase");
+				msj.info("Correo no enviado exitosamente");
+				
+			}
+			
 		}catch (Exception e) {
 		
 			throw e;
 		}
 		
-		return listaAtributos;	
+		return egresadoMail;	
+	}
+	
+	public Egresado bucarEgresado() throws Exception{
+		
+		try{
+			
+			egresadoAtributos=daoEgresado.buscarEgresado(dniEgresado);
+		}catch (Exception e) {
+		
+			throw e;
+		}
+		
+		return egresadoAtributos;	
 	}
 
-	public Egresado getListaAtributos() {
-		return listaAtributos;
+	
+	public Egresado getEgresadoAtributos() {
+		return egresadoAtributos;
 	}
 
-	public void setListaAtributos(Egresado listaAtributos) {
-		this.listaAtributos = listaAtributos;
+	public void setEgresadoAtributos(Egresado egresadoAtributos) {
+		this.egresadoAtributos = egresadoAtributos;
+	}
+
+	public Egresado getEgresadoMail() {
+		return egresadoMail;
+	}
+
+	public void setEgresadoMail(Egresado egresadoMail) {
+		this.egresadoMail = egresadoMail;
 	}
 
 	public List<Egresado> getListaEgresados() {
@@ -92,7 +185,7 @@ public class EgresadoBean implements Serializable {
 			daoEgresado=new EgresadoDao();
 			daoEgresado.registrar(egresado);
 			egresado=new Egresado();
-			
+			msj.info("Egresado registrado exitosamente");
 			
 		}catch(Exception e){
 			

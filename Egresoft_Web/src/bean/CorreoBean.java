@@ -7,11 +7,14 @@ import mail.SendMailTLS;
 import mensajes.MessagesView;
 import vo.CorreoVo;
 
+
+
 @ManagedBean
 @RequestScoped
 public class CorreoBean {
 
 	private CorreoVo correo = new CorreoVo();
+
 
 	private MessagesView msj = new MessagesView();
 
@@ -37,7 +40,10 @@ public class CorreoBean {
 		} else {
 			msj.error("No se pudo enviar el correo");
 		}
+	}
+}
 		
-	}
+	
+	
 
-	}
+	

@@ -19,7 +19,7 @@ import org.primefaces.model.UploadedFile;
 @RequestScoped
 public class FileUploadView {
 
-	String ruta = "C:\\Servidores_de_Aplicaciones\\wildfly-10.1.0.Final\\standalone\\deployments\\Egresoft_Web.war\\resources\\archivosBd";
+	String ruta = "C:\\Servidores_de_Aplicaciones\\wildfly-10.1.0.Final\\standalone\\deployments\\Egresoft_Web.war\\resources\\cargados";
 
 	private String name;
 	// private UploadedFile document;
@@ -216,7 +216,7 @@ public class FileUploadView {
 	public void uploadAttachment(FileUploadEvent event) {
 		UploadedFile file = event.getFile();
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-		String filePath = ec.getRealPath(String.format("/resources/archivosBd/%s", file.getFileName()));
+		String filePath = ec.getRealPath(String.format("/resources/cargados/%s", file.getFileName()));
 		try {
 			FileOutputStream fos = new FileOutputStream(filePath);
 			fos.write(file.getContents());
