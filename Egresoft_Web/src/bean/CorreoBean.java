@@ -36,7 +36,7 @@ public class CorreoBean {
 		//SendMailSSL sendMailSSL = new SendMailSSL();
 		
 		if (sendMailTLS.enviar(correo)) {
-			msj.info("Correo enviado");
+			msj.info("Correo enviado exitosamente");
 		} else {
 			msj.error("No se pudo enviar el correo");
 		}

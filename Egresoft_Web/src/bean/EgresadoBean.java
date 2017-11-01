@@ -123,7 +123,7 @@ public class EgresadoBean implements Serializable {
 				
 			}else {
 				System.out.println("NO instacio la clase");
-				msj.info("Correo no enviado exitosamente");
+				msj.error("Correo no enviado exitosamente");
 				
 			}
 			
@@ -140,6 +140,15 @@ public class EgresadoBean implements Serializable {
 		try{
 			
 			egresadoAtributos=daoEgresado.buscarEgresado(dniEgresado);
+			
+			if(egresadoAtributos!=null){
+				
+				msj.info("Egresado en Base de datos");
+			}
+			else {
+				
+				msj.error("Egresado no existe en Base de Datos");
+			}
 		}catch (Exception e) {
 		
 			throw e;

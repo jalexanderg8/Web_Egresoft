@@ -18,20 +18,25 @@
 					<p:messages id="messages" showDetail="true" autoUpdate="true"
 						closable="true" severity="error,fatal,info,warn" life="5200" />
 
+					<h:message for="myform" errorClass="error"
+							infoClass="ok" />
 					<p:panelGrid columns="2">
 						<p:outputLabel value="Para:" />
-						<p:inputText value="#{correoBean.correo.para}" required="true" disabled="true"
+						<p:inputText value="#{correoBean.correo.para}" required="true" disabled="true" id="para"
 							validatorMessage="e-mail… incorrecto, si va a colocar varios separelos por coma y sin espacio">
 							<f:validateRegex
 								pattern="^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$" />
+								
 						</p:inputText>
 
 						<p:outputLabel value="Asunto:" />
-						<p:inputText value="#{correoBean.correo.asunto}" required="true" />
+						<p:inputText value="#{correoBean.correo.asunto}" id="asunto" required="true" />
+						
 
 						<p:outputLabel value="Cuerpo del mensaje:" />
-						<p:inputTextarea value="#{correoBean.correo.cuerpo}"
+						<p:inputTextarea value="#{correoBean.correo.cuerpo}" id="cuerpo"
 							required="true" />
+						
 
 					</p:panelGrid>
 					<br></br>
@@ -41,10 +46,11 @@
 					<br></br>
 					<br></br>
 					<div class="center-align">
-						<p:commandButton value="Enviar"
+						<p:commandButton value="Enviar" icon="fa fa-paper-plane" update="myform"
 							action="#{correoBean.enviarCorreo()}" />
 						<p:spacer width="50" height="10" />
-						<p:commandButton value="Cancelar" />
+						<p:button value="Cancelar" outcome="index.jsf"
+						icon="fa fa-window-close" />
 					</div>
 					<br></br>
 					<br></br>
