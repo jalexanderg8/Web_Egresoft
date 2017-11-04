@@ -1,5 +1,5 @@
 package entidades;
-// Generated 30/10/2017 08:29:39 PM by Hibernate Tools 5.2.3.Final
+// Generated 3/11/2017 01:17:47 PM by Hibernate Tools 5.2.3.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,6 +21,7 @@ public class Evento implements java.io.Serializable {
 
 	private Integer idEvento;
 	private String nombreEvento;
+	private String urlRedireccion;
 	private String imagenEvento;
 	private String descripcionEvento;
 	private Set<ConfirmarEvento> confirmarEventos = new HashSet<ConfirmarEvento>(0);
@@ -28,15 +29,17 @@ public class Evento implements java.io.Serializable {
 	public Evento() {
 	}
 
-	public Evento(String nombreEvento, String imagenEvento, String descripcionEvento) {
+	public Evento(String nombreEvento, String urlRedireccion, String imagenEvento, String descripcionEvento) {
 		this.nombreEvento = nombreEvento;
+		this.urlRedireccion = urlRedireccion;
 		this.imagenEvento = imagenEvento;
 		this.descripcionEvento = descripcionEvento;
 	}
 
-	public Evento(String nombreEvento, String imagenEvento, String descripcionEvento,
+	public Evento(String nombreEvento, String urlRedireccion, String imagenEvento, String descripcionEvento,
 			Set<ConfirmarEvento> confirmarEventos) {
 		this.nombreEvento = nombreEvento;
+		this.urlRedireccion = urlRedireccion;
 		this.imagenEvento = imagenEvento;
 		this.descripcionEvento = descripcionEvento;
 		this.confirmarEventos = confirmarEventos;
@@ -61,6 +64,15 @@ public class Evento implements java.io.Serializable {
 
 	public void setNombreEvento(String nombreEvento) {
 		this.nombreEvento = nombreEvento;
+	}
+
+	@Column(name = "url_redireccion", nullable = false, length = 45)
+	public String getUrlRedireccion() {
+		return this.urlRedireccion;
+	}
+
+	public void setUrlRedireccion(String urlRedireccion) {
+		this.urlRedireccion = urlRedireccion;
 	}
 
 	@Column(name = "imagen_evento", nullable = false, length = 45)

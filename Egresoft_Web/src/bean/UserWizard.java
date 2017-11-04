@@ -62,8 +62,7 @@ public class UserWizard implements Serializable {
 		String siguiente = event.getNewStep();
 		String antes = event.getOldStep();
 
-		if (!verificado) {// si no esta verificado lo verifica ,incrementa 1 al
-							// // presionar siguiente y verificar que esta en BD
+		if (!verificado) {
 			if (verificar(idEgresado)) {
 				verificado = true;
 				// contadorNext++;
@@ -76,12 +75,14 @@ public class UserWizard implements Serializable {
 			}
 
 		} else {
+			verificado = false;
+
 			if (siguiente.equals("Estudio")) {
 				// contadorNext=1;
 				System.out.println("en estudio");
 			} else if (siguiente.equals("contraseña")) {
 				// contadorNext=2;
-				System.out.println("en contraseña");
+				System.out.println("en contraseñ");
 			} else if (siguiente.equals("encuesta")) {
 
 				try {

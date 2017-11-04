@@ -11,62 +11,69 @@
 	template="/templates/templateAdministrador/AdminTemplate.xhtml">
 	<ui:define name="admin">
 		<h:head>
-			<f:metadata><f:event listener="#{logicaNavegacion.verificarSesion()}"
-				type="preRenderView"></f:event></f:metadata>
+			<f:metadata>
+				<f:event listener="#{logicaNavegacion.verificarSesion()}"
+					type="preRenderView"></f:event>
+			</f:metadata>
 		</h:head>
 
 		<h:body>
-		
-		<h3>Carga y Descarga de Archivos</h3>
+			<div class="container">
 
-	
-	<h:form id="formTabla" enctype="multipart/form-data">
-		<p:growl id="messages1" showDetail="true" />
-		<p:messages id="messages" showDetail="true" autoUpdate="true"
-			closable="true" severity="error,fatal,info,warn" life="5200" />
+				<h3>Carga y Descarga de Archivos</h3>
 
-
-		<p:fileUpload uploadLabel="Cargar" cancelLabel="Cancelar"
-			label="Seleccionar archivo"
-			fileUploadListener="#{fileUploadView.uploadAttachment}"
-			mode="advanced" dragDropSupport="false" multiple="true"
-			update=":formTabla:docId" sizeLimit="2500000" fileLimit="3"
-			auto="false"
-			allowTypes="/(\.|\/)(gif|jpe?g|png|doc|docx|xls|xlsx|pdf|ppt|pptx)$/"
-			invalidFileMessage="Solamente esta permitido cargar archivos con extensión .gif, .jpg, .png, .doc, .docx, .xls, .xlsx, .pdf, .ppt . pptx" />
+					<br />
+					<br></br>
+				<h:form id="formTabla" enctype="multipart/form-data">
+					<p:growl id="messages1" showDetail="true" />
+					<p:messages id="messages" showDetail="true" autoUpdate="true"
+						closable="true" severity="error,fatal,info,warn" life="5200" />
 
 
-		<p:separator />
-
-		<p:outputPanel id="testContainer">
-			<p:dataTable id="docId" var="row"
-				value="#{fileUploadView.documentList}" editable="true"
-				editMode="cell" widgetVar="documentTable">
-
-				<p:column headerText="Sr. No" style="width:3%">
-					<h:outputText value="#{row.srNo}" title="No" />
-				</p:column>
+					<p:fileUpload uploadLabel="Cargar" cancelLabel="Cancelar"
+						label="Seleccionar archivo"
+						fileUploadListener="#{fileUploadView.uploadAttachment}"
+						mode="advanced" dragDropSupport="false" multiple="true"
+						update=":formTabla:docId" sizeLimit="2500000" fileLimit="3"
+						auto="false"
+						allowTypes="/(\.|\/)(gif|jpe?g|png|doc|docx|xls|xlsx|pdf|ppt|pptx)$/"
+						invalidFileMessage="Solamente esta permitido cargar archivos con extensión .gif, .jpg, .png, .doc, .docx, .xls, .xlsx, .pdf, .ppt . pptx" />
 
 
+					<p:separator />
 
-				<p:column headerText="Document Name">
-						<h:outputText value="#{row.documentName}" />
-				</p:column>
+					<p:outputPanel id="testContainer">
+						<p:dataTable id="docId" var="row"
+							value="#{fileUploadView.documentList}" editable="true"
+							editMode="cell" widgetVar="documentTable">
 
-				<p:column headerText="Action">
-					<p:commandButton icon="fa fa-fw fa-remove" title="Remover Archivo"
-						actionListener="#{fileUploadView.removeRow(row)}" update="docId"
-						ajax="true" rendered="#{row.removable}" process="@this" />
-						
-					
-				</p:column>
+							<p:column headerText="#" style="width:15%">
+								<h:outputText value="#{row.srNo}" title="No" />
+							</p:column>
 
-			</p:dataTable>
-		</p:outputPanel>
-	</h:form>
-		
+
+
+							<p:column headerText="Nombre de Documento">
+								<h:outputText value="#{row.documentName}" />
+							</p:column>
+
+							<p:column headerText="Accion">
+								<p:commandButton icon="fa fa-fw fa-remove"
+									value="Eliminar Archivo"
+									actionListener="#{fileUploadView.removeRow(row)}"
+									update="docId" ajax="true" rendered="#{row.removable}"
+									process="@this" />
+									
+									<p:spacer width="10px" height="10px"></p:spacer>
+									<p:commandButton value="Cargar Archivo"  icon="fa fa-cloud-upload"
+									/>
+							</p:column>
+						</p:dataTable>
+					</p:outputPanel>
+				</h:form>
+			</div>
 			<!-- <script type="text/javascript" src="resources/js/jquery-3.2.1.min.js"></script> -->
-			 <script type="text/javascript" src="resources/js/materialize.js"></script>
+			<script type="text/javascript" src="resources/js/materialize.js"></script>
 		</h:body>
 	</ui:define>
 </ui:composition>
