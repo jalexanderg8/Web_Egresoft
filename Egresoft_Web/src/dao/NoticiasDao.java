@@ -93,7 +93,7 @@ public class NoticiasDao {
 
 		try {
 			Statement sentencia = conex.getConnection().createStatement();	
-			sentencia.executeUpdate("delete from noticia where idConvenio= "+noticia.getIdNoticia()+"");
+			sentencia.executeUpdate("delete from noticia where idNoticia= "+noticia.getIdNoticia()+"");
 			
 			 //JOptionPane.showMessageDialog(null, " Se ha Eliminado Correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
 

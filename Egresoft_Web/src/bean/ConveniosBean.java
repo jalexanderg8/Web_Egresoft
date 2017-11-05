@@ -64,10 +64,17 @@ public class ConveniosBean {
 	
         
     	try {
-			FileOutputStream fos = new FileOutputStream("C:\\Git\\.git\\Web_Egresoft\\Egresoft_Web\\WebContent\\resources\\imgBD\\"+this.file.getFileName());
-			fos.write(file.getContents());
+			//FileOutputStream fos = new FileOutputStream("C:\\Git\\.git\\Web_Egresoft\\Egresoft_Web\\WebContent\\resources\\imgBD\\"+this.file.getFileName());
+			
+    		FileOutputStream fos = new FileOutputStream("D:\\RepositorioEgresoft\\Web_Egresoft\\Egresoft_Web\\WebContent\\resources\\imgBD\\"+this.file.getFileName());
+    		System.out.println(1);
+    		fos.write(file.getContents());
+    		System.out.println(2);
 			fos.flush();
+    		System.out.println(3);
 			fos.close();
+    		System.out.println(4);
+
 
 			//documentList = initialize();
 			FacesContext context = FacesContext.getCurrentInstance();

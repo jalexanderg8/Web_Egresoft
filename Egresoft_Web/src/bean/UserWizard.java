@@ -62,7 +62,8 @@ public class UserWizard implements Serializable {
 		String siguiente = event.getNewStep();
 		String antes = event.getOldStep();
 
-		if (!verificado) {
+		if (verificado==false) {
+			System.out.println(verificado);
 			if (verificar(idEgresado)) {
 				verificado = true;
 				// contadorNext++;
@@ -78,26 +79,32 @@ public class UserWizard implements Serializable {
 			verificado = false;
 
 			if (siguiente.equals("Estudio")) {
-				// contadorNext=1;
 				System.out.println("en estudio");
-			} else if (siguiente.equals("contraseña")) {
-				// contadorNext=2;
-				System.out.println("en contraseñ");
-			} else if (siguiente.equals("encuesta")) {
+				evento = siguiente;
 
+			} else if (siguiente.equals("contraseña")) {
+				System.out.println("en contraseñ");
+				evento = siguiente;
+				System.out.println(siguiente.toString());
+				
+			}  else if (siguiente.equals("confirma")) {
+				System.out.println("en confirma");
+				
+			/*	
 				try {
 					if (!primeraContraseña.equals(segundaContraseña)) {
 						System.out.println("las contraseñas no coincidend contraseña1: " + primeraContraseña
 								+ " contraseña2: " + segundaContraseña);
+						
 						FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 								"Las contraseñas no coinciden ", "vuelva a intentarlo"));
-						siguiente = "contraseña";
-						evento = siguiente;
+						//siguiente = "contraseña";
+						evento = antes;
 					} else {
 						System.out.println("las contraseñas si coincidend contraseña1: " + primeraContraseña
 								+ " contraseña2: " + segundaContraseña);
 
-						evento = event.getNewStep();
+						evento = siguiente;
 					}
 				} catch (Exception e) {
 					System.out.println("error");
@@ -108,14 +115,9 @@ public class UserWizard implements Serializable {
 									"vuelva a intentarlo"));
 					evento = antes;
 
-				}
-
-				System.out.println("en encuesta");
-			} else if (siguiente.equals("confirma")) {
-				System.out.println("en confirma");
-
+				}*/
+	
 			}
-			evento = siguiente;
 
 		}
 

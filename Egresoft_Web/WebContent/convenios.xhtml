@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html >
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -18,7 +18,7 @@
      <div class="titulo">
        <h2 class=" green-text text-darken-5 center-align">Conveinos  Sena </h2>
      </div>
-   
+     </div>   
      
    <h:dataTable  id="tabla-convenios" value="#{conveniosBean.listaConvenios}"   var="convenio"  rendered="true" >
  
@@ -53,12 +53,14 @@
    </h:column>
   
    </h:dataTable>
-     </div>   
+   
+   
 		<script type="text/javascript"
 				src="resources/js/jquery-3.2.1.min.js.js"></script>
 			<script type="text/javascript" src="resources/js/materialize.js"></script>
 		</h:body>
 	</ui:define>
 </ui:composition>
+
 
 </html>

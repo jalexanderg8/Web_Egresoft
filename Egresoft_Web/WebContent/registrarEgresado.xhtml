@@ -18,8 +18,7 @@
 
 							<p:growl id="growl" sticky="true" showDetail="true" />
 
-							<p:wizard flowListener="#{userWizard.onFlowProcess}"
-								nextLabel="Siguiente" backLabel="Atras">
+							<p:wizard  flowListener="#{userWizard.onFlowProcess}" nextLabel	="Siguiente" backLabel="Atras">
 								<p:tab id="personal" title="Verificación de Identidad">
 									<p:panel header="Verificación de Identidad">
 										<p:messages />
@@ -36,21 +35,20 @@
 												<h:panelGrid columns="2" cellpadding="5">
 
 													<h:outputText value="Numero de Documento: *" />
-													<p:inputText id="numeroDocumento"
-														value="#{egresadoBean.egresado.idEgresado}"
+													<p:inputText id="numeroDocumento" value="#{egresadoBean.egresado.idEgresado}"
 														placeholder="cedula" required="true"
 														title="el campo de la cedula es requerido"
 														label="El campo del documento  es requerido">
 														<f:validateLongRange minimum="1000000"
 															maximum="9999999999999"></f:validateLongRange>
 													</p:inputText>
-													<p:tooltip for="numeroDocumento"
+													<p:tooltip  for="numeroDocumento"
 														value="Ingrese un numero de documento" showEffect="clip"
 														hideEffect="explode" data-position="left" />
 
 												</h:panelGrid>
 											</p:fieldset>
-											<!-- 	<br />
+										<!-- 	<br />
 											<h:outputText value="Ir al ultimo paso: " />
 											<br />
 											<p:selectBooleanCheckbox value="#{userWizard.pasar}" /> -->
@@ -60,61 +58,59 @@
 
 								<p:tab id="Estudio" title="Actualizar Datos">
 									<p:panel header="Actualizar Datos">
-										<p:messages id="messages" showDetail="true" autoUpdate="true"
-											closable="true" severity="error,fatal,info,warn" life="200" />
+									 <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"  severity="error,fatal,info,warn"   life="200" />
 										<h:panelGrid columns="2" columnClasses="label, value">
 											<p:fieldset legend="Actualizar" toggleable="true"
 												toggleSpeed="500">
 												<p:ajax event="toggle"
-													listener="#{fieldsetView.handleToggle}" update="" />
+													listener="#{fieldsetView.handleToggle}" update="" /> 
 												<h:panelGrid columns="2" cellpadding="5">
 
 													<h:outputText value="Correo Alterno:" />
 													<p:inputText id="correo"
 														value="#{egresadoBean.egresado.emailAlterno}"
-														placeholder="correo" required="true"
+														placeholder="correo" 
 														title="El campo correo es requerido ejemplo: xxxx@domio.xx"
 														label="El campo correo es requerido ejemplo: xxxx@domio.xx">
-														<f:validateRegex
-															pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$" />
+													<!-- 	<f:validateRegex
+															pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$" /> -->
 													</p:inputText>
-
+													
 													<h:outputText value="Teléfono Principal: " />
 													<p:inputText id="telefonoPrincipal"
 														value="#{egresadoBean.egresado.telefonoPrincipal}"
-														placeholder="telefono" required="true"
+														placeholder="telefono" 
 														title="El telefono es requerido debe empezar por 3 y tener un total de 10 digitos"
 														label="El telefono es requerido debe empezar por 3
                                                      y tener un total de 10 digitos">
-														<f:validateRegex pattern="^[3][0-9]{9}$" />
+											<!-- 			<f:validateRegex pattern="^[3][0-9]{9}$" /> -->
 													</p:inputText>
-
+													
 													<h:outputText value="Teléfono Alterno: " />
 													<p:inputText id="telefonoAlterno"
 														value="#{egresadoBean.egresado.telefonoAlterno}"
-														placeholder="telefono" required="true"
+														placeholder="telefono" 
 														title="El telefono es requerido debe empezar por 3 y tener un total de 10 digitos"
 														label="El telefono es requerido debe empezar por 3
                                                      y tener un total de 10 digitos">
-														<f:validateRegex pattern="^[3][0-9]{9}$" />
 													</p:inputText>
 
 
 													<h:outputText value="Lugar de Residencia: " />
 													<p:inputText
 														value="#{egresadoBean.egresado.lugarResidencia}"
-														placeholder="residencia" required="true"
+														placeholder="residencia" 
 														title="El campo residencia es requerido"
 														label="El campo residencia es requerido" />
 
 
 													<h:outputText value="Fecha Inicio Formacion " />
-													<p:calendar id="botonInicio" required="true"
+													<p:calendar id="botonInicio" 
 														value="#{egresadoBean.egresado.fechaInicio}"
 														showOn="button" />
 
 													<h:outputText value="Fecha Fin Formacion " />
-													<p:calendar id="botonFin" required="true"
+													<p:calendar id="botonFin"
 														value="#{egresadoBean.egresado.fechaFin}" showOn="button" />
 
 
@@ -163,8 +159,6 @@
 										</h:panelGrid>
 									</p:panel>
 								</p:tab>
-
-
 								<p:tab id="confirma" title="Confirmación">
 									<p:panel header="Confirmación">
 										<h:panelGrid id="confirmation" columns="3"
@@ -183,7 +177,7 @@
 												<h:inputText
 													value="#{egresadoBean.egresado.telefonoPrincipal}"
 													styleClass="outputLabel" disabled="true" />
-
+													
 												<h:outputText value="5. Telefono Alterno: " />
 												<h:inputText
 													value="#{egresadoBean.egresado.telefonoAlterno}"
@@ -203,7 +197,7 @@
 
 
 												<h:outputText value="8. Confirmar Contraseña: " />
-												<h:inputText value="#{egresadoBean.egresado.contrasena}"
+												<h:inputText value="#{ userWizard.segundaContraseña}"
 													styleClass="outputLabel" disabled="true" />
 
 												<h:outputText value="9. Fecha Inicio Formacion: " />
@@ -218,8 +212,8 @@
 										</h:panelGrid>
 
 										<p:commandButton value="Actualizar"
-											actionListener="#{egresadoBean.editarEgresado()}"
-											update="growl" process="@this" />
+											actionListener="#{egresadoBean.editarEgresado()}" update="growl"
+											process="@this" />
 									</p:panel>
 								</p:tab>
 							</p:wizard>

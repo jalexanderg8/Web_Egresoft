@@ -9,84 +9,65 @@
 	template="/templates/templateAdministrador/AdminTemplate.xhtml">
 	<ui:define name="admin">
 		<h:head>
-			<f:metadata>
-				<f:event listener="#{logicaNavegacion.verificarSesion()}"
-					type="preRenderView"></f:event>
-			</f:metadata>
+			<f:metadata><f:event listener="#{logicaNavegacion.verificarSesion()}"
+				type="preRenderView"></f:event>
+							<f:event listener="#{noticiasBean.consultar()}" type="preRenderView"></f:event>
+				
+				</f:metadata>
 		</h:head>
 		<h:body>
-		<div class="container">
+	
+	<h:panelGrid >
 
-			<h:panelGrid>
+<img src="../resources/imagenes/con1.jpg" />
 
-				<img src="resources/imagenes/con1.jpg" />
+<h:form enctype="multipart/form-data">
+    <p:growl id="messages" showDetail="true" />
+ <p:outputLabel>Imagen</p:outputLabel>
+    <p:fileUpload value="#{noticiasBean.file}" mode="simple" skinSimple="true"/>
+ <br />
+ 
+ <p:outputLabel>Nombre de la Noticia: </p:outputLabel>
+<p:inputTextarea  rows="1" value="#{noticiasBean.objNoticia.nombreNoticia}"></p:inputTextarea>
 
-				<h:form enctype="multipart/form-data">
-					<p:growl id="messages" showDetail="true" />
-					<p:outputLabel>Imagen</p:outputLabel>
-					<p:fileUpload value="#{noticiasBean.file}" mode="simple"
-						skinSimple="true" />
-					<br />
+<p:outputLabel>Descripcion: </p:outputLabel>
+ <p:inputTextarea  rows="1" value="#{noticiasBean.objNoticia.descripcionNoticia}"></p:inputTextarea>
 
-					<p:outputLabel>Nombre de la Noticia: </p:outputLabel>
-					<p:inputTextarea rows="1"
-						value="#{noticiasBean.objNoticia.nombreNoticia}"></p:inputTextarea>
-
-					<p:outputLabel>Descripcion: </p:outputLabel>
-					<p:inputTextarea rows="1"
-						value="#{noticiasBean.objNoticia.descripcionNoticia}"></p:inputTextarea>
-
-					<p:commandButton ajax="false" value="Guardar"
-						action="#{noticiasBean.guardar()}"></p:commandButton>
-					<p:commandButton value="Cancelar"></p:commandButton>
-
-				</h:form>
+<p:commandButton ajax="false" value="Guardar"  action="#{noticiasBean.guardar()}" ></p:commandButton>
+<p:commandButton value="Cancelar"></p:commandButton>
+ 
+</h:form>
 
 
-			</h:panelGrid>
+</h:panelGrid>
 
+	
+	<h:form>
+<p:dataTable id="tabla" bodyrows="3"  border="2"  value="#{noticiasBean.listaNoticias}"   var="noticia"  rendered="#{noticiasBean.listaNoticias.size()>=0 eq true}">
 
-			<h:form>
-				<p:dataTable id="tabla" bodyrows="3" border="2"
-					value="#{noticiasBean.listaNoticias}" var="noticia"
-					rendered="#{noticiasBean.listaNoticias.size()>0 eq true}">
+<p:column>
+<f:facet name="header"><h:outputText  value="imagen"></h:outputText></f:facet>
+ <p:graphicImage  height="100" value="#{noticia.imagenNoticia}" width="100"  ></p:graphicImage>	 
+</p:column>
 
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="imagen"></h:outputText>
-						</f:facet>
-						<p:graphicImage height="100" value="#{noticia.imagenNoticia}"
-							width="100"></p:graphicImage>
-					</p:column>
+<p:column>
+<f:facet name="header"><h:outputText  value="nombre"></h:outputText></f:facet>
+<p:outputLabel value="#{noticia.nombreNoticia}"></p:outputLabel>
+</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="descripcion  de noticia"></h:outputText></f:facet>
+<p:outputLabel value="#{noticia.descripcionNoticia}"></p:outputLabel>
+</p:column>
 
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="nombre"></h:outputText>
-						</f:facet>
-						<p:outputLabel value="#{noticia.nombreNoticia}"></p:outputLabel>
-					</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="elimnar"></h:outputText></f:facet>
+	<p:commandButton   update="tabla" style="background: #F39C12 ; width:60px; height:60px;" actionListener="#{noticiasBean.eliminar(noticia)}" icon="fa fa-fw fa-bitbucket"></p:commandButton>
+</p:column>
 
-
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="descripcion  de noticia"></h:outputText>
-						</f:facet>
-						<p:outputLabel value="#{noticia.descripcionNoticia}"></p:outputLabel>
-					</p:column>
-
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="elimnar"></h:outputText>
-						</f:facet>
-						<p:commandButton render="#tabla-convenios" update="tabla"
-							ajax="true" actionListener="#{noticiasBean.eliminar(noticia)}"
-							icon="fa fa-fw fa-close"></p:commandButton>
-					</p:column>
-
-				</p:dataTable>
-			</h:form>
-			</div>
-
+</p:dataTable>
+</h:form>
+	
+	
 			<script type="text/javascript"
 				src="resources/js/jquery-3.2.1.min.js.js"></script>
 			<script type="text/javascript" src="resources/js/materialize.js"></script>

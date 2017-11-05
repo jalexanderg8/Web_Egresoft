@@ -10,95 +10,74 @@
 	<ui:define name="admin">
 		<h:head>
 			<f:metadata>
-				<f:event listener="#{logicaNavegacion.verificarSesion()}"
-					type="preRenderView"></f:event>
-				<f:event listener="#{eventoBean.consultar()}" type="preRenderView"></f:event>
+			<f:event listener="#{logicaNavegacion.verificarSesion()}" type="preRenderView"></f:event>
+			<f:event listener="#{eventoBean.consultar()}" type="preRenderView"></f:event>
 			</f:metadata>
 		</h:head>
 		<h:body>
-			<div class="container">
+	
+	<h:panelGrid >
 
-				<h:panelGrid>
+<img src="../resources/imagenes/con1.jpg" />
 
-					<img src="resources/imagenes/con1.jpg" />
+<h:form enctype="multipart/form-data">
+    <p:growl id="messages" showDetail="true" />
+ <p:outputLabel>Imagen</p:outputLabel>
+    <p:fileUpload value="#{eventoBean.file}" mode="simple" skinSimple="true"/>
+ <br />
+ 
+ <p:outputLabel>Nombre del evento: </p:outputLabel>
+<p:inputTextarea  rows="1" value="#{eventoBean.objEvento.nombreEvento}"></p:inputTextarea>
 
-					<h:form enctype="multipart/form-data">
-						<p:growl id="messages" showDetail="true" />
-						<p:outputLabel>Imagen</p:outputLabel>
-						<p:fileUpload value="#{eventoBean.file}" mode="simple"
-							skinSimple="true" />
-						<br />
-
-						<p:outputLabel>Nombre del evento: </p:outputLabel>
-						<p:inputTextarea rows="1"
-							value="#{eventoBean.objEvento.nombreEvento}"></p:inputTextarea>
-
-						<p:outputLabel>Descripcion : </p:outputLabel>
-						<p:inputTextarea rows="1"
-							value="#{eventoBean.objEvento.descripcionEvento}"></p:inputTextarea>
-
-						<p:outputLabel>link para el registro del evento : </p:outputLabel>
-						<p:inputTextarea rows="1"
-							value="#{eventoBean.objEvento.urlRedireccion}"></p:inputTextarea>
-
-						<p:commandButton ajax="false" value="Guardar"
-							action="#{eventoBean.guardar()}"></p:commandButton>
-						<p:commandButton value="Cancelar"></p:commandButton>
-
-					</h:form>
-				</h:panelGrid>
+<p:outputLabel>Descripcion : </p:outputLabel>
+ <p:inputTextarea  rows="1" value="#{eventoBean.objEvento.descripcionEvento}"></p:inputTextarea>
+ 
+ <p:outputLabel>link para el registro del evento : </p:outputLabel>
+ <p:inputTextarea  rows="1" value="#{eventoBean.objEvento.url_redireccion}"></p:inputTextarea>
+ 
+<p:commandButton ajax="false" value="Guardar"  action="#{eventoBean.guardar()}" ></p:commandButton>
+<p:commandButton value="Cancelar"></p:commandButton>
+ 
+</h:form>
+</h:panelGrid>
 
 
 
-				<h:form>
-					<p:dataTable id="tabla" bodyrows="3" border="2"
-						value="#{eventoBean.listaEventos}" var="evento"
-						rendered="#{eventoBean.listaEventos.size()>0 eq true}">
+<h:form>
+<p:dataTable id="tabla" bodyrows="3"  border="2"  value="#{eventoBean.listaEventos}"   var="evento"  rendered="#{eventoBean.listaEventos.size()>=0 eq true}">
 
-						<p:column>
-							<f:facet name="header">
-								<h:outputText value="imagen"></h:outputText>
-							</f:facet>
-							<p:graphicImage height="100" value="#{evento.imagenEvento}"
-								width="100"></p:graphicImage>
-						</p:column>
+<p:column>
+<f:facet name="header"><h:outputText  value="imagen"></h:outputText></f:facet>
+ <p:graphicImage  height="100" value="#{evento.imagenEvento}" width="100"  ></p:graphicImage>	 
+</p:column>
 
-						<p:column>
-							<f:facet name="header">
-								<h:outputText value="nombre"></h:outputText>
-							</f:facet>
-							<p:outputLabel value="#{evento.nombreEvento}"></p:outputLabel>
-						</p:column>
+<p:column>
+<f:facet name="header"><h:outputText  value="nombre"></h:outputText></f:facet>
+<p:outputLabel value="#{evento.nombreEvento}"></p:outputLabel>
+</p:column>
 
 
-						<p:column>
-							<f:facet name="header">
-								<h:outputText value="descripcion  de evento"></h:outputText>
-							</f:facet>
-							<p:outputLabel value="#{evento.descripcionEvento}"></p:outputLabel>
-						</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="descripcion  de evento"></h:outputText></f:facet>
+<p:outputLabel value="#{evento.descripcionEvento}"></p:outputLabel>
+</p:column>
 
-						<p:column>
-							<f:facet name="header">
-								<h:outputText value="link de registro"></h:outputText>
-							</f:facet>
-							<p:outputLabel value="#{evento.urlRedireccion}"></p:outputLabel>
-						</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="link de registro"></h:outputText></f:facet>
+<p:outputLabel value="#{evento.url_redireccion}"></p:outputLabel>
+</p:column>
 
 
-						<p:column>
-							<f:facet name="header">
-								<h:outputText value="elimnar"></h:outputText>
-							</f:facet>
-							<p:commandButton update="tabla" ajax="true"
-								actionListener="#{eventoBean.eliminar(evento)}"
-								icon="fa fa-fw fa-close"></p:commandButton>
-						</p:column>
+<p:column>
+<f:facet name="header"><h:outputText value="elimnar"></h:outputText></f:facet>
 
-					</p:dataTable>
-				</h:form>
-			</div>
+	<p:commandButton  update="tabla" style="background: #F39C12 ; width:60px; height:60px;" icon="fa fa-fw fa-bitbucket"  actionListener="#{eventoBean.eliminar(evento)}" ></p:commandButton>
+</p:column>
 
+</p:dataTable>
+</h:form>
+
+	
 			<script type="text/javascript"
 				src="resources/js/jquery-3.2.1.min.js.js"></script>
 			<script type="text/javascript" src="resources/js/materialize.js"></script>

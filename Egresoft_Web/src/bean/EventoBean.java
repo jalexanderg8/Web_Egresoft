@@ -68,8 +68,10 @@ public class EventoBean {
 	
         
     	try {
-			FileOutputStream fos = new FileOutputStream("C:\\Git\\.git\\Web_Egresoft\\Egresoft_Web\\WebContent\\resources\\imgBD\\"+this.file.getFileName());
-			fos.write(file.getContents());
+//FileOutputStream fos = new FileOutputStream("C:\\Git\\.git\\Web_Egresoft\\Egresoft_Web\\WebContent\\resources\\imgBD\\"+this.file.getFileName());
+			
+    		FileOutputStream fos = new FileOutputStream("D:\\RepositorioEgresoft\\Web_Egresoft\\Egresoft_Web\\WebContent\\resources\\imgBD\\"+this.file.getFileName());
+    		fos.write(file.getContents());
 			fos.flush();
 			fos.close();
 
