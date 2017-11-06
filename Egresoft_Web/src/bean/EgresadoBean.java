@@ -122,7 +122,7 @@ public class EgresadoBean implements Serializable {
 				
 				
 			}else {
-				System.out.println("NO instacio la clase");
+				System.out.println("No instacio la clase");
 				msj.error("Correo no enviado exitosamente");
 				
 			}

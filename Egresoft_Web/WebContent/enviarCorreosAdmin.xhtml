@@ -15,15 +15,30 @@
 			</f:metadata>
 		</h:head>
 		<h:body>
-		<h4 class="green-text text-darken-5 center-align">Bienvenido a
+			<h4 class="green-text text-darken-5 center-align">Bienvenido a
 				Enviar correos a egresados</h4>
 			<div class="container-fluid">
-				<h:form id="formConsulta">
-					<p:dataTable id="tablaConsulta" var="egre"
-						value="#{egresadoBean.listaEgresados}"
+				<h:form id="pform">
+					<p:dataTable id="invoicesList" var="egre"
+						value="#{envioCorreos.listaEgresados}"  binding="#{envioCorreos.invoicesDataTable}"
 						emptyMessage="No hay Egresados
 		Registrados" paginator="true"
 						paginatorPosition="top" rows="10">
+						
+						<p:column>
+							<f:facet name="header">
+								<h:selectBooleanCheckbox id="selectAllEntities" value="#{envioCorreos.selectAllInvoices}"  
+									immediate="true" valueChangeListener="#{envioCorreos.selectAllInvoicesListener}">
+									<f:ajax event="click" render="@form"/>
+								</h:selectBooleanCheckbox> 
+							</f:facet>
+							<h:selectBooleanCheckbox value="#{envioCorreos.invoicesSelected[egre]}" 
+								immediate="true" valueChangeListener="#{envioCorreos.selectInvoiceListener}">
+								<f:ajax event="click" render="@form"/>
+							</h:selectBooleanCheckbox>
+						</p:column>
+
+						
 
 						<p:column headerText="Numero de cedula"
 							filterBy="#{egre.idEgresado}">
@@ -40,11 +55,42 @@
 							<p:outputLabel value="#{egre.apellidos}" />
 						</p:column>
 
-						<p:column headerText="Email Princioal"
+						<!-- <p:column headerText="Email Principal"
 							filterBy="#{egre.emailPrincipal}">
-							<p:outputLabel value="#{egre.emailPrincipal}" />
+							 <h:selectManyCheckbox value="#{egre.emailPrincipal}">
+								<f:selectItem itemLabel="#{egre.emailPrincipal}" />
+							</h:selectManyCheckbox> 
+							
+							
+							
+							<h:selectBooleanCheckbox value="#{envioCorreos.invoicesSelected[invoice]}" 
+								immediate="true" valueChangeListener="#{invoiceView.selectInvoiceListener}">
+								<f:ajax event="click" render="@form"/>
+							</h:selectBooleanCheckbox>
+							
 						</p:column>
+ -->
 					</p:dataTable>
+					
+					<h:panelGroup>
+						<h:commandButton actionListener="#{envioCorreos.markAsInvoicedListener}" value="#{msg['components.datatableMultipleSelection.bill']}"/>
+					</h:panelGroup>					
+				</h:panelGroup>
+
+				<h:panelGroup id="selectedInvoicesPanel">
+					<h:outputText value="#{msg['components.datatableMultipleSelection.selectedInvoices']}" />
+					<ul>
+						<ui:repeat var="invoice" value="#{envioCorreos.allInvoicesSelected}" >
+							<li><h:outputText value="#{invoice.number} - #{invoice.client} - #{invoice.amount}" /></li>
+						</ui:repeat>
+					</ul>
+				</h:panelGroup>
+
+					<!-- <center>
+						<p:commandButton type="submit"
+							actionListener="#{envioCorreos.bucarEmail(egre)}" id="enviar"
+							update="formConsulta" value="Enviar" class="button big" />
+					</center> -->
 				</h:form>
 			</div>
 		</h:body>

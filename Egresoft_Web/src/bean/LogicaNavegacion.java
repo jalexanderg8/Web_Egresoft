@@ -45,7 +45,7 @@ public class LogicaNavegacion implements Serializable {
 
 	public String iniciarSesion() throws Exception{
 		
-		System.out.println("en iniciar cesion  usuario "+usuario+" contraseña "+contraseña);
+		System.out.println("en iniciar sesion  usuario "+usuario+" contraseña "+contraseña);
 		
 		String redireccion=null;
 		
