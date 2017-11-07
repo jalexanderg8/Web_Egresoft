@@ -248,13 +248,19 @@ public class EgresadoDao {
 
 		if (usuario == idEgresado) {
 			System.out.println("true");
+
+		
+		if (usuario==idEgresado) {
+			System.out.println(usuario+" y "+idEgresado);
+            System.out.println("true");
 			return true;
 
 		} else {
 			System.out.println("false");
-
-			return false;
+	
 		}
+	  }
+		return false;
 
 	}
 

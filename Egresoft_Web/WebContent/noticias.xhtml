@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition 
+	template="templates/templateUsuario/UsuarioTemplate.xhtml">
+	<ui:define name="content">
+	<h:head>
+	<f:metadata><f:event listener="#{noticiasBean.consultar()}"
+				type="preRenderView"></f:event></f:metadata>
+	</h:head>
+	<h:body>
+    
+  
+     <div class="container">
+     <div class="titulo">
+       <h2 class=" green-text text-darken-5 center-align">Noticias Sena </h2>
+     </div>
+     </div>   
+     
+<div class="container">
+   <h:dataTable value="#{noticiasBean.listaNoticias}"   var="noticia"  rendered="true" >
+   
+   <h:column >
+    		 <div class="card ">
+				      <div class="card-image waves-effect waves-block waves-orange">
+
+ <p:graphicImage  height="400" value="#{noticia.imagenNoticia}" width="100"  class="activator"></p:graphicImage>	      
+    </div>
+				       <div class="card-content">
+				       <span class="card-title activator green-text text-darken-4"><p:outputLabel value="#{noticia.nombreNoticia}"  /><i class="mdi-navigation-more-vert right material-icons">more_vert</i></span>
+				       </div>
+				       <div class="card-reveal">
+				       <span class="card-title green-text text-darken-4"><i class="mdi-navigation-close right material-icons right">close</i> </span>
+				        <p:outputLabel value="#{noticia.nombreNoticia}"/>
+				        	     <br/>
+				     <br/>
+				     <br/>
+				     <br/>
+				     <br/>
+                       <p:outputLabel value="#{noticia.descripcionNoticia}"/>				       
+				       <br></br>
+				       </div>     
+    		 </div>
+
+   </h:column>
+   
+   </h:dataTable>
+   
+   
+	
+	</div>
+	
+	
+		<script type="text/javascript"
+				src="resources/js/jquery-3.2.1.min.js.js"></script>
+			<script type="text/javascript" src="resources/js/materialize.js"></script>
+		</h:body>
+	</ui:define>
+</ui:composition>
+
+
+
+</html>

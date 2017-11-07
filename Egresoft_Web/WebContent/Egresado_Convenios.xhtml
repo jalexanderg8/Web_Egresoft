@@ -1,113 +1,54 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" 
-      xmlns:ui="http://java.sun.com/jsf/facelets" 
-      xmlns:h="http://java.sun.com/jsf/html" 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-       xmlns:p="http://primefaces.org/ui">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
 
-<f:metadata>
-<f:event listener="#{logicaNavegacion.verificarSesion()}"
-		type="preRenderView"></f:event></f:metadata>  
-
+	<h:body>
+  
      <div class="container">
      <div class="titulo">
-       <h2 class=" green-text text-darken-5 center-align">Convenios Sena </h2>
-     
+       <h2 class=" green-text text-darken-5 center-align">Conveinos  Sena </h2>
      </div>
-   
+     </div>   
      
-     <div class="row">
-    	 <div class="col  m6 s12">
+   <h:dataTable  id="tabla-convenios" value="#{conveniosBean.listaConvenios}"   var="convenio"  rendered="true" >
+ 
+   <h:column >
     		 <div class="card ">
-				      <div class="card-image waves-effect waves-block waves-green">
-				       	<img class="activator" src="resources/imagenes/con1.jpg"  />
-				       	
-				       </div>
-				       <div class="card-content">
-				       <span class="card-title activator green-text text-darken-4">Convenio Gran Colombia
-				       <i class="mdi-navigation-more-vert right material-icons">more_vert</i>
-				       </span>
-				       </div>
-				       <div class="card-reveal">
-				       <span class="card-title green-text text-darken-4">Convenio Gran Colombia
-				       <i class="mdi-navigation-close right material-icons right">close</i>
-				       </span>
-				       <p>informacion del Convenio</p><br></br>
-					       <p>Persona de Contacto</p>
-				       </div>
-     
-     
-    		 </div>
-    	 </div>
-    	 <div class="col  m6 s12">
-					    	 <div class="card">
-					     	<div class="card-image waves-effect waves-block waves-green">
-					       	<img class="activator responsive-img" src="resources/imagenes/con2.jpg" />
-					       	
-					       </div>
-					       <div class="card-content">
-					       <span class="card-title activator grey-text text-darken-4">Convenio Uniquindio
-					       <i class="mdi-navigation-more-vert right material-icons">more_vert</i>
-					       </span>
-					       </div>
-					       <div class="card-reveal">
-					       <span class="card-title grey-text text-darken-4">Convenio Uniquidio
-					       <i class="mdi-navigation-close right material-icons right">close</i>
-					       </span>
-					       <p>informacion del Convenio</p><br></br>
-					       <p>Persona de Contacto</p>
-					       </div>
-    		 </div>
-    		 </div>
-    	 </div>
-   
-     <div class="row">
-    	 <div class="col  m6 s12">
-    		 <div class="card ">
-				      <div class="card-image waves-effect waves-block waves-green">
-				       	<img class="activator" src="resources/imagenes/con3.jpg"  />
-				       	
-				       </div>
-				       <div class="card-content">
-				       <span class="card-title activator green-text text-darken-4">Convenio Gran Colombia
-				       <i class="mdi-navigation-more-vert right material-icons">more_vert</i>
-				       </span>
-				       </div>
-				       <div class="card-reveal">
-				       <span class="card-title green-text text-darken-4">Convenio Gran Colombia
-				       <i class="mdi-navigation-close right material-icons right">close</i>
-				       </span>
-				       <p>Informacion del Convenio</p><br></br>
-				       <p>Persona de Contacto</p>
-				       </div>
-     
-     
-    		 </div>
-    	 </div>
-    	 <div class="col  m6 s12">
-					    	 <div class="card">
-					     	<div class="card-image waves-effect waves-block waves-green">
-					       	<img class="activator responsive-img" src="resources/imagenes/con4.jpg" />
-					       	
-					       </div>
-					       <div class="card-content">
-					       <span class="card-title activator grey-text text-darken-5">Convenio Uniquindio
-					       <i class="mdi-navigation-more-vert right material-icons">more_vert</i>
-					       </span>
-					       </div>
-					       <div class="card-reveal">
-					       <span  class="card-title green-text text-darken-4">Convenio Uniquidio
-					       <i class="mdi-navigation-close right material-icons right">close</i>
-					       </span>
-					      <p>informacion del Convenio</p><br></br>
-					       <p>Persona de Contacto</p>
-					       </div>
-    		 </div>
-    		 </div>
-    	 </div>
-     </div>
-     
-<ui:insert name="Convenios_Egresado" />
+				      <div class="card-image waves-effect waves-block waves-orange">
 
+ <p:graphicImage  height="400" value="#{convenio.imagenConvenio}" width="100"  class="activator"></p:graphicImage>	      
+    </div>
+				       <div class="card-content">
+				       <span class="card-title activator green-text text-darken-4"><p:outputLabel value="#{convenio.nombrelCovenio}" /><i class="mdi-navigation-more-vert right material-icons">more_vert</i></span>
+				       </div>
+				       <div class="card-reveal">
+				       <span class="card-title green-text text-darken-4"><i class="mdi-navigation-close right material-icons right">close</i> </span>
+				        <p:outputLabel value="#{convenio.nombrelCovenio}" />
+				        
+				        <br/>
+				     <br/>
+				     <br/>
+				     <br/>
+				     <br/>
+                       <p:outputLabel value="#{convenio.infoConvenio}"/>				       
+				       <br></br>
+				       <br />
+				       <br />
+				         <br/>
+                       <p:outputLabel value="#{convenio.personaContacto}"/>				       
+				       <br></br>
+				       </div>    
+    		 </div>
+
+   </h:column>
+  
+   </h:dataTable>
+   </h:body>
    
+        <ui:insert name="convenios_egresado" />
+
+
 </html>
