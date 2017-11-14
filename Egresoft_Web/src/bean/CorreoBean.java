@@ -2,15 +2,15 @@ package bean;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 import mail.SendMailTLS;
+import mail.SendMailTLSAdjunto;
 import mensajes.MessagesView;
 import vo.CorreoVo;
 
-
-
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class CorreoBean {
 
 	private CorreoVo correo = new CorreoVo();
@@ -40,6 +40,19 @@ public class CorreoBean {
 		} else {
 			msj.error("No se pudo enviar el correo");
 		}
+	}
+	
+	public void enviarCorreoAdjunto() {
+
+		SendMailTLSAdjunto sendMailTLSAdjunto = new SendMailTLSAdjunto();
+
+		if (sendMailTLSAdjunto.enviar(correo)) {
+			msj.info("Correo enviado");
+			sendMailTLSAdjunto.borrarAdjuntos();
+		} else {
+			msj.error("No se pudo enviar el correo");
+		}
+
 	}
 }
 		

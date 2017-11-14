@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 
 <ui:composition xmlns:p="http://primefaces.org/ui"
@@ -18,27 +19,43 @@
 			<h4 class="green-text text-darken-5 center-align">Bienvenido a
 				Enviar correos a egresados</h4>
 			<div class="container-fluid">
-				<h:form id="pform">
-					<p:dataTable id="invoicesList" var="egre"
-						value="#{envioCorreos.listaEgresados}"  binding="#{envioCorreos.invoicesDataTable}"
+				<h:form id="formulario">
+					<p:growl id="message" showDetail="true" />
+					<p:messages id="messages" showDetail="true" autoUpdate="true"
+						closable="true" severity="error,fatal,info,warn" life="5200" />
+
+					<p:panelGrid columns="2">
+
+
+						<p:outputLabel value="Asunto:" />
+						<p:inputText value="#{correoBean.correo.asunto}" required="true" />
+
+						<p:outputLabel value="Cuerpo del mensaje:" />
+						<p:inputTextarea value="#{correoBean.correo.cuerpo}"
+							required="true" />
+
+
+
+					</p:panelGrid>
+
+					<p:fileUpload uploadLabel="Cargar" cancelLabel="Cancelar"
+						label="Seleccionar archivo"
+						fileUploadListener="#{fileUploadView.uploadAttachment}"
+						mode="advanced" dragDropSupport="false" multiple="true"
+						update="messages" sizeLimit="2500000" fileLimit="3" auto="false"
+						allowTypes="/(\.|\/)(gif|jpe?g|png|doc|docx|xls|xlsx|pdf|ppt|pptx)$/"
+						invalidFileMessage="Solamente esta permitido cargar archivos con extensión .gif, .jpg, .png, .doc, .docx, .xls, .xlsx, .pdf, .ppt . pptx" />
+
+
+
+					<p:dataTable id="tablaEgre" var="egre"
+						value="#{envioCorreos.listaEgresados}"
 						emptyMessage="No hay Egresados
 		Registrados" paginator="true"
 						paginatorPosition="top" rows="10">
-						
-						<p:column>
-							<f:facet name="header">
-								<h:selectBooleanCheckbox id="selectAllEntities" value="#{envioCorreos.selectAllInvoices}"  
-									immediate="true" valueChangeListener="#{envioCorreos.selectAllInvoicesListener}">
-									<f:ajax event="click" render="@form"/>
-								</h:selectBooleanCheckbox> 
-							</f:facet>
-							<h:selectBooleanCheckbox value="#{envioCorreos.invoicesSelected[egre]}" 
-								immediate="true" valueChangeListener="#{envioCorreos.selectInvoiceListener}">
-								<f:ajax event="click" render="@form"/>
-							</h:selectBooleanCheckbox>
-						</p:column>
 
-						
+
+
 
 						<p:column headerText="Numero de cedula"
 							filterBy="#{egre.idEgresado}">
@@ -55,42 +72,31 @@
 							<p:outputLabel value="#{egre.apellidos}" />
 						</p:column>
 
-						<!-- <p:column headerText="Email Principal"
-							filterBy="#{egre.emailPrincipal}">
-							 <h:selectManyCheckbox value="#{egre.emailPrincipal}">
-								<f:selectItem itemLabel="#{egre.emailPrincipal}" />
-							</h:selectManyCheckbox> 
-							
-							
-							
-							<h:selectBooleanCheckbox value="#{envioCorreos.invoicesSelected[invoice]}" 
-								immediate="true" valueChangeListener="#{invoiceView.selectInvoiceListener}">
-								<f:ajax event="click" render="@form"/>
-							</h:selectBooleanCheckbox>
-							
+						<p:column headerText="Correo" filterBy="#{egre.emailPrincipal}">
+							<p:outputLabel value="#{egre.emailPrincipal}" />
 						</p:column>
- -->
+
+						<p:column headerText="Seleccionar">
+							<p:selectBooleanCheckbox
+								value="#{envioCorreos.correoSeleccionado}">
+								<p:ajax listener="#{envioCorreos.addCorreo(egre)}" />
+							</p:selectBooleanCheckbox>
+						</p:column>
+
+
+
 					</p:dataTable>
-					
-					<h:panelGroup>
-						<h:commandButton actionListener="#{envioCorreos.markAsInvoicedListener}" value="#{msg['components.datatableMultipleSelection.bill']}"/>
-					</h:panelGroup>					
-				</h:panelGroup>
+					<center>
+						<p:commandButton value="Enviar Correo" class="button big"
+							actionListener="#{envioCorreos.enviar()}">
 
-				<h:panelGroup id="selectedInvoicesPanel">
-					<h:outputText value="#{msg['components.datatableMultipleSelection.selectedInvoices']}" />
-					<ul>
-						<ui:repeat var="invoice" value="#{envioCorreos.allInvoicesSelected}" >
-							<li><h:outputText value="#{invoice.number} - #{invoice.client} - #{invoice.amount}" /></li>
-						</ui:repeat>
-					</ul>
-				</h:panelGroup>
+						</p:commandButton>
 
-					<!-- <center>
-						<p:commandButton type="submit"
-							actionListener="#{envioCorreos.bucarEmail(egre)}" id="enviar"
-							update="formConsulta" value="Enviar" class="button big" />
-					</center> -->
+						<!-- <p:commandButton 
+							actionListener="#{envioCorreos.enviar()}" id="enviar"
+							value="Enviar" class="button big" /> -->
+					</center>
+
 				</h:form>
 			</div>
 		</h:body>
