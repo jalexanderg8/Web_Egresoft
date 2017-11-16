@@ -292,6 +292,7 @@ public class EnvioCorreos implements Serializable {
 
 	}
 
+
 	public CorreoBean getCorreoBean() {
 		return correoBean;
 	}
@@ -304,7 +305,7 @@ public class EnvioCorreos implements Serializable {
 		Iterator<Long> it = mapaCorreos.keySet().iterator();
 		while (it.hasNext()) {
 			Long key = (Long) it.next();
-			System.out.println("Diana imprimiendo el mapa:");
+			System.out.println("imprimiendo el mapa:");
 			System.out.println("Clave: " + key + " -> Valor: " + mapaCorreos.get(key));
 		
 		}

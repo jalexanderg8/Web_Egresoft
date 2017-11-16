@@ -9,7 +9,7 @@
 <ui:composition xmlns:p="http://primefaces.org/ui"
 	template="/templates/templateAdministrador/AdminTemplate.xhtml">
 	<ui:define name="admin">
-		<h:head>
+		<h:head>	
 			<f:metadata>
 				<f:event listener="#{logicaNavegacion.verificarSesion()}"
 					type="preRenderView"></f:event>
@@ -25,16 +25,12 @@
 						closable="true" severity="error,fatal,info,warn" life="5200" />
 
 					<p:panelGrid columns="2">
-
-
-						<p:outputLabel value="Asunto:" />
+				<p:outputLabel value="Asunto:" />
 						<p:inputText value="#{correoBean.correo.asunto}" required="true" />
 
 						<p:outputLabel value="Cuerpo del mensaje:" />
 						<p:inputTextarea value="#{correoBean.correo.cuerpo}"
 							required="true" />
-
-
 
 					</p:panelGrid>
 
@@ -46,16 +42,13 @@
 						allowTypes="/(\.|\/)(gif|jpe?g|png|doc|docx|xls|xlsx|pdf|ppt|pptx)$/"
 						invalidFileMessage="Solamente esta permitido cargar archivos con extensión .gif, .jpg, .png, .doc, .docx, .xls, .xlsx, .pdf, .ppt . pptx" />
 
-
-
 					<p:dataTable id="tablaEgre" var="egre"
 						value="#{envioCorreos.listaEgresados}"
 						emptyMessage="No hay Egresados
-		Registrados" paginator="true"
-						paginatorPosition="top" rows="10">
-
-
-
+		                Registrados" paginator="true"
+		                rowKey="#{egre.emailPrincipal}"
+						paginatorPosition="top" rows="10"
+						selection="#{envioCorreos.listaEgresados}">
 
 						<p:column headerText="Numero de cedula"
 							filterBy="#{egre.idEgresado}">

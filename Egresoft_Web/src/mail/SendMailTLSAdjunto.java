@@ -89,7 +89,7 @@ public class SendMailTLSAdjunto {
 
 	public BodyPart[] adjuntarArchivos() {
 
-		String ruta = "c:\\horario\\ANALISIS 7\\JEE\\entorno 2017\\wildfly\\wildfly-10.1.0.Final\\standalone\\deployments\\Egresoft_Web.war\\resources\\cargados";
+		String ruta = "D:\\Entorno JEE\\wildfly-10.1.0.Final\\standalone\\deployments\\Egresoft_Web.war\\resources\\cargados";
 
 		File directorio = new File(ruta);
 
@@ -145,7 +145,7 @@ public class SendMailTLSAdjunto {
 
 	public void borrarAdjuntos() {
 
-		String ruta = "D:\\horario\\ANALISIS 7\\JEE\\entorno 2017\\wildfly\\wildfly-10.1.0.Final\\standalone\\deployments\\Egresoft_Web.war\\resources\\cargados";
+		String ruta = "D:\\Entorno JEE\\wildfly-10.1.0.Final\\standalone\\deployments\\Egresoft_Web.war\\resources\\cargados";
 
 		File directorio = new File(ruta);
 

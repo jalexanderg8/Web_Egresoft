@@ -15,7 +15,6 @@ public class CorreoBean {
 
 	private CorreoVo correo = new CorreoVo();
 
-
 	private MessagesView msj = new MessagesView();
 
 	public CorreoBean() {
