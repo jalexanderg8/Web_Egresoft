@@ -1,10 +1,15 @@
 package bean;
-import java.io.BufferedOutputStream;
+
+
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -12,28 +17,115 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
+
+import dao.EgresadoDao;
+import dao.NumeroFichaDao;
+import dao.ProgramaDao;
+import dao.TipoTitulacionDao;
+import entidades.Egresado;
+import entidades.NumeroFicha;
+import entidades.ProgramaFormacion;
+import entidades.TipoTitulacion;
+import mensajes.MessagesView;
+
 
 @ManagedBean
 @RequestScoped
 public class FileUploadView {
 
-	//String ruta = "C:\\Servidores_de_Aplicaciones\\wildfly-10.1.0.Final\\standalone\\deployments\\Egresoft_Web.war\\resources\\cargados";
-	String ruta="D:\\horario\\ANALISIS 7\\JEE\\entorno 2017\\wildfly\\wildfly-10.1.0.Final\\standalone\\deployments\\Egresoft_Web.war\\resources\\cargados";
-	
-	private String name;
+	String ruta = "C:\\Servidores_de_Aplicaciones\\wildfly-10.1.0.Final\\standalone\\deployments\\Egresoft_Web.war\\resources\\archivosExcel\\";
+	             
+
+	Workbook wb;
+	private EgresadoBean egresadoBean;
+	private static TipoTitulacion tipoTitulacion;
+	private static ProgramaFormacion programaFormacion;
+	private static NumeroFicha numeroFicha;
+	EgresadoDao daoEgresado;
+    TipoTitulacionDao tipoTitulacionDao;
+	ProgramaDao programaDao;
+	NumeroFichaDao numeroFichaDao;
+	private Egresado egresado;
+	private static String titulacion;
+	private static String nombreFormacion;
+	private static String fichaFormacion;
 	// private UploadedFile document;
 	private static ArrayList<DocumentModel> documentList = null;
-
+	private String rutaArchivo;
 	private UploadedFile file;
-
-	public String getName() {
-		return name;
+	private MessagesView msj = new MessagesView();
+	
+	public EgresadoBean getEgresadoBean() {
+		return egresadoBean;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setEgresadoBean(EgresadoBean egresadoBean) {
+		this.egresadoBean = egresadoBean;
+	}
+
+	public static TipoTitulacion getTipoTitulacion() {
+		return tipoTitulacion;
+	}
+
+	public static void setTipoTitulacion(TipoTitulacion tipoTitulacion) {
+		FileUploadView.tipoTitulacion = tipoTitulacion;
+	}
+
+	public static ProgramaFormacion getProgramaFormacion() {
+		return programaFormacion;
+	}
+
+	public static void setProgramaFormacion(ProgramaFormacion programaFormacion) {
+		FileUploadView.programaFormacion = programaFormacion;
+	}
+
+	public static NumeroFicha getNumeroFicha() {
+		return numeroFicha;
+	}
+
+	public static void setNumeroFicha(NumeroFicha numeroFicha) {
+		FileUploadView.numeroFicha = numeroFicha;
+	}
+
+	public static String getTitulacion() {
+		return titulacion;
+	}
+
+	public static void setTitulacion(String titulacion) {
+		FileUploadView.titulacion = titulacion;
+	}
+
+	public static String getNombreFormacion() {
+		return nombreFormacion;
+	}
+
+	public static void setNombreFormacion(String nombreFormacion) {
+		FileUploadView.nombreFormacion = nombreFormacion;
+	}
+
+	public static String getFichaFormacion() {
+		return fichaFormacion;
+	}
+
+	public static void setFichaFormacion(String fichaFormacion) {
+		FileUploadView.fichaFormacion = fichaFormacion;
+	}
+	
+	public MessagesView getMsj() {
+		return msj;
+	}
+
+	public void setMsj(MessagesView msj) {
+		this.msj = msj;
 	}
 
 	public UploadedFile getFile() {
@@ -49,7 +141,14 @@ public class FileUploadView {
 	}
 
 	public void setDocumentList(ArrayList<DocumentModel> documentList) {
-		this.documentList = documentList;
+		FileUploadView.documentList = documentList;
+	}
+	public Egresado getEgresado() {
+		return egresado;
+	}
+
+	public void setEgresado(Egresado egresado) {
+		this.egresado = egresado;
 	}
 
 	/// nuevo
@@ -92,26 +191,13 @@ public class FileUploadView {
 			System.out.println("Ruta del archivos es: " + tmpFile.getPath());
 			obj.setRemovable(true);
 			list.add(obj);
+			rutaArchivo=ruta+nombreArchivo;
 
 		}
 		return list;
 	}
 
-//	public String addNewDoc() throws IOException {
-//
-//		ArrayList<DocumentModel> list = getDocumentList();
-//		// System.out.println("list count= " + list.size() +
-//		// list.get(list.size() - 1).srNo);
-//		DocumentModel obj = new DocumentModel();
-//		obj.setSrNo(list.size());
-//		obj.setDocumentName(getName());
-//		list.add(obj);
-//
-//		setDocumentList(list);
-//
-//		return null;
-//
-//	}
+
 
 	public String removeRow(DocumentModel row) {
 		documentList.remove(row);
@@ -156,68 +242,12 @@ public class FileUploadView {
 
 	}
 
-//	public String uploadDoc_Advanced(FileUploadEvent e) throws IOException {
-//
-//		DocumentModel docObj = (DocumentModel) e.getComponent().getAttributes().get("docObj");
-//
-//		file = e.getFile();
-//
-//		String fileName = "";
-//
-//		String filePath = "D:\\horario\\ANALISIS 7\\JEE\\entorno 2017\\wildfly\\wildfly-10.1.0.Final\\standalone\\deployments\\ProyectoWebCargaYDescargaArchivos.war\\resources\\cargados";
-//		byte[] bytes = null;
-//
-//		if (null != file) {
-//			bytes = file.getContents();
-//			fileName = FilenameUtils.getName(file.getFileName());
-//			System.out.println("file name" + fileName);
-//			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filePath + fileName)));
-//			stream.write(bytes);
-//			stream.close();
-//		}
-//
-//		docObj.setUploaded(true);
-//		docObj.setDocumentUploadedPath(filePath + fileName);
-//		documentList.set(documentList.indexOf(docObj), docObj);
-//
-//		System.out.println("File Uploaded");
-//
-//		return null;
-//	}
 
-//	public String updatePage() throws IOException {
-//
-//		ArrayList<DocumentModel> list = getDocumentList();
-//
-//		int i = 0;
-//
-//		StringBuffer resultTemp = new StringBuffer();
-//
-//		// DB (DAO) code may be called here to capture all document
-//		// details. I have not written this part of code.
-//
-//		for (DocumentModel fl : list) {
-//
-//			i++;
-//
-//			resultTemp.append(
-//					i + ". Document Name : " + fl.documentName + ", File Path: " + fl.getDocumentUploadedPath());
-//		}
-//
-//		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(resultTemp.toString()));
-//
-//		// setResult(resultTemp.toString());
-//
-//		return "success";
-//
-//	}
-
-	/// Hasta aqui
 
 	public void uploadAttachment(FileUploadEvent event) {
 		UploadedFile file = event.getFile();
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-		String filePath = ec.getRealPath(String.format("/resources/cargados/%s", file.getFileName()));
+		String filePath = ec.getRealPath(String.format("/resources/archivosExcel/%s", file.getFileName()));
 		try {
 			FileOutputStream fos = new FileOutputStream(filePath);
 			fos.write(file.getContents());
@@ -235,4 +265,293 @@ public class FileUploadView {
 		}
 
 	}
+	public void Importar() {
+	
+		// DefaultTableModel modeloT = new DefaultTableModel();
+		// tablaD.setModel(modeloT);
+		// tablaD.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		
+		HashMap<Long, Egresado> mapaEgresados = new HashMap<Long, Egresado>();
+		
+		try {
+			
+			FileInputStream fil = new FileInputStream(
+					new File(rutaArchivo));
+
+			// wb = WorkbookFactory.create(new
+			// FileInputStream(archivo));//CREAMOS UNA REPRESENTACIÓN DE HOJA
+			// EXCEL
+			wb = WorkbookFactory.create(fil);// CREAMOS UNA REPRESENTACIÓN DE
+												// HOJA EXCEL
+
+			Sheet hoja = wb.getSheetAt(0);// SELECCIONAMOS LA HOJA DE LA
+											// POSICIÓN -> 0 DEL LIBRO
+			// Row row = hoja.getRow(13);
+
+			Iterator filaIterator = hoja.rowIterator();
+			int indiceFila = -1;
+			//int indiceColumna = -1;
+			String valorCelda = "";
+			int contador = 0;
+			int contador1= 0;
+
+			boolean egresadoEs = false;
+			boolean nivelFormacion=false;
+			boolean salir=true;
+			while (filaIterator.hasNext()) {
+				indiceFila++;
+				
+
+				Egresado egresado = new Egresado();
+				Row fila = (Row) filaIterator.next();
+				Iterator columnaIterator = fila.cellIterator();
+				Object[] listaColumna = new Object[1000];
+				int indiceColumna = -1;
+
+				while (columnaIterator.hasNext()) {
+					indiceColumna++;
+
+					Cell celda = (Cell) columnaIterator.next();
+					// if(indiceFila==0){
+					// modeloT.addColumn(celda.getStringCellValue());
+					// }else{
+					if (celda != null) {
+						switch (celda.getCellType()) {
+						case Cell.CELL_TYPE_STRING:
+							// egresado.setTipoDocumento(celda.getStringCellValue());
+							// System.out.println(egresado.getTipoDocumento());
+							System.out.println("FILA: " + indiceFila + "Columna" + indiceColumna + "valor de la celda"
+									+ celda.getStringCellValue());
+							valorCelda = celda.getStringCellValue();
+
+							break;
+						case Cell.CELL_TYPE_NUMERIC:
+							// egresado.setIdEgresado(Long.parseLong(
+							// celda.getStringCellValue()));
+							// System.out.println(egresado.getIdEgresado());
+							System.out.println("FILA: " + indiceFila + "Columna" + indiceColumna + "valor de la celda"
+									+ celda.getNumericCellValue());
+							break;
+							
+						default:
+							
+							if(contador==1){
+								
+								egresadoEs=false;
+								salir=false;
+							}
+
+						}
+						if (egresadoEs) {
+								
+							if (celda != null) {
+
+								switch (contador) {
+
+								case (1):
+									egresado.setTipoDocumento(celda.getStringCellValue());
+									System.out.println(egresado.getTipoDocumento());
+									contador++;
+									break;
+
+								case (2):
+
+									egresado.setIdEgresado(Long.parseLong(celda.getStringCellValue()));
+									System.out.println(egresado.getIdEgresado());
+									contador++;
+									break;
+								case (3):
+									egresado.setNombres(celda.getStringCellValue());
+									System.out.println(egresado.getNombres());
+									contador++;
+									break;
+								case (4):
+									egresado.setApellidos(celda.getStringCellValue());
+									System.out.println(egresado.getApellidos());
+									contador++;
+									break;
+								case (5):
+									egresado.setTelefonoPrincipal(celda.getStringCellValue());
+									System.out.println(egresado.getTelefonoPrincipal());
+									contador++;
+									break;
+								case (6):
+									egresado.setEmailPrincipal(celda.getStringCellValue());
+									System.out.println(egresado.getEmailPrincipal());
+									contador++;
+									break;
+									
+								default:
+									
+									contador=1;
+								}
+							}
+						}
+                         if(nivelFormacion){
+							
+							if (celda != null) {
+
+								switch (contador1) {
+								
+								case (1):
+									
+									String string = celda.getStringCellValue();
+								System.out.println(string);
+								   String[] parts = string.split("-");
+								   
+								   String numero=parts[0].trim();
+								   String nombre=parts[1].trim();
+								   String tipo=parts[2].trim();
+								   								   
+									System.out.println(tipo);	
+									System.out.println(nombre);	
+									System.out.println(numero);	
+									
+									titulacion=tipo;
+									nombreFormacion=nombre;
+									fichaFormacion=numero;
+									
+									
+									tipoTitulacionDao =new TipoTitulacionDao();
+						
+									
+									
+									try{
+										
+										tipoTitulacion=new TipoTitulacion(titulacion);
+										
+										if(tipoTitulacionDao.registrar(tipoTitulacion)){
+											
+											System.out.println("Registro tipo de titulacion ");
+											
+											
+											nivelFormacion=false;
+											
+										}else{
+											
+											System.out.println("no registro tipo titulacion");
+											nivelFormacion=false;
+										}
+										
+										programaFormacion=new ProgramaFormacion(tipoTitulacion, nombre);     
+										programaDao=new ProgramaDao();
+																		
+										if(programaDao.registrar(programaFormacion)){
+											
+											System.out.println("registro nombre Formacion");
+											
+										}else{
+											
+											System.out.println("No registro nombre Formacion");
+										}
+										
+										
+									}catch (Exception e) {
+										
+										
+										System.out.println(e.getMessage());
+										System.out.println("Excepcion de registro ");
+										
+									}
+									
+									break;
+								
+								default:
+									contador1++;
+								}
+						}
+						
+					}
+						
+					}
+					
+				// if(indiceFila!=0)modeloT.addRow(listaColumna);
+
+				System.out.println("Estos son los datos del egresado en el mapa: "+egresado.toString());
+				if (egresadoEs&&valorCelda.equals("EN FORMACION")) {
+					mapaEgresados.put(egresado.getIdEgresado(), egresado);
+					
+					daoEgresado=new EgresadoDao();
+					numeroFichaDao=new NumeroFichaDao();
+				
+						
+						try{
+							numeroFicha=new NumeroFicha();
+							
+							
+							if(daoEgresado.registrar(egresado)){
+								
+						
+								System.out.println("estamos en registrar egresado ");
+								
+								
+								msj.info("Egresado registrado satisfactoriamente");
+								
+							}else{
+								
+								
+								System.out.println("No se pudo registrar egresado ");
+								msj.error("No se pudo registrar al egresado");
+								
+							}
+							
+							numeroFicha=new NumeroFicha(egresado, programaFormacion, fichaFormacion);
+							
+	                         if(numeroFichaDao.registrar(numeroFicha)){
+								
+								System.out.println("registro numero de ficha ");
+
+							}else {
+								
+								System.out.println("no registro numero de ficha ");
+
+							}
+						
+							
+						}catch(Exception e){
+							
+							System.out.println(e.getMessage());
+							System.out.println("No en formacion");
+							
+							
+						}
+				}
+				if (valorCelda.equals("Estado")) {
+
+					egresadoEs = true;
+					contador++;
+					
+				}
+				if(valorCelda.equals("Ficha de Caracterización:")){
+					
+					nivelFormacion=true;
+					
+				}
+				
+			}
+
+			
+
+			// Recorremos el hashMap y mostramos por pantalla el par valor y
+			// clave
+			Iterator it = mapaEgresados.entrySet().iterator();
+			while (it.hasNext()) {
+				Map.Entry e = (Map.Entry) it.next();
+				System.out.println(e.getKey() + " " + e.getValue().toString());
+
+				System.out.println("tamaño del mapa: " + mapaEgresados.size());
+			}
+			}
+
+		} catch (
+
+		FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException | InvalidFormatException | EncryptedDocumentException e) {
+			System.err.println(e.getMessage());
+		}
+	
+	}
+
 	}

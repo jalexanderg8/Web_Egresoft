@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -10,78 +10,117 @@
 	<ui:define name="admin">
 		<h:head>
 			<f:metadata>
-			<f:event listener="#{logicaNavegacion.verificarSesion()}" type="preRenderView"></f:event>
-			<f:event listener="#{eventoBean.consultar()}" type="preRenderView"></f:event>
+				<f:event listener="#{logicaNavegacion.verificarSesion()}"
+					type="preRenderView"></f:event>
+				<f:event listener="#{eventoBean.consultar()}" type="preRenderView"></f:event>
 			</f:metadata>
 		</h:head>
 		<h:body>
-	
-	<h:panelGrid >
 
-<img src="../resources/imagenes/con1.jpg" />
-
-<h:form enctype="multipart/form-data">
-    <p:growl id="messages" showDetail="true" />
- <p:outputLabel>Imagen</p:outputLabel>
-    <p:fileUpload value="#{eventoBean.file}" mode="simple" skinSimple="true"/>
- <br />
- 
- <p:outputLabel>Nombre del evento: </p:outputLabel>
-<p:inputTextarea  rows="1" value="#{eventoBean.objEvento.nombreEvento}"></p:inputTextarea>
-
-<p:outputLabel>Descripcion : </p:outputLabel>
- <p:inputTextarea  rows="1" value="#{eventoBean.objEvento.descripcionEvento}"></p:inputTextarea>
- 
- <p:outputLabel>link para el registro del evento : </p:outputLabel>
- <p:inputTextarea  rows="1" value="#{eventoBean.objEvento.url_redireccion}"></p:inputTextarea>
- 
-<p:commandButton ajax="false" value="Guardar"  action="#{eventoBean.guardar()}" ></p:commandButton>
-<p:commandButton value="Cancelar"></p:commandButton>
- 
-</h:form>
-</h:panelGrid>
+			<div class="container">
+				<h:panelGrid>
 
 
 
-<h:form>
-<p:dataTable id="tabla" bodyrows="3"  border="2"  value="#{eventoBean.listaEventos}"   var="evento"  rendered="#{eventoBean.listaEventos.size()>=0 eq true}">
+					<h:form enctype="multipart/form-data">
+						<p:growl id="messages" showDetail="true" />
+						<br></br>
+						<br></br>
+						<p:outputLabel>Imagen</p:outputLabel>
+						<p:spacer width="100px" height="10px"></p:spacer>
+						<p:fileUpload value="#{eventoBean.file}" mode="simple"
+							skinSimple="true" label="Escoger imagen" />
 
-<p:column>
-<f:facet name="header"><h:outputText  value="imagen"></h:outputText></f:facet>
- <p:graphicImage  height="100" value="#{evento.imagenEvento}" width="100"  ></p:graphicImage>	 
-</p:column>
+						<br></br>
+						<br></br>
+						<p:outputLabel>Nombre del evento: </p:outputLabel>
+						<p:inputTextarea rows="1"
+							value="#{eventoBean.objEvento.nombreEvento}"></p:inputTextarea>
 
-<p:column>
-<f:facet name="header"><h:outputText  value="nombre"></h:outputText></f:facet>
-<p:outputLabel value="#{evento.nombreEvento}"></p:outputLabel>
-</p:column>
+						<br></br>
+						<br></br>
+						<p:outputLabel>Descripcion : </p:outputLabel>
+						<p:inputTextarea rows="1"
+							value="#{eventoBean.objEvento.descripcionEvento}"></p:inputTextarea>
+
+						<br></br>
+						<br></br>
+						<p:outputLabel>link para el registro del evento : </p:outputLabel>
+						<p:inputTextarea rows="1"
+							value="#{eventoBean.objEvento.urlRedireccion}"></p:inputTextarea>
+
+						<br></br>
+						<br></br>
+
+						<p:spacer width="350px" height="10px"></p:spacer>
+						<p:commandButton ajax="false" value="Guardar"
+							icon="fa fa-floppy-o" action="#{eventoBean.guardar()}"></p:commandButton>
+						<p:spacer width="50px" height="10px"></p:spacer>
+						<p:commandButton value="Cancelar" icon="fa fa-times-circle-o"></p:commandButton>
+
+					</h:form>
+				</h:panelGrid>
 
 
-<p:column>
-<f:facet name="header"><h:outputText value="descripcion  de evento"></h:outputText></f:facet>
-<p:outputLabel value="#{evento.descripcionEvento}"></p:outputLabel>
-</p:column>
 
-<p:column>
-<f:facet name="header"><h:outputText value="link de registro"></h:outputText></f:facet>
-<p:outputLabel value="#{evento.url_redireccion}"></p:outputLabel>
-</p:column>
+				<h:form>
+					<br></br>
+					<br></br>
+					<p:dataTable id="tabla" bodyrows="3" border="2"
+						value="#{eventoBean.listaEventos}" var="evento"
+						rendered="#{eventoBean.listaEventos.size()>=0 eq true}">
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="imagen"></h:outputText>
+							</f:facet>
+							<p:graphicImage height="100" value="#{evento.imagenEvento}"
+								width="100"></p:graphicImage>
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="nombre"></h:outputText>
+							</f:facet>
+							<p:outputLabel value="#{evento.nombreEvento}"></p:outputLabel>
+						</p:column>
 
 
-<p:column>
-<f:facet name="header"><h:outputText value="elimnar"></h:outputText></f:facet>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="descripcion  de evento"></h:outputText>
+							</f:facet>
+							<p:outputLabel value="#{evento.descripcionEvento}"></p:outputLabel>
+						</p:column>
 
-	<p:commandButton  update="tabla" style="background: #F39C12 ; width:60px; height:60px;" icon="fa fa-fw fa-bitbucket"  actionListener="#{eventoBean.eliminar(evento)}" ></p:commandButton>
-</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="link de registro"></h:outputText>
+							</f:facet>
+							<p:outputLabel value="#{evento.urlRedireccion}"></p:outputLabel>
+						</p:column>
 
-</p:dataTable>
-</h:form>
 
-	
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="elimnar"></h:outputText>
+							</f:facet>
+
+							<p:commandButton update="tabla"
+								style="background: #F39C12 ; width:60px; height:60px;"
+								icon="fa fa-fw fa-bitbucket"
+								actionListener="#{eventoBean.eliminar(evento)}"></p:commandButton>
+						</p:column>
+
+					</p:dataTable>
+				</h:form>
+
+			</div>
 			<script type="text/javascript"
 				src="resources/js/jquery-3.2.1.min.js.js"></script>
 			<script type="text/javascript" src="resources/js/materialize.js"></script>
 		</h:body>
+
 	</ui:define>
 </ui:composition>
 

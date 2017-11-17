@@ -32,8 +32,9 @@ public class TipoTitulacionDao {
 			return listaTipoTitulaciones;
 		}
 
-		public void registrar(TipoTitulacion tipoTitulacion) {
+		public boolean registrar(TipoTitulacion tipoTitulacion) {
 		
+			boolean a=false;
 			Session s = null;
 			
 			
@@ -42,15 +43,18 @@ public class TipoTitulacionDao {
 				s.beginTransaction();
 				s.save(tipoTitulacion);
 				s.getTransaction().commit();
+				a=true;
 			} catch (Exception e) {
 
 				System.out.println(e.getMessage());
+				a=false;
 			} finally {
 
 				if (s != null) {
 					s.close();
 				}
 			}
+			return a;
 		}
 		
 		public void editar(TipoTitulacion tipoTitulacion) {

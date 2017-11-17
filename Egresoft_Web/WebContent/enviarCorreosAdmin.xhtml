@@ -9,7 +9,7 @@
 <ui:composition xmlns:p="http://primefaces.org/ui"
 	template="/templates/templateAdministrador/AdminTemplate.xhtml">
 	<ui:define name="admin">
-		<h:head>	
+		<h:head>
 			<f:metadata>
 				<f:event listener="#{logicaNavegacion.verificarSesion()}"
 					type="preRenderView"></f:event>
@@ -18,37 +18,21 @@
 		<h:body>
 			<h4 class="green-text text-darken-5 center-align">Bienvenido a
 				Enviar correos a egresados</h4>
-			<div class="container-fluid">
+			
 				<h:form id="formulario">
+				<div class="container-fluid">
 					<p:growl id="message" showDetail="true" />
 					<p:messages id="messages" showDetail="true" autoUpdate="true"
 						closable="true" severity="error,fatal,info,warn" life="5200" />
 
-					<p:panelGrid columns="2">
-				<p:outputLabel value="Asunto:" />
-						<p:inputText value="#{correoBean.correo.asunto}" required="true" />
-
-						<p:outputLabel value="Cuerpo del mensaje:" />
-						<p:inputTextarea value="#{correoBean.correo.cuerpo}"
-							required="true" />
-
-					</p:panelGrid>
-
-					<p:fileUpload uploadLabel="Cargar" cancelLabel="Cancelar"
-						label="Seleccionar archivo"
-						fileUploadListener="#{fileUploadView.uploadAttachment}"
-						mode="advanced" dragDropSupport="false" multiple="true"
-						update="messages" sizeLimit="2500000" fileLimit="3" auto="false"
-						allowTypes="/(\.|\/)(gif|jpe?g|png|doc|docx|xls|xlsx|pdf|ppt|pptx)$/"
-						invalidFileMessage="Solamente esta permitido cargar archivos con extensión .gif, .jpg, .png, .doc, .docx, .xls, .xlsx, .pdf, .ppt . pptx" />
 
 					<p:dataTable id="tablaEgre" var="egre"
 						value="#{envioCorreos.listaEgresados}"
 						emptyMessage="No hay Egresados
-		                Registrados" paginator="true"
-		                rowKey="#{egre.emailPrincipal}"
-						paginatorPosition="top" rows="10"
-						selection="#{envioCorreos.listaEgresados}">
+						Registrados"
+						paginator="true" paginatorPosition="top" rows="10">
+
+
 
 						<p:column headerText="Numero de cedula"
 							filterBy="#{egre.idEgresado}">
@@ -76,20 +60,61 @@
 							</p:selectBooleanCheckbox>
 						</p:column>
 
+
+
 					</p:dataTable>
-					<center>
-						<p:commandButton value="Enviar Correo" class="button big"
+					<br></br><br></br>
+					</div>
+					<div class="container">
+					
+
+						<p:panelGrid columns="2">
+
+
+							<p:outputLabel value="Asunto:" />
+							<p:inputText value="#{correoBean.correo.asunto}" required="true" />
+
+							<p:outputLabel value="Cuerpo del mensaje:" />
+							<p:inputTextarea value="#{correoBean.correo.cuerpo}"
+								required="true" />
+
+
+
+						</p:panelGrid>
+
+
+
+						<p:fileUpload uploadLabel="Cargar" cancelLabel="Cancelar"
+							label="Seleccionar archivo"
+							fileUploadListener="#{fileUploadView.uploadAttachment}"
+							mode="advanced" dragDropSupport="false" multiple="true"
+							update="messages" sizeLimit="2500000" fileLimit="3" auto="false"
+							allowTypes="/(\.|\/)(gif|jpe?g|png|doc|docx|xls|xlsx|pdf|ppt|pptx)$/"
+							invalidFileMessage="Solamente esta permitido cargar archivos con extensión .gif, .jpg, .png, .doc, .docx, .xls, .xlsx, .pdf, .ppt . pptx" />
+
+
+						<br></br><br></br>
+						<div class="center-align">
+						<p:button value="Enviar Correo" class="button big" icon="fa fa-envelope-open-o"
 							actionListener="#{envioCorreos.enviar()}">
+						</p:button>
+						
+						<p:spacer width="50px" height="10px"></p:spacer>
+						<p:button value="Cancelar" class="button big" icon="fa fa-ban"
+							outcome="indexAdmin.jsf">
 
-						</p:commandButton>
-
+						</p:button>
+						</div>
 						<!-- <p:commandButton 
 							actionListener="#{envioCorreos.enviar()}" id="enviar"
 							value="Enviar" class="button big" /> -->
-					</center>
+					
+					</div>
+			
 
-				</h:form>
-			</div>
+
+			</h:form>
+			<br></br>
 		</h:body>
 	</ui:define>
 </ui:composition>

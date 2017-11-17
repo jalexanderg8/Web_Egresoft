@@ -1,5 +1,5 @@
 package entidades;
-// Generated 30/10/2017 08:29:39 PM by Hibernate Tools 5.2.3.Final
+// Generated 16/11/2017 09:52:27 PM by Hibernate Tools 5.2.3.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -33,8 +33,8 @@ public class Egresado implements java.io.Serializable {
 	private String modalidad;
 	private Date fechaInicio;
 	private Date fechaFin;
-	private Set<NumeroFicha> numeroFichas = new HashSet<NumeroFicha>(0);
 	private Set<ConfirmarEvento> confirmarEventos = new HashSet<ConfirmarEvento>(0);
+	private Set<NumeroFicha> numeroFichas = new HashSet<NumeroFicha>(0);
 
 	public Egresado() {
 	}
@@ -46,21 +46,11 @@ public class Egresado implements java.io.Serializable {
 		this.apellidos = apellidos;
 		this.emailPrincipal = emailPrincipal;
 	}
-	
-	public Egresado(long idEgresado, String tipoDocumento, String nombres, String apellidos, String emailPrincipal,
-			String contrasena) {
-		this.idEgresado = idEgresado;
-		this.tipoDocumento = tipoDocumento;
-		this.nombres = nombres;
-		this.apellidos = apellidos;
-		this.emailPrincipal = emailPrincipal;
-		this.contrasena = contrasena;
-	}
 
 	public Egresado(long idEgresado, String tipoDocumento, String nombres, String apellidos, String telefonoPrincipal,
 			String telefonoAlterno, String emailPrincipal, String emailAlterno, String lugarResidencia,
-			String contrasena, String modalidad, Date fechaInicio, Date fechaFin, Set<NumeroFicha> numeroFichas,
-			Set<ConfirmarEvento> confirmarEventos) {
+			String contrasena, String modalidad, Date fechaInicio, Date fechaFin, Set<ConfirmarEvento> confirmarEventos,
+			Set<NumeroFicha> numeroFichas) {
 		this.idEgresado = idEgresado;
 		this.tipoDocumento = tipoDocumento;
 		this.nombres = nombres;
@@ -74,8 +64,8 @@ public class Egresado implements java.io.Serializable {
 		this.modalidad = modalidad;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
-		this.numeroFichas = numeroFichas;
 		this.confirmarEventos = confirmarEventos;
+		this.numeroFichas = numeroFichas;
 	}
 
 	@Id
@@ -200,15 +190,6 @@ public class Egresado implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "egresado")
-	public Set<NumeroFicha> getNumeroFichas() {
-		return this.numeroFichas;
-	}
-
-	public void setNumeroFichas(Set<NumeroFicha> numeroFichas) {
-		this.numeroFichas = numeroFichas;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "egresado")
 	public Set<ConfirmarEvento> getConfirmarEventos() {
 		return this.confirmarEventos;
 	}
@@ -217,14 +198,13 @@ public class Egresado implements java.io.Serializable {
 		this.confirmarEventos = confirmarEventos;
 	}
 
-	@Override
-	public String toString() {
-		return "Egresado [idEgresado=" + idEgresado + ", tipoDocumento=" + tipoDocumento + ", nombres=" + nombres
-				+ ", apellidos=" + apellidos + ", telefonoPrincipal=" + telefonoPrincipal + ", telefonoAlterno="
-				+ telefonoAlterno + ", emailPrincipal=" + emailPrincipal + ", emailAlterno=" + emailAlterno
-				+ ", lugarResidencia=" + lugarResidencia + ", contrasena=" + contrasena + "]";
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "egresado")
+	public Set<NumeroFicha> getNumeroFichas() {
+		return this.numeroFichas;
 	}
-	
-	
+
+	public void setNumeroFichas(Set<NumeroFicha> numeroFichas) {
+		this.numeroFichas = numeroFichas;
+	}
 
 }

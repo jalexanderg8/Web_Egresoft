@@ -5,45 +5,45 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
+
+
 <f:metadata>
-	<f:event listener="#{logicaNavegacion.verificarSesion()}"
-		type="preRenderView"></f:event>
+	<f:event listener="#{eventoBean.consultar()}" type="preRenderView"></f:event>
 </f:metadata>
 
 
 <div class="container">
 	<div class="titulo">
-		<h2 class=" green-text text-darken-5 center-align">Convenios Sena
-		</h2>
-
+		<h2 class=" green-text text-darken-5 center-align">Eventos Sena</h2>
 	</div>
-    
-	<h:dataTable id="tabla-convenios"
-		value="#{conveniosBean.listaConvenios}" var="convenio" rendered="true">
+
+	
+	<h:dataTable id="tabla-convenios" value="#{eventoBean.listaEventos}"
+		var="evento" rendered="true">
 
 		<h:column>
 			<div class="card ">
 				<div class="card-image waves-effect waves-block waves-orange">
 
-					<p:graphicImage height="400" value="#{convenio.imagenConvenio}"
+					<p:graphicImage height="400" value="#{evento.imagenEvento}"
 						width="100" class="activator"></p:graphicImage>
 				</div>
 				<div class="card-content">
 					<span class="card-title activator green-text text-darken-4"><p:outputLabel
-							value="#{convenio.nombrelCovenio}" /><i
+							value="#{evento.nombreEvento}" /><i
 						class="mdi-navigation-more-vert right material-icons">more_vert</i></span>
 				</div>
 				<div class="card-reveal">
 					<span class="card-title green-text text-darken-4"><i
 						class="mdi-navigation-close right material-icons right">close</i>
 					</span>
-					<p:outputLabel value="#{convenio.nombrelCovenio}" />
+					<p:outputLabel value="#{evento.nombreEvento}" />
 
 					<br /> <br /> <br /> <br /> <br />
-					<p:outputLabel value="#{convenio.infoConvenio}" />
-					<br></br> <br /> <br /> <br />
-					<p:outputLabel value="#{convenio.personaContacto}" />
-					<br></br>
+					<p:outputLabel value="#{evento.descripcionEvento}" />
+					<br /> <br /> <br /> <br /> <br /> <a
+						>registrece aqui</a>
+
 				</div>
 			</div>
 
@@ -52,9 +52,6 @@
 	</h:dataTable>
 	</div>
 
-
-
-<ui:insert name="Convenios_Egresado" />
-
+<ui:insert name="Egresado_Evento" />
 
 </html>

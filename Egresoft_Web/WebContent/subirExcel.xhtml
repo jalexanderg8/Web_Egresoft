@@ -20,7 +20,7 @@
 		<h:body>
 			<div class="container">
 
-				<h3>Carga y Descarga de Archivos</h3>
+				<h3>Carga de Base de Datos</h3>
 
 					<br />
 					<br></br>
@@ -31,7 +31,7 @@
 
 
 					<p:fileUpload uploadLabel="Cargar" cancelLabel="Cancelar"
-						label="Seleccionar archivo"
+						label="Seleccionar archivo" 
 						fileUploadListener="#{fileUploadView.uploadAttachment}"
 						mode="advanced" dragDropSupport="false" multiple="true"
 						update=":formTabla:docId" sizeLimit="2500000" fileLimit="3"
@@ -41,11 +41,12 @@
 
 
 					<p:separator />
+					<br></br><br></br><br></br><br></br><br></br><br></br><br></br>
 
 					<p:outputPanel id="testContainer">
-						<p:dataTable id="docId" var="row"
+						<p:dataTable id="docId" var="row" 
 							value="#{fileUploadView.documentList}" editable="true"
-							editMode="cell" widgetVar="documentTable">
+							editMode="cell" widgetVar="documentTable" emptyMessage="No hay archivos selecionados">
 
 							<p:column headerText="#" style="width:15%">
 								<h:outputText value="#{row.srNo}" title="No" />
@@ -65,8 +66,8 @@
 									process="@this" />
 									
 									<p:spacer width="10px" height="10px"></p:spacer>
-									<p:commandButton value="Cargar Archivo"  icon="fa fa-cloud-upload"
-									/>
+									<p:commandButton value="Subir a BD"  icon="fa fa-cloud-upload"
+									actionListener="#{fileUploadView.Importar()}"/>
 							</p:column>
 						</p:dataTable>
 					</p:outputPanel>

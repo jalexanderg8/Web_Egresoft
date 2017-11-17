@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -7,79 +7,118 @@
 
 <ui:composition xmlns:p="http://primefaces.org/ui"
 	template="/templates/templateAdministrador/AdminTemplate.xhtml">
-	
+
 	<ui:define name="admin">
 		<h:head>
-	<link rel="stylesheet" href="resources/css/main.css" />
-			<f:metadata><f:event listener="#{logicaNavegacion.verificarSesion()}"	type="preRenderView"></f:event></f:metadata>		<!-- hace la verificacion de la sesion -->
-				<f:metadata><f:event listener="#{conveniosBean.consultar()}" type="preRenderView"></f:event></f:metadata> 	<!-- llena la lista para que el la vea en el datatable -->
+		
+			<f:metadata>
+				<f:event listener="#{logicaNavegacion.verificarSesion()}"
+					type="preRenderView"></f:event>
+			</f:metadata>
+			<!-- hace la verificacion de la sesion -->
+			<f:metadata>
+				<f:event listener="#{conveniosBean.consultar()}"
+					type="preRenderView"></f:event>
+			</f:metadata>
+			<!-- llena la lista para que el la vea en el datatable -->
 		</h:head>
 		<h:body>
-	
-	
-	<h:panelGrid >
+
+			<div class="container">
+			<h:panelGrid>
 
 
-<h:form enctype="multipart/form-data">
-    <p:growl id="messages" showDetail="true" />
-    
- <p:outputLabel>Imagen</p:outputLabel>
-    <p:fileUpload value="#{conveniosBean.file}"    mode="simple" skinSimple="true"/>
- <br />
- 
- <p:outputLabel>Nombre del Convenio: </p:outputLabel>
-<p:inputTextarea  rows="1" value="#{conveniosBean.objConvenio.nombrelCovenio}"></p:inputTextarea>
+				<h:form enctype="multipart/form-data">
+					<p:growl id="messages" showDetail="true" />
+					<br></br><br></br>
+					<p:outputLabel>Imagen</p:outputLabel>
+					<p:spacer width="100px" height="10px"></p:spacer>
+					<p:fileUpload value="#{conveniosBean.file}" mode="simple"
+						skinSimple="true" label="Escoger imagen"  />
+					
+					<br></br><br></br>
+					<p:outputLabel>Nombre del Convenio: </p:outputLabel>
+					<p:inputTextarea rows="1"
+						value="#{conveniosBean.objConvenio.nombrelCovenio}"></p:inputTextarea>
 
-<p:outputLabel>Descripcion: </p:outputLabel>
- <p:inputTextarea  rows="1" value="#{conveniosBean.objConvenio.infoConvenio}"></p:inputTextarea>
- 
- <p:outputLabel>Persona de Contacto: : </p:outputLabel>
- <p:inputTextarea  rows="1" value="#{conveniosBean.objConvenio.personaContacto}"></p:inputTextarea>
- 
-<p:commandButton ajax="false" value="Guardar"  action="#{conveniosBean.guardar()}"  ></p:commandButton>
-<p:commandButton value="Cancelar"></p:commandButton>
-</h:form>
+					<br></br><br></br>
+					<p:outputLabel>Informacion del convenio: </p:outputLabel>
+					<p:inputTextarea rows="1"
+						value="#{conveniosBean.objConvenio.infoConvenio}"></p:inputTextarea>
+
+					<br></br><br></br>
+					<p:outputLabel>Persona de Contacto:  </p:outputLabel>
+					<p:inputTextarea rows="1"
+						value="#{conveniosBean.objConvenio.personaContacto}"></p:inputTextarea>
+
+					<br></br><br></br>
+					
+					<p:spacer width="350px" height="10px"></p:spacer>
+					<p:commandButton ajax="false" value="Guardar" icon="fa fa-floppy-o"
+						action="#{conveniosBean.guardar()}"></p:commandButton>
+						<p:spacer width="50px" height="10px"></p:spacer>
+					<p:commandButton value="Cancelar" icon="fa fa-times-circle-o"></p:commandButton>
+				
+				</h:form>
+
+				<br></br><br></br>
+			</h:panelGrid>
+
+			<h:form>
+				<p:dataTable id="tabla" bodyrows="3" border="6"
+					value="#{conveniosBean.listaConvenios}" var="convenio"
+					rendered="#{conveniosBean.listaConvenios.size()>=0 eq true}"
+					emptyMessage="No hay convenios registrados">
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="imagen"></h:outputText>
+						</f:facet>
+						<p:graphicImage height="100" value="#{convenio.imagenConvenio}"
+							width="100"></p:graphicImage>
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="nombre"></h:outputText>
+						</f:facet>
+						<p:outputLabel value="#{convenio.nombrelCovenio}"></p:outputLabel>
+					</p:column>
 
 
-</h:panelGrid>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="informacion de convenio"></h:outputText>
+						</f:facet>
+						<p:outputLabel value="#{convenio.infoConvenio}"></p:outputLabel>
+					</p:column>
 
-<h:form>
-<p:dataTable   id="tabla" bodyrows="3"  border="6"  value="#{conveniosBean.listaConvenios}"   var="convenio"  rendered="#{conveniosBean.listaConvenios.size()>=0 eq true}">
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="persona de contacto"></h:outputText>
+						</f:facet>
+						<p:outputLabel value="#{convenio.personaContacto}"></p:outputLabel>
+					</p:column>
 
-<p:column>
-<f:facet name="header"><h:outputText  value="imagen"></h:outputText></f:facet>
- <p:graphicImage  height="100" value="#{convenio.imagenConvenio}" width="100"  ></p:graphicImage>	 
-</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="eliminar"></h:outputText>
+						</f:facet>
 
-<p:column>
-<f:facet name="header"><h:outputText  value="nombre"></h:outputText></f:facet>
-<p:outputLabel value="#{convenio.nombrelCovenio}"></p:outputLabel>
-</p:column>
+						<center>
+							<p:commandButton
+								style="background: #F39C12 ; width:60px; height:60px;"
+								update="tabla"
+								actionListener="#{conveniosBean.eliminar(convenio)}"
+								icon="fa fa-bitbucket"></p:commandButton>
 
+						</center>
+					</p:column>
 
-<p:column>
-<f:facet name="header"><h:outputText value="informacion de convenio"></h:outputText></f:facet>
-<p:outputLabel value="#{convenio.infoConvenio}"></p:outputLabel>
-</p:column>
+				</p:dataTable>
+			</h:form>
+			</div>
 
-<p:column>
-<f:facet name="header"><h:outputText value="persona de contacto"></h:outputText></f:facet>
-<p:outputLabel value="#{convenio.personaContacto}"></p:outputLabel>
-</p:column>
-
-<p:column>
-<f:facet name="header"><h:outputText value="elimnar"></h:outputText></f:facet>
-
-<center>
-<p:commandButton  style="background: #F39C12 ; width:60px; height:60px;"  update="tabla"   actionListener="#{conveniosBean.eliminar(convenio)}"  icon="fa fa-bitbucket"></p:commandButton>
-
-</center>
-</p:column>
-
-</p:dataTable>
-</h:form>
-	
-	
 			<script type="text/javascript"
 				src="resources/js/jquery-3.2.1.min.js.js"></script>
 			<script type="text/javascript" src="resources/js/materialize.js"></script>

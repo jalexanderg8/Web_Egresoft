@@ -33,8 +33,9 @@ public class ProgramaDao {
 		return listaProgramasFormacion;
 	}
 
-	public void registrar(ProgramaFormacion programaFormacion) {
+	public boolean registrar(ProgramaFormacion programaFormacion) {
 	
+		boolean a=false;
 		Session s = null;
 		
 		
@@ -43,15 +44,18 @@ public class ProgramaDao {
 			s.beginTransaction();
 			s.save(programaFormacion);
 			s.getTransaction().commit();
+			a=true;
 		} catch (Exception e) {
 
 			System.out.println(e.getMessage());
+			a=false;
 		} finally {
 
 			if (s != null) {
 				s.close();
 			}
 		}
+		return a;
 	}
 	
 	public void editar(ProgramaFormacion programaFormacion) {

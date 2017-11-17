@@ -24,14 +24,15 @@ public class SendMailTLSAdjunto {
 
 	public boolean enviar(CorreoVo correo) {
 		boolean seEnvio = false;
-		final String username = "jhonjairohincapie21@gmail.com";
-		final String password = "junior399";
+		final String username = "pruebaegresado@gmail.com";
+		final String password = "Egresoft2017";
 		
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.port", "587");
+		props.put("mail.smtp.ssl.trust", "*");
 
 		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -89,7 +90,7 @@ public class SendMailTLSAdjunto {
 
 	public BodyPart[] adjuntarArchivos() {
 
-		String ruta = "D:\\Entorno JEE\\wildfly-10.1.0.Final\\standalone\\deployments\\Egresoft_Web.war\\resources\\cargados";
+		String ruta = "C:\\Servidores_de_Aplicaciones\\wildfly-10.1.0.Final\\standalone\\deployments\\Egresoft_Web.war\\resources\\cargados\\";
 
 		File directorio = new File(ruta);
 
@@ -145,7 +146,7 @@ public class SendMailTLSAdjunto {
 
 	public void borrarAdjuntos() {
 
-		String ruta = "D:\\Entorno JEE\\wildfly-10.1.0.Final\\standalone\\deployments\\Egresoft_Web.war\\resources\\cargados";
+		String ruta = "C:\\Servidores_de_Aplicaciones\\wildfly-10.1.0.Final\\standalone\\deployments\\Egresoft_Web.war\\resources\\cargados\\";
 
 		File directorio = new File(ruta);
 

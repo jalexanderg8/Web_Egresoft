@@ -28,7 +28,7 @@ public class EventosDao {
 
 				preStatement.setInt(1, 0);
 				preStatement.setString(2, objEvento.getNombreEvento());
-				preStatement.setString(3, objEvento.geturl_redireccion());
+				preStatement.setString(3, objEvento.getUrlRedireccion());
 				preStatement.setString(4, imagen);
 				preStatement.setString(5, objEvento.getDescripcionEvento());
 				preStatement.executeUpdate();
@@ -68,7 +68,7 @@ public class EventosDao {
 				
 				objEvento.setIdEvento(resultado.getInt(1));
 				objEvento.setNombreEvento(resultado.getString(2));
-				objEvento.seturl_redireccion(resultado.getString(3));
+				objEvento.setUrlRedireccion(resultado.getString(3));
 				objEvento.setImagenEvento("/resources/imgBD/"+resultado.getString(4));
 				objEvento.setDescripcionEvento(resultado.getString(5));
 				

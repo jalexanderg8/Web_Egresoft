@@ -1,5 +1,5 @@
 package entidades;
-// Generated 3/11/2017 01:17:47 PM by Hibernate Tools 5.2.3.Final
+// Generated 16/11/2017 09:52:27 PM by Hibernate Tools 5.2.3.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,15 +21,15 @@ public class NumeroFicha implements java.io.Serializable {
 	private Integer idNumeroFicha;
 	private Egresado egresado;
 	private ProgramaFormacion programaFormacion;
-	private String numeroFicha;
+	private String numeroDeFicha;
 
 	public NumeroFicha() {
 	}
 
-	public NumeroFicha(Egresado egresado, ProgramaFormacion programaFormacion, String numeroFicha) {
+	public NumeroFicha(Egresado egresado, ProgramaFormacion programaFormacion, String numeroDeFicha) {
 		this.egresado = egresado;
 		this.programaFormacion = programaFormacion;
-		this.numeroFicha = numeroFicha;
+		this.numeroDeFicha = numeroDeFicha;
 	}
 
 	@Id
@@ -55,7 +55,7 @@ public class NumeroFicha implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idprograma_formacion", nullable = false)
+	@JoinColumn(name = "idPrograma_formacion", nullable = false)
 	public ProgramaFormacion getProgramaFormacion() {
 		return this.programaFormacion;
 	}
@@ -64,13 +64,13 @@ public class NumeroFicha implements java.io.Serializable {
 		this.programaFormacion = programaFormacion;
 	}
 
-	@Column(name = "numero_ficha", nullable = false, length = 45)
-	public String getNumeroFicha() {
-		return this.numeroFicha;
+	@Column(name = "numero_de_ficha", nullable = false, length = 45)
+	public String getNumeroDeFicha() {
+		return this.numeroDeFicha;
 	}
 
-	public void setNumeroFicha(String numeroFicha) {
-		this.numeroFicha = numeroFicha;
+	public void setNumeroDeFicha(String numeroDeFicha) {
+		this.numeroDeFicha = numeroDeFicha;
 	}
 
 }
