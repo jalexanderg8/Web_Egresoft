@@ -22,6 +22,9 @@ public class LogicaNavegacion implements Serializable {
 	
 	AdminDao miAdminDao;
 	EgresadoDao miEgresadoDao;
+	Egresado egre=null;
+	Administrador admin=null;
+	
 	
 	private String contraseña;
 	private String usuario;
@@ -53,8 +56,8 @@ public class LogicaNavegacion implements Serializable {
 		 miEgresadoDao=new EgresadoDao();
 		 miAdminDao=new AdminDao();
 		 
-		 Egresado egre=miEgresadoDao.consultarEgresado(usuario,contraseña);
-		 Administrador admin=miAdminDao.consultarAdmin(usuario,contraseña);
+		  egre=miEgresadoDao.consultarEgresado(usuario,contraseña);
+		  admin=miAdminDao.consultarAdmin(usuario,contraseña);
 		 
 		 if (egre!=null) {
 		
@@ -62,7 +65,7 @@ public class LogicaNavegacion implements Serializable {
 			 redireccion="indexEgresado";
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("egresado", egre);
 			
-			 System.out.println("ya metio el usuario");
+			 System.out.println("ya metio el usuario egresado");
 
 		 }
 		else if (admin!=null) {
@@ -70,42 +73,67 @@ public class LogicaNavegacion implements Serializable {
 			 redireccion="indexAdmin";
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("admin", admin);
 			 
-			 System.out.println("ya metio el usuario");
+			 System.out.println("ya metio el usuarioa dministrador");
 			
 		}
+		 
 		else {
-			System.err.println("");
 	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Usuario no registrado revise sus credenciales ... ", "Contacte al Administrador del sistema "));
 		}
 		}catch (Exception e) {
 			
 		}
+		System.err.println("usuario admin: "+admin+" usuario egresado: "+egre);
+
 		return redireccion;
 	}
 	
 	
+	public void verificarSesionAdmin() {
 
-
-	public void verificarSesion() {
-
-		System.out.println("en el metodo verificar sesion");
+		System.out.println("en el metodo verificar sesion admin");
 			
 	    try {
 	    	
 	    	FacesContext context = FacesContext.getCurrentInstance();	
-			Egresado usuario = (Egresado) context.getExternalContext().getSessionMap().get("egresado");
-			Administrador administrador= (Administrador) context.getExternalContext().getSessionMap().get("admin");
+			 Administrador administrador= (Administrador) context.getExternalContext().getSessionMap().get("admin");	
 			
-			
-			
-			
-				if (usuario==null&&administrador==null) {
+				if (administrador==null) {
 					context.getExternalContext().redirect("login.jsf");
 					System.out.println("usuario vacio validacion");
-	                //mensajes.fatal("no a iniciado sesion");
+					System.err.println("usuario admin: "+administrador);
+
 				}
 				else{
-					
+					System.err.println("usuario admin: "+administrador);
+
+					System.out.println("no esta vacio");
+				}
+		
+				
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	public void verificarSesionEgresado() {
+
+		System.out.println("en el metodo verificar sesion egresado");
+			
+	    try {
+	    	
+	    	FacesContext context = FacesContext.getCurrentInstance();	
+			 Egresado egresado = (Egresado) context.getExternalContext().getSessionMap().get("egresado");
+			
+				if (egresado==null) {
+					context.getExternalContext().redirect("login.jsf");
+					System.out.println("usuario vacio validacion");
+					System.err.println(" usuario egresado: "+egresado);
+
+				}
+				else{
+					System.err.println(" usuario egresado: "+egresado);
+
 					System.out.println("no esta vacio");
 				}
 		

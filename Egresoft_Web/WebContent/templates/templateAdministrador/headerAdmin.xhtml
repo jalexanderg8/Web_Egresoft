@@ -25,25 +25,28 @@
 
 				<ul class="right hide-on-med-and-down">
 					<h:form>
+
 						<li><a class="z-depth-3" href="subirExcel.jsf"><i
 								class="material-icons left">save</i>Cargar BD</a></li>
-						<li><a class="z-depth-3"><i class="material-icons left">poll</i>Gestionar
-								Noticia/Evento </a>
-							<ul>
-								<li><a href="gestionarEvento.jsf"
-									class="teal-text text-accent-4"> Gestionar Evento</a>
-									<ul>
-										<li><a href="gestionarNoticia.jsf"
-											class="teal-text text-accent-4"> Gestionar Noticia</a></li>
-									</ul></li>
-							</ul></li>
+
 						<li><a class="z-depth-3" href="gestionarConvenios.jsf"><i
 								class="material-icons left">business_center</i>Gestionar
 								Convenios</a></li>
 
+						<ul id="dropdown2" class="dropdown-content">
+							<li><a class="z-depth-3" href="gestionarNoticia.jsf"><i
+									class="material-icons left">event_available</i>Gestionar Noticias</a></li>
+							<li><a class="z-depth-3" href="gestionarEvento.jsf"><i
+									class="material-icons left">event_note</i>Gestionar Eventos</a></li>
+						</ul>
+						<li><a class="dropdown-button z-depth-3" href="#!"
+							data-activates="dropdown2"><i class="material-icons left">poll</i>Subir
+								Eventos y Noticias</a></li>
+								
+								
+
 						<li><a class="z-depth-3" href="enviarCorreosAdmin.jsf"><i
 								class="material-icons left">mail</i>Enviar Correos</a></li>
-
 
 						<li><a class="z-depth-3" href="crudEgresado.jsf"><i
 								class="material-icons left">mode_edit</i>Gestionar Egresado</a></li>

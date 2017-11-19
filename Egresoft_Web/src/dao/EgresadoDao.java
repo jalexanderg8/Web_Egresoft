@@ -248,44 +248,45 @@ public class EgresadoDao {
 
 	//CONSULTA PARA QUE EL WIZARD CONTINUE
 
-	public boolean consultarDoc(long idEgresado){
-		long usuario = 0;		
-		Conexion conexion=new Conexion();
+		public boolean consultarDoc(long idEgresado){
+			long usuario = 0;		
+			Conexion conexion=new Conexion();
 
-		try {
-			System.out.println("en el try");
-			PreparedStatement consulta = (PreparedStatement) conexion.getConnection().prepareStatement("SELECT *  FROM egresado WHERE idEgresado=?");
-			consulta.setLong(1, idEgresado);
-			ResultSet res = consulta.executeQuery();
-			System.out.println("despues de executeQyery");
+			try {
+				System.out.println("en el try");
+				PreparedStatement consulta = (PreparedStatement) conexion.getConnection().prepareStatement("SELECT *  FROM egresado WHERE idEgresado=?");
+				consulta.setLong(1, idEgresado);
+				ResultSet res = consulta.executeQuery();
+				System.out.println("despues de executeQyery");
 
-			if (res.next())
-			{
-				 usuario=res.getLong("idEgresado");
+				if (res.next())
+				{
+					 usuario=res.getLong("idEgresado");
+				}
+				
+				System.out.println("dfespues de asignar valores a variables internas");
+			
+				res.close();
+				System.out.println("cerró resultset");
+				conexion.desconectar();
+				System.out.println("cerro la BD");
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
 			}
 			
-			System.out.println("dfespues de asignar valores a variables internas");
-		
-			res.close();
-			System.out.println("cerró resultset");
-			conexion.desconectar();
-			System.out.println("cerro la BD");
+			if (usuario==idEgresado) {
+				System.out.println(usuario+" y "+idEgresado);
+	System.out.println("true");
+				return true;
 
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			}else{
+				System.out.println("false");
+
+				return false;
+			}
+			
 		}
-		
-		if (usuario==idEgresado) {
-			System.out.println("true");
-			return true;
-
-		}else{
-			System.out.println("false");
-
-			return false;
-		}
-		
-	}
 	
 	/*public Egresado consultarEgresado(String Usuario,String Contraseña){
 	String contraseña="";

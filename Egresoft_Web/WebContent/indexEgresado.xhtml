@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+ <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
 	<f:metadata>
+		<f:event listener="#{logicaNavegacion.verificarSesionEgresado()}"
+			type="preRenderView"></f:event>
+	
 <f:event listener="#{noticiasBean.consultar()}"
 				type="preRenderView"></f:event>
 	
 	<f:event listener="#{eventoBean.consultar()}"
 				type="preRenderView"></f:event>
+				
+					<f:event listener="#{conveniosBean.consultar()}"
+				type="preRenderView"></f:event>
 	
-		<f:event listener="#{logicaNavegacion.verificarSesion()}"
-			type="preRenderView"></f:event>
 	</f:metadata>
 	<link rel="stylesheet" href="resources/css/main.css" />
 </h:head>
@@ -76,9 +80,6 @@
 			<div class="container">
 				<ui:include src="/Egresado_Convenios.xhtml">
 					<ui:define name="convenios_egresado">
-
-<p:button value="asdfghs"></p:button>		
-
 			</ui:define>
 				</ui:include>
 			</div>
@@ -125,7 +126,7 @@
 				       				       <br />
 				       				       <br />
 				       				       <br />
-<a href="#{evento.url_redireccion}">registrece aqui</a>			       
+<a href="#{evento.urlRedireccion}">registrece aqui</a>			       
 			       
 				       </div>    
     		 </div>
@@ -136,7 +137,7 @@
 
 </div>
 </div>
-			<!-- NOTICIAS-->
+<!-- 			NOTICIAS-->
 
 			<div id="noticias">
 				<ui:include src="/Egresado_Noticias.xhtml">
@@ -154,21 +155,8 @@
 			<br />
 			<br />
 
-			<!-- PORTAL LABORAL -->
-			<div id="P_lABORAL">
-				<ui:include src="/Egresado_PortalLaboral.xhtml">
-					<ui:define name="Egresado_P_Laboral">
 
-					</ui:define>
-				</ui:include>
-			</div>
-
-			<br />
-			<br />
-			<br />
-			<br />
-
-			<!-- PORTAL DESARROLLADORES -->
+	<!-- 	PORTAL DESARROLLADORES-->
 
 			<div class="desarrolladores" id="desarrolladores">
 				<h3 class="green-text text-darken-5 center-align">Desarrolladores
@@ -222,16 +210,30 @@
 			<br />
 			<br />
 			<br />
+		<!-- 	PORTAL LABORAL-->
 
-			<!-- CONTACTAR ADMIN -->
-			<div id="contactarAdmin">
+			<div id="P_lABORAL">
+				<ui:include src="/Egresado_PortalLaboral.xhtml">
+					<ui:define name="Egresado_P_Laboral">
+
+					</ui:define>
+				</ui:include>
+			</div>
+
+			<br />
+			<br />
+			<br />
+			<br />
+		
+			<!-- 	CONTACTAR ADMIN-->
+	<div id="contactarAdmin">
 				<ui:include src="/Egresado_ContactarAdmin.xhtml">
 					<ui:define name="Egresado_ContactarAdmin">
 
 					</ui:define>
 				</ui:include>
 			</div>
-
+ 
 
 			<script type="text/javascript"
 				src="resources/js/jquery-3.2.1.min.js.js"></script>
