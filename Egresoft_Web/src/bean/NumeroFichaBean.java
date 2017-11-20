@@ -1,5 +1,6 @@
 package bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -16,11 +17,13 @@ import mensajes.MessagesView;
 
 @ManagedBean (name="numeroFichaBean", eager=true)
 @RequestScoped
-		public class NumeroFichaBean {
+		public class NumeroFichaBean implements Serializable{
 
 		private NumeroFicha numeroFicha=new NumeroFicha();
 		private List<NumeroFicha>listaNumeroFicha;
 		private NumeroFichaDao numFichaDao;
+		
+		
 		private MessagesView msj = new MessagesView();
 
 		public NumeroFicha getNumeroFicha() {

@@ -42,11 +42,12 @@ public class EnvioCorreos implements Serializable {
 	//private UIData invoicesDataTable;
 
 	private boolean correoSeleccionado;
+	private List<Egresado>listaCorreos;
 	private Map<Long, String> mapaCorreos= new HashMap<Long, String>();
 	@ManagedProperty("#{correoBean}")
 	private CorreoBean correoBean;
 
-	List<Egresado> listaEgresados;
+	private List<Egresado> listaEgresados;
 	private boolean selectAllInvoices;
 	
 	public void EnvioCorreosBean(){
@@ -309,6 +310,14 @@ public class EnvioCorreos implements Serializable {
 			System.out.println("Clave: " + key + " -> Valor: " + mapaCorreos.get(key));
 		
 		}
+	}
+
+	public List<Egresado> getListaCorreos() {
+		return listaCorreos;
+	}
+
+	public void setListaCorreos(List<Egresado> listaCorreos) {
+		this.listaCorreos = listaCorreos;
 	}
 
 }

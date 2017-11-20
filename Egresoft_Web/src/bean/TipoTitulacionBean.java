@@ -1,5 +1,6 @@
 package bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -14,7 +15,7 @@ import mensajes.MessagesView;
 @ManagedBean (name="tipoTitulacionBean", eager = true)
 @RequestScoped
 
-public class TipoTitulacionBean {
+public class TipoTitulacionBean implements Serializable{
 
 		private TipoTitulacion tipoTitulacion=new TipoTitulacion();
 		private List<TipoTitulacion>listaTipoTitulaciones;

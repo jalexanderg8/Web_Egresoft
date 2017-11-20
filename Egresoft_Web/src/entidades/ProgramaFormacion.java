@@ -3,6 +3,8 @@ package entidades;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,8 +24,9 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "programa_formacion", catalog = "egresoft", uniqueConstraints = @UniqueConstraint(columnNames = "nombre_formacion"))
 public class ProgramaFormacion implements java.io.Serializable {
 
+
 	private Integer idProgramaFormacion;
-	private TipoTitulacion tipoTitulacion;
+    private TipoTitulacion tipoTitulacion;
 	private String nombreFormacion;
 	private Set<NumeroFicha> numeroFichas = new HashSet<NumeroFicha>(0);
 
@@ -53,8 +56,8 @@ public class ProgramaFormacion implements java.io.Serializable {
 		this.idProgramaFormacion = idProgramaFormacion;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idtipo_titulacion", nullable = false)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idTipo_titulacion", nullable = false)
 	public TipoTitulacion getTipoTitulacion() {
 		return this.tipoTitulacion;
 	}
@@ -63,7 +66,7 @@ public class ProgramaFormacion implements java.io.Serializable {
 		this.tipoTitulacion = tipoTitulacion;
 	}
 
-	@Column(name = "nombre_formacion", unique = true, nullable = false, length = 55)
+	@Column(name = "nombre_formacion", unique = false, nullable = false, length = 55)
 	public String getNombreFormacion() {
 		return this.nombreFormacion;
 	}
@@ -72,13 +75,18 @@ public class ProgramaFormacion implements java.io.Serializable {
 		this.nombreFormacion = nombreFormacion;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "programaFormacion")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "programaFormacion",cascade=CascadeType.ALL)
 	public Set<NumeroFicha> getNumeroFichas() {
 		return this.numeroFichas;
 	}
 
 	public void setNumeroFichas(Set<NumeroFicha> numeroFichas) {
 		this.numeroFichas = numeroFichas;
+	}
+	@Override
+	public String toString() {
+		return "ProgramaFormacion [idProgramaFormacion=" + idProgramaFormacion + ", tipoTitulacion=" + tipoTitulacion
+				+ ", nombreFormacion=" + nombreFormacion + ", numeroFichas=" + numeroFichas + "]";
 	}
 
 }

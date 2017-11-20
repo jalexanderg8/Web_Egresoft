@@ -8,6 +8,7 @@ import java.util.Properties;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.mail.Message;
@@ -27,8 +28,10 @@ import mensajes.MessagesView;
 @ViewScoped
 public class EgresadoBean implements Serializable {
 
+
 	private MessagesView msj = new MessagesView();
 	EgresadoDao daoEgresado=new EgresadoDao();
+	
 	private Egresado egresado = new Egresado();
 	private List<Egresado>listaEgresados;	
 	private Egresado egresadoAtributos;
@@ -36,8 +39,6 @@ public class EgresadoBean implements Serializable {
 	private long dniEgresado;
 	private String direccionEmail;
 
-	
-	
 
 	public String getDireccionEmail() {
 		return direccionEmail;
@@ -221,11 +222,11 @@ public class EgresadoBean implements Serializable {
 		
 		if (daoEgresado.editaEgresadoFromEgresado(egresado)) {
 			System.out.println("editó al egresado");
-	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Hecho", "se editó al egresado"));
+	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Hecho", "Se registro al  egresado"));
 			
 		}else{
 			System.err.println("no lo edito");
-	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "error", "no se pudo editar al egresado"));
+	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "error", "no se pudo registrar al egresado"));
 		}
 		
 

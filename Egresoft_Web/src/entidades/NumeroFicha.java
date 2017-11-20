@@ -44,7 +44,7 @@ public class NumeroFicha implements java.io.Serializable {
 		this.idNumeroFicha = idNumeroFicha;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idEgresado", nullable = false)
 	public Egresado getEgresado() {
 		return this.egresado;
@@ -54,7 +54,7 @@ public class NumeroFicha implements java.io.Serializable {
 		this.egresado = egresado;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idPrograma_formacion", nullable = false)
 	public ProgramaFormacion getProgramaFormacion() {
 		return this.programaFormacion;
@@ -72,5 +72,12 @@ public class NumeroFicha implements java.io.Serializable {
 	public void setNumeroDeFicha(String numeroDeFicha) {
 		this.numeroDeFicha = numeroDeFicha;
 	}
+
+	@Override
+	public String toString() {
+		return "NumeroFicha [idNumeroFicha=" + idNumeroFicha + ", egresado=" + egresado + ", programaFormacion="
+				+ programaFormacion + ", numeroDeFicha=" + numeroDeFicha + "]";
+	}
+	
 
 }

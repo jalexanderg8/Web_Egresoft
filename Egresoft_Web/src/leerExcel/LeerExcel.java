@@ -43,6 +43,8 @@ public class LeerExcel {
 
 	Workbook wb;
 	private EgresadoBean egresadoBean;
+	Set<ProgramaFormacion> programaFormaciones = null;
+	Set<NumeroFicha> numeroFichas = null;
 	private static TipoTitulacion tipoTitulacion;
 	private static ProgramaFormacion programaFormacion;
 	private static NumeroFicha numeroFicha;
@@ -57,7 +59,7 @@ public class LeerExcel {
 	private static String fichaFormacion;
 	
 
-	private String ruta="C:\\ProyectoFinal\\Base de Datos\\Reporte de Aprendices Ficha 1133634 PRUEBA - copia.xls";
+	private String ruta="C:\\ProyectoFinal\\Base de Datos\\Reporte de Aprendices Ficha 1132273 PRUEBA - copia - copia.xls";
 	private MessagesView msj = new MessagesView();
 	
 	
@@ -234,12 +236,12 @@ public class LeerExcel {
 								case (1):
 									
 									String string = celda.getStringCellValue();
-								System.out.println(string);
+								   System.out.println(string);
 								   String[] parts = string.split("-");
 								   
-								   String numero=parts[0].trim();
-								   String nombre=parts[1].trim();
-								   String tipo=parts[2].trim();
+								  String numero=parts[0].trim();
+								  String nombre=parts[1].trim();
+								  String tipo=parts[2].trim();
 								   								   
 									System.out.println(tipo);	
 									System.out.println(nombre);	
@@ -249,14 +251,26 @@ public class LeerExcel {
 									nombreFormacion=nombre;
 									fichaFormacion=numero;
 									
-									
 									tipoTitulacionDao =new TipoTitulacionDao();
-						
+									programaDao=new ProgramaDao();
 									
+									tipoTitulacion=new TipoTitulacion();
+									tipoTitulacion.setTipoTitulacion(titulacion);
+									
+									
+									programaFormacion=new ProgramaFormacion();
+									programaFormacion.setNombreFormacion(nombreFormacion);
+									programaFormacion.setTipoTitulacion(tipoTitulacion);
+									
+									
+									programaFormaciones=new HashSet();
+									programaFormaciones.add(programaFormacion);
+									
+									tipoTitulacion.getProgramaFormacions();
 									
 									try{
 										
-										tipoTitulacion=new TipoTitulacion(titulacion);
+										
 										
 										if(tipoTitulacionDao.registrar(tipoTitulacion)){
 											
@@ -271,14 +285,15 @@ public class LeerExcel {
 											nivelFormacion=false;
 										}
 										
-										programaFormacion=new ProgramaFormacion(tipoTitulacion, nombre);     
-										programaDao=new ProgramaDao();
+										   
+										
 																		
 										if(programaDao.registrar(programaFormacion)){
 											
 											System.out.println("registro nombre Formacion");
 											
 										}else{
+											
 											
 											System.out.println("No registro nombre Formacion");
 										}
@@ -310,53 +325,72 @@ public class LeerExcel {
 				if (egresadoEs&&valorCelda.equals("EN FORMACION")) {
 					mapaEgresados.put(egresado.getIdEgresado(), egresado);
 					
-					
-					
 					daoEgresado=new EgresadoDao();
 					numeroFichaDao=new NumeroFichaDao();
-				
+					
+					
+					
+					
+					
+					
+					numeroFichas=new HashSet();
+					numeroFichas.add(numeroFicha);
+					
+					programaFormacion.getNumeroFichas();
+					
+					numeroFicha=new NumeroFicha();
+					numeroFicha.setEgresado(egresado);
+					numeroFicha.setNumeroDeFicha(fichaFormacion);
+					numeroFicha.setProgramaFormacion(programaFormacion);
+					
+					egresado.getNumeroFichas();
 						
-						try{
-							numeroFicha=new NumeroFicha();
-							
-							
-							if(daoEgresado.registrar(egresado)){
-								
 						
-								System.out.println("estamos en registrar egresado ");
-								
-								
-								//msj.info("Egresado registrado satisfactoriamente");
-								
-							}else{
-								
-								
-								System.out.println("No se pudo registrar egresado ");
-								//msj.error("No se pudo registrar al egresado");
-								
-							}
-							
-							numeroFicha=new NumeroFicha(egresado, programaFormacion, fichaFormacion);
-							
-	                         if(numeroFichaDao.registrar(numeroFicha)){
-								
-								System.out.println("registro numero de ficha ");
-
-							}else {
-								
-								System.out.println("no registro numero de ficha ");
-
-							}
+					
+					
+					
+					try{
 						
+						
+						
+						if(daoEgresado.registrar(egresado)){
 							
-						}catch(Exception e){
+					
+							System.out.println("estamos en registrar egresado ");
 							
-							System.out.println(e.getMessage());
-							System.out.println("No en formacion");
 							
+							msj.info("Egresado registrado satisfactoriamente");
+							
+						}else{
+							
+							
+							System.out.println("No se pudo registrar egresado ");
+							msj.error("No se pudo registrar al egresado");
 							
 						}
 						
+						
+						
+						
+						
+                         if(numeroFichaDao.registrar(numeroFicha)){
+							
+							System.out.println("registro numero de ficha ");
+
+						}else {
+							
+							System.out.println("no registro numero de ficha ");
+
+						}
+					
+						
+					}catch(Exception e){
+						
+						System.out.println(e.getMessage());
+						System.out.println("No en formacion");
+						
+						
+					}
 					
 				
 				}

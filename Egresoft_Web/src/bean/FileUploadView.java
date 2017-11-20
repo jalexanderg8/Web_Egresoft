@@ -475,9 +475,7 @@ public class FileUploadView {
 					numeroFichaDao=new NumeroFichaDao();
 				
 						
-						try{
-							numeroFicha=new NumeroFicha();
-							
+						try{							
 							
 							if(daoEgresado.registrar(egresado)){
 								

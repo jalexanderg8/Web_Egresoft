@@ -171,7 +171,6 @@ public class Egresado implements java.io.Serializable {
 
 	public void setContrasena(String contrasena) {
 		UserWizard.primeraContraseña=contrasena;
-		System.out.println("en el metodo setContraseña, la contraseña desde el egresado esta en : "+contrasena+" el userzizard.contraseña queda como= "+UserWizard.primeraContraseña);
 		this.contrasena = contrasena;
 	}
 

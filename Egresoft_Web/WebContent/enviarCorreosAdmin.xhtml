@@ -18,21 +18,26 @@
 		<h:body>
 			<h4 class="green-text text-darken-5 center-align">Bienvenido a
 				Enviar correos a egresados</h4>
+
+
 			
-				<h:form id="formulario">
+
+			<h:form id="formulario">
 				<div class="container-fluid">
 					<p:growl id="message" showDetail="true" />
 					<p:messages id="messages" showDetail="true" autoUpdate="true"
 						closable="true" severity="error,fatal,info,warn" life="5200" />
 
 
-					<p:dataTable id="tablaEgre" var="egre"
-						value="#{envioCorreos.listaEgresados}"
+					<p:dataTable id="tablaEgre" value="#{envioCorreos.listaEgresados}" var="egre"
+						
 						emptyMessage="No hay Egresados
-						Registrados"
-						paginator="true" paginatorPosition="top" rows="10">
+						Registrados" rowKey="#{egre.idEgresado}"
+						paginator="true" paginatorPosition="top" rows="25">
+						
+						<p:ajax event="rowSelect"/>	
 
-
+						 <f:facet name="header">Envio de Correos</f:facet>
 
 						<p:column headerText="Numero de cedula"
 							filterBy="#{egre.idEgresado}">
@@ -40,7 +45,7 @@
 						</p:column>
 
 						<p:column headerText="Nombres Completos"
-							filterBy="#{egre.nombres}">
+							filterBy="#{egre.nombres}" >
 							<p:outputLabel value="#{egre.nombres}" />
 						</p:column>
 
@@ -52,69 +57,73 @@
 						<p:column headerText="Correo" filterBy="#{egre.emailPrincipal}">
 							<p:outputLabel value="#{egre.emailPrincipal}" />
 						</p:column>
-
-						<p:column headerText="Seleccionar">
-							<p:selectBooleanCheckbox
-								value="#{envioCorreos.correoSeleccionado}">
-								<p:ajax listener="#{envioCorreos.addCorreo(egre)}" />
-							</p:selectBooleanCheckbox>
-						</p:column>
-
-
-
-					</p:dataTable>
-					<br></br><br></br>
-					</div>
-					<div class="container">
-					
-
-						<p:panelGrid columns="2">
-
-
-							<p:outputLabel value="Asunto:" />
-							<p:inputText value="#{correoBean.correo.asunto}" required="true" />
-
-							<p:outputLabel value="Cuerpo del mensaje:" />
-							<p:inputTextarea value="#{correoBean.correo.cuerpo}"
-								required="true" />
-
-
-
-						</p:panelGrid>
-
-
-
-						<p:fileUpload uploadLabel="Cargar" cancelLabel="Cancelar"
-							label="Seleccionar archivo"
-							fileUploadListener="#{fileUploadView.uploadAttachment}"
-							mode="advanced" dragDropSupport="false" multiple="true"
-							update="messages" sizeLimit="2500000" fileLimit="3" auto="false"
-							allowTypes="/(\.|\/)(gif|jpe?g|png|doc|docx|xls|xlsx|pdf|ppt|pptx)$/"
-							invalidFileMessage="Solamente esta permitido cargar archivos con extensión .gif, .jpg, .png, .doc, .docx, .xls, .xlsx, .pdf, .ppt . pptx" />
-
-
-						<br></br><br></br>
-						<div class="center-align">
-						<p:button value="Enviar Correo" class="button big" icon="fa fa-envelope-open-o"
-							actionListener="#{envioCorreos.enviar()}">
-						</p:button>
+						 <p:column id="uno" width="5%" 
+						 headerText="X" selectionMode="multiple"
+						 style="width:25px;text-align:center" >
+						 <p:selectBooleanCheckbox 
+						 value="#{envioCorreos.correoSeleccionado}"
+						 widgetVar="uno" >
+						 
+						 <p:ajax listener="#{envioCorreos.addCorreo(egre)}"/>
+						 </p:selectBooleanCheckbox>
+						 </p:column>
 						
+				</p:dataTable>
+					<br></br>
+					<br></br>
+				</div>
+				<div class="container">
+
+
+					<p:panelGrid columns="2">
+
+
+						<p:outputLabel value="Asunto:" />
+						<p:inputText value="#{correoBean.correo.asunto}" required="true" />
+
+						<p:outputLabel value="Cuerpo del mensaje:" />
+						<p:inputTextarea value="#{correoBean.correo.cuerpo}"
+							required="true" />
+
+
+
+					</p:panelGrid>
+
+
+
+					<p:fileUpload uploadLabel="Cargar" cancelLabel="Cancelar"
+						label="Seleccionar archivo"
+						fileUploadListener="#{fileUploadView.uploadAttachment}"
+						mode="advanced" dragDropSupport="false" multiple="true"
+						update="messages" sizeLimit="2500000" fileLimit="3" auto="false"
+						allowTypes="/(\.|\/)(gif|jpe?g|png|doc|docx|xls|xlsx|pdf|ppt|pptx)$/"
+						invalidFileMessage="Solamente esta permitido cargar archivos con extensión .gif, .jpg, .png, .doc, .docx, .xls, .xlsx, .pdf, .ppt . pptx" />
+
+
+					<br></br>
+					<br></br>
+					<div class="center-align">
+						<p:commandButton value="Enviar Correo" class="button big"
+							icon="fa fa-rocket" actionListener="#{envioCorreos.enviar()}">
+						</p:commandButton>
+
 						<p:spacer width="50px" height="10px"></p:spacer>
 						<p:button value="Cancelar" class="button big" icon="fa fa-ban"
 							outcome="indexAdmin.jsf">
 
 						</p:button>
-						</div>
-						<!-- <p:commandButton 
-							actionListener="#{envioCorreos.enviar()}" id="enviar"
-							value="Enviar" class="button big" /> -->
-					
 					</div>
-			
+
+
+				</div>
+
 
 
 			</h:form>
 			<br></br>
+			<!--  <script type="text/javascript"
+				src="resources/js/jquery-3.2.1.min.js.js"></script>  -->
+			<script type="text/javascript" src="resources/js/materialize.js"></script>
 		</h:body>
 	</ui:define>
 </ui:composition>
