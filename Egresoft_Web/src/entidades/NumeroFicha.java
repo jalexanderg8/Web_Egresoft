@@ -1,6 +1,8 @@
 package entidades;
-// Generated 16/11/2017 09:52:27 PM by Hibernate Tools 5.2.3.Final
+// Generated 22/11/2017 08:55:24 AM by Hibernate Tools 5.2.3.Final
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +11,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -19,17 +22,23 @@ import javax.persistence.Table;
 public class NumeroFicha implements java.io.Serializable {
 
 	private Integer idNumeroFicha;
-	private Egresado egresado;
 	private ProgramaFormacion programaFormacion;
 	private String numeroDeFicha;
+	private Set<NumeroFichaEgresado> numeroFichaEgresados = new HashSet<NumeroFichaEgresado>(0);
 
 	public NumeroFicha() {
 	}
 
-	public NumeroFicha(Egresado egresado, ProgramaFormacion programaFormacion, String numeroDeFicha) {
-		this.egresado = egresado;
+	public NumeroFicha(ProgramaFormacion programaFormacion, String numeroDeFicha) {
 		this.programaFormacion = programaFormacion;
 		this.numeroDeFicha = numeroDeFicha;
+	}
+
+	public NumeroFicha(ProgramaFormacion programaFormacion, String numeroDeFicha,
+			Set<NumeroFichaEgresado> numeroFichaEgresados) {
+		this.programaFormacion = programaFormacion;
+		this.numeroDeFicha = numeroDeFicha;
+		this.numeroFichaEgresados = numeroFichaEgresados;
 	}
 
 	@Id
@@ -44,17 +53,7 @@ public class NumeroFicha implements java.io.Serializable {
 		this.idNumeroFicha = idNumeroFicha;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idEgresado", nullable = false)
-	public Egresado getEgresado() {
-		return this.egresado;
-	}
-
-	public void setEgresado(Egresado egresado) {
-		this.egresado = egresado;
-	}
-
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idPrograma_formacion", nullable = false)
 	public ProgramaFormacion getProgramaFormacion() {
 		return this.programaFormacion;
@@ -73,11 +72,13 @@ public class NumeroFicha implements java.io.Serializable {
 		this.numeroDeFicha = numeroDeFicha;
 	}
 
-	@Override
-	public String toString() {
-		return "NumeroFicha [idNumeroFicha=" + idNumeroFicha + ", egresado=" + egresado + ", programaFormacion="
-				+ programaFormacion + ", numeroDeFicha=" + numeroDeFicha + "]";
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "numeroFicha")
+	public Set<NumeroFichaEgresado> getNumeroFichaEgresados() {
+		return this.numeroFichaEgresados;
 	}
-	
+
+	public void setNumeroFichaEgresados(Set<NumeroFichaEgresado> numeroFichaEgresados) {
+		this.numeroFichaEgresados = numeroFichaEgresados;
+	}
 
 }

@@ -29,10 +29,12 @@ import org.primefaces.model.UploadedFile;
 
 import dao.EgresadoDao;
 import dao.NumeroFichaDao;
+import dao.NumerofichaEgresadoDao;
 import dao.ProgramaDao;
 import dao.TipoTitulacionDao;
 import entidades.Egresado;
 import entidades.NumeroFicha;
+import entidades.NumeroFichaEgresado;
 import entidades.ProgramaFormacion;
 import entidades.TipoTitulacion;
 import mensajes.MessagesView;
@@ -46,110 +48,27 @@ public class FileUploadView {
 	             
 
 	Workbook wb;
-	private EgresadoBean egresadoBean;
-	private static TipoTitulacion tipoTitulacion;
-	private static ProgramaFormacion programaFormacion;
-	private static NumeroFicha numeroFicha;
-	EgresadoDao daoEgresado;
-    TipoTitulacionDao tipoTitulacionDao;
-	ProgramaDao programaDao;
-	NumeroFichaDao numeroFichaDao;
-	private Egresado egresado;
-	private static String titulacion;
-	private static String nombreFormacion;
-	private static String fichaFormacion;
+	private  TipoTitulacion tipoTitulacion;
+	private TipoTitulacion tipoTitulacion2;
+	private  ProgramaFormacion programaFormacion;
+	private  NumeroFicha numeroFicha;
+	private NumeroFichaEgresado numeroFichaEgresado;
+	private  Egresado egresado;
+	private  String titulacion;
+	private  String nombreFormacion;
+	private  String fichaFormacion;
+	private EgresadoDao daoEgresado;
+    private TipoTitulacionDao tipoTitulacionDao;
+	private ProgramaDao programaDao;
+	private NumeroFichaDao numeroFichaDao;
+	private NumerofichaEgresadoDao numerofichaEgresadoDao;
 	// private UploadedFile document;
 	private static ArrayList<DocumentModel> documentList = null;
 	private String rutaArchivo;
 	private UploadedFile file;
 	private MessagesView msj = new MessagesView();
 	
-	public EgresadoBean getEgresadoBean() {
-		return egresadoBean;
-	}
 
-	public void setEgresadoBean(EgresadoBean egresadoBean) {
-		this.egresadoBean = egresadoBean;
-	}
-
-	public static TipoTitulacion getTipoTitulacion() {
-		return tipoTitulacion;
-	}
-
-	public static void setTipoTitulacion(TipoTitulacion tipoTitulacion) {
-		FileUploadView.tipoTitulacion = tipoTitulacion;
-	}
-
-	public static ProgramaFormacion getProgramaFormacion() {
-		return programaFormacion;
-	}
-
-	public static void setProgramaFormacion(ProgramaFormacion programaFormacion) {
-		FileUploadView.programaFormacion = programaFormacion;
-	}
-
-	public static NumeroFicha getNumeroFicha() {
-		return numeroFicha;
-	}
-
-	public static void setNumeroFicha(NumeroFicha numeroFicha) {
-		FileUploadView.numeroFicha = numeroFicha;
-	}
-
-	public static String getTitulacion() {
-		return titulacion;
-	}
-
-	public static void setTitulacion(String titulacion) {
-		FileUploadView.titulacion = titulacion;
-	}
-
-	public static String getNombreFormacion() {
-		return nombreFormacion;
-	}
-
-	public static void setNombreFormacion(String nombreFormacion) {
-		FileUploadView.nombreFormacion = nombreFormacion;
-	}
-
-	public static String getFichaFormacion() {
-		return fichaFormacion;
-	}
-
-	public static void setFichaFormacion(String fichaFormacion) {
-		FileUploadView.fichaFormacion = fichaFormacion;
-	}
-	
-	public MessagesView getMsj() {
-		return msj;
-	}
-
-	public void setMsj(MessagesView msj) {
-		this.msj = msj;
-	}
-
-	public UploadedFile getFile() {
-		return file;
-	}
-
-	public void setFile(UploadedFile file) {
-		this.file = file;
-	}
-
-	public ArrayList<DocumentModel> getDocumentList() {
-		return documentList;
-	}
-
-	public void setDocumentList(ArrayList<DocumentModel> documentList) {
-		FileUploadView.documentList = documentList;
-	}
-	public Egresado getEgresado() {
-		return egresado;
-	}
-
-	public void setEgresado(Egresado egresado) {
-		this.egresado = egresado;
-	}
 
 	/// nuevo
 	public FileUploadView() {
@@ -493,7 +412,7 @@ public class FileUploadView {
 								
 							}
 							
-							numeroFicha=new NumeroFicha(egresado, programaFormacion, fichaFormacion);
+							numeroFicha=new NumeroFicha( programaFormacion, fichaFormacion);
 							
 	                         if(numeroFichaDao.registrar(numeroFicha)){
 								

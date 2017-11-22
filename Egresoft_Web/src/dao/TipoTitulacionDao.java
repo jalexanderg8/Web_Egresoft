@@ -98,5 +98,29 @@ public class TipoTitulacionDao {
 				}
 			}
 		}
+		
+		@SuppressWarnings("unchecked")
+		public TipoTitulacion buscarTipoTitulacion(String tipoT) {
+			
+			
+			TipoTitulacion tipoTitulacion= null;
+			Session s = HibernateUtil.getSessionFactory().openSession();
+			Transaction t = s.beginTransaction();
+			String consulta2="From TipoTitulacion as t Where t.tipoTitulacion ='"+tipoT+"'";
+			try {
 
+				tipoTitulacion =(TipoTitulacion) s.createQuery(consulta2).getSingleResult();
+				System.out.println("consulta ok");
+				t.commit();
+				s.close();
+			} catch (Exception e) {
+
+				System.out.println(e.getMessage());
+				t.rollback();
+				System.out.println("No consulta ok");
+			}
+			return tipoTitulacion;
+		}
+		
+		
 	}

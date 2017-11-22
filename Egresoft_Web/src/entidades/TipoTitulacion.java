@@ -1,10 +1,8 @@
 package entidades;
-// Generated 16/11/2017 09:52:27 PM by Hibernate Tools 5.2.3.Final
+// Generated 22/11/2017 08:55:24 AM by Hibernate Tools 5.2.3.Final
 
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -50,7 +48,7 @@ public class TipoTitulacion implements java.io.Serializable {
 		this.idTipoTitulacion = idTipoTitulacion;
 	}
 
-	@Column(name = "tipo_titulacion", unique = false, nullable = false, length = 45)
+	@Column(name = "tipo_titulacion", unique = true, nullable = false, length = 45)
 	public String getTipoTitulacion() {
 		return this.tipoTitulacion;
 	}
@@ -59,7 +57,7 @@ public class TipoTitulacion implements java.io.Serializable {
 		this.tipoTitulacion = tipoTitulacion;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "tipoTitulacion",cascade=CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoTitulacion")
 	public Set<ProgramaFormacion> getProgramaFormacions() {
 		return this.programaFormacions;
 	}
@@ -67,12 +65,5 @@ public class TipoTitulacion implements java.io.Serializable {
 	public void setProgramaFormacions(Set<ProgramaFormacion> programaFormacions) {
 		this.programaFormacions = programaFormacions;
 	}
-
-	@Override
-	public String toString() {
-		return "TipoTitulacion [idTipoTitulacion=" + idTipoTitulacion + ", tipoTitulacion=" + tipoTitulacion
-				+ ", programaFormacions=" + programaFormacions + "]";
-	}
-	
 
 }

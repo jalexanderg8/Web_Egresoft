@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 
 import dao.ProgramaDao;
 import dao.TipoTitulacionDao;
@@ -16,6 +17,9 @@ import mensajes.MessagesView;
 @RequestScoped
 
 public class TipoTitulacionBean implements Serializable{
+	
+	@ManagedProperty("#{programaFormacionBean}")
+	private NombreFormacionBean nombreFormacionBean;
 
 		private TipoTitulacion tipoTitulacion=new TipoTitulacion();
 		private List<TipoTitulacion>listaTipoTitulaciones;
