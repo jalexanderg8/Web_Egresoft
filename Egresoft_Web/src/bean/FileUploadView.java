@@ -1,6 +1,5 @@
 package bean;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -39,26 +38,24 @@ import entidades.ProgramaFormacion;
 import entidades.TipoTitulacion;
 import mensajes.MessagesView;
 
-
 @ManagedBean
 @RequestScoped
 public class FileUploadView {
 
 	String ruta = "C:\\Servidores_de_Aplicaciones\\wildfly-10.1.0.Final\\standalone\\deployments\\Egresoft_Web.war\\resources\\archivosExcel\\";
-	             
 
 	Workbook wb;
-	private  TipoTitulacion tipoTitulacion;
+	private TipoTitulacion tipoTitulacion;
 	private TipoTitulacion tipoTitulacion2;
-	private  ProgramaFormacion programaFormacion;
-	private  NumeroFicha numeroFicha;
+	private ProgramaFormacion programaFormacion;
+	private NumeroFicha numeroFicha;
 	private NumeroFichaEgresado numeroFichaEgresado;
-	private  Egresado egresado;
-	private  String titulacion;
-	private  String nombreFormacion;
-	private  String fichaFormacion;
+	private Egresado egresado;
+	private String titulacion;
+	private String nombreFormacion;
+	private String fichaFormacion;
 	private EgresadoDao daoEgresado;
-    private TipoTitulacionDao tipoTitulacionDao;
+	private TipoTitulacionDao tipoTitulacionDao;
 	private ProgramaDao programaDao;
 	private NumeroFichaDao numeroFichaDao;
 	private NumerofichaEgresadoDao numerofichaEgresadoDao;
@@ -67,8 +64,6 @@ public class FileUploadView {
 	private String rutaArchivo;
 	private UploadedFile file;
 	private MessagesView msj = new MessagesView();
-	
-
 
 	/// nuevo
 	public FileUploadView() {
@@ -94,11 +89,9 @@ public class FileUploadView {
 		total += arrArchivos.length;
 		System.out.println("total de archivos es: " + total);
 
-		
-
 		for (int i = 0; i < arrArchivos.length; i++) {
-			obj=new DocumentModel();
-			
+			obj = new DocumentModel();
+
 			File tmpFile = new File(directorio.getPath() + "/" + arrArchivos[i]);
 			String nombreArchivo = tmpFile.getName();
 
@@ -110,13 +103,11 @@ public class FileUploadView {
 			System.out.println("Ruta del archivos es: " + tmpFile.getPath());
 			obj.setRemovable(true);
 			list.add(obj);
-			rutaArchivo=ruta+nombreArchivo;
+			rutaArchivo = ruta + nombreArchivo;
 
 		}
 		return list;
 	}
-
-
 
 	public String removeRow(DocumentModel row) {
 		documentList.remove(row);
@@ -161,8 +152,6 @@ public class FileUploadView {
 
 	}
 
-
-
 	public void uploadAttachment(FileUploadEvent event) {
 		UploadedFile file = event.getFile();
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
@@ -184,18 +173,18 @@ public class FileUploadView {
 		}
 
 	}
+
 	public void Importar() {
-	
+
 		// DefaultTableModel modeloT = new DefaultTableModel();
 		// tablaD.setModel(modeloT);
 		// tablaD.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		
+
 		HashMap<Long, Egresado> mapaEgresados = new HashMap<Long, Egresado>();
-		
+
 		try {
-			
-			FileInputStream fil = new FileInputStream(
-					new File(rutaArchivo));
+
+			FileInputStream fil = new FileInputStream(new File(rutaArchivo));
 
 			// wb = WorkbookFactory.create(new
 			// FileInputStream(archivo));//CREAMOS UNA REPRESENTACIÓN DE HOJA
@@ -209,17 +198,16 @@ public class FileUploadView {
 
 			Iterator filaIterator = hoja.rowIterator();
 			int indiceFila = -1;
-			//int indiceColumna = -1;
+			// int indiceColumna = -1;
 			String valorCelda = "";
 			int contador = 0;
-			int contador1= 0;
+			int contador1 = 0;
 
 			boolean egresadoEs = false;
-			boolean nivelFormacion=false;
-			boolean salir=true;
+			boolean nivelFormacion = false;
+			boolean salir = true;
 			while (filaIterator.hasNext()) {
 				indiceFila++;
-				
 
 				Egresado egresado = new Egresado();
 				Row fila = (Row) filaIterator.next();
@@ -251,18 +239,18 @@ public class FileUploadView {
 							System.out.println("FILA: " + indiceFila + "Columna" + indiceColumna + "valor de la celda"
 									+ celda.getNumericCellValue());
 							break;
-							
+
 						default:
-							
-							if(contador==1){
-								
-								egresadoEs=false;
-								salir=false;
+
+							if (contador == 1) {
+
+								egresadoEs = false;
+								salir = false;
 							}
 
 						}
 						if (egresadoEs) {
-								
+
 							if (celda != null) {
 
 								switch (contador) {
@@ -299,165 +287,189 @@ public class FileUploadView {
 									System.out.println(egresado.getEmailPrincipal());
 									contador++;
 									break;
-									
+
 								default:
-									
-									contador=1;
+
+									contador = 1;
 								}
 							}
 						}
-                         if(nivelFormacion){
-							
+						if (nivelFormacion) {
+
 							if (celda != null) {
 
 								switch (contador1) {
-								
+
 								case (1):
-									
+
 									String string = celda.getStringCellValue();
-								System.out.println(string);
-								   String[] parts = string.split("-");
-								   
-								   String numero=parts[0].trim();
-								   String nombre=parts[1].trim();
-								   String tipo=parts[2].trim();
-								   								   
-									System.out.println(tipo);	
-									System.out.println(nombre);	
-									System.out.println(numero);	
-									
-									titulacion=tipo;
-									nombreFormacion=nombre;
-									fichaFormacion=numero;
-									
-									
-									tipoTitulacionDao =new TipoTitulacionDao();
-						
-									
-									
-									try{
-										
-										tipoTitulacion=new TipoTitulacion(titulacion);
-										
-										if(tipoTitulacionDao.registrar(tipoTitulacion)){
-											
-											System.out.println("Registro tipo de titulacion ");
-											
-											
-											nivelFormacion=false;
-											
-										}else{
-											
-											System.out.println("no registro tipo titulacion");
-											nivelFormacion=false;
+									System.out.println(string);
+									String[] parts = string.split("-");
+
+									String numero = parts[0].trim();
+									String nombre = parts[1].trim();
+									String tipo = parts[2].trim();
+
+									System.out.println(tipo);
+									System.out.println(nombre);
+									System.out.println(numero);
+
+									titulacion = tipo;
+									nombreFormacion = nombre;
+									fichaFormacion = numero;
+
+									tipoTitulacionDao = new TipoTitulacionDao();
+
+									try {
+
+										tipoTitulacion2 = tipoTitulacionDao.buscarTipoTitulacion(titulacion);
+										if (tipoTitulacion2 == null) {
+
+											tipoTitulacion = new TipoTitulacion(titulacion);
+
+											if (tipoTitulacionDao.registrar(tipoTitulacion)) {
+
+												System.out.println("Registro tipo de titulacion ");
+
+												programaFormacion = new ProgramaFormacion(tipoTitulacion, nombre);
+												programaDao = new ProgramaDao();
+
+												if (programaDao.registrar(programaFormacion)) {
+
+													System.out.println("registro nombre Formacion");
+
+												} else {
+
+													System.out.println("No registro nombre Formacion");
+												}
+
+											} else {
+
+												System.out.println("no registro tipo titulacion");
+
+											}
+										} else {
+
+											programaFormacion = new ProgramaFormacion(tipoTitulacion2, nombre);
+											programaDao = new ProgramaDao();
+
+											if (programaDao.registrar(programaFormacion)) {
+
+												System.out.println("registro nombre Formacion");
+
+											} else {
+
+												System.out.println("No registro nombre Formacion");
+											}
+
 										}
-										
-										programaFormacion=new ProgramaFormacion(tipoTitulacion, nombre);     
-										programaDao=new ProgramaDao();
-																		
-										if(programaDao.registrar(programaFormacion)){
-											
-											System.out.println("registro nombre Formacion");
-											
-										}else{
-											
-											System.out.println("No registro nombre Formacion");
+
+										numeroFichaDao = new NumeroFichaDao();
+										numeroFicha = new NumeroFicha(programaFormacion, fichaFormacion);
+
+										if (numeroFichaDao.registrar(numeroFicha)) {
+
+											System.out.println("registro numero de ficha");
+										} else {
+
+											System.out.println("No registro numero de ficha");
 										}
-										
-										
-									}catch (Exception e) {
-										
-										
+
+									} catch (Exception e) {
+
 										System.out.println(e.getMessage());
 										System.out.println("Excepcion de registro ");
-										
+
 									}
-									
+									nivelFormacion = false;
 									break;
-								
+
 								default:
 									contador1++;
 								}
+							}
+
 						}
-						
-					}
-						
-					}
-					
-				// if(indiceFila!=0)modeloT.addRow(listaColumna);
 
-				System.out.println("Estos son los datos del egresado en el mapa: "+egresado.toString());
-				if (egresadoEs&&valorCelda.equals("EN FORMACION")) {
-					mapaEgresados.put(egresado.getIdEgresado(), egresado);
-					
-					daoEgresado=new EgresadoDao();
-					numeroFichaDao=new NumeroFichaDao();
-				
-						
-						try{							
-							
-							if(daoEgresado.registrar(egresado)){
-								
-						
+					}
+
+					// if(indiceFila!=0)modeloT.addRow(listaColumna);
+
+					System.out.println("Estos son los datos del egresado en el mapa: " + egresado.toString());
+					if (egresadoEs && valorCelda.equals("EN FORMACION")) {
+						mapaEgresados.put(egresado.getIdEgresado(), egresado);
+
+						daoEgresado = new EgresadoDao();
+						numerofichaEgresadoDao=new NumerofichaEgresadoDao();
+
+						try {
+
+							if (daoEgresado.registrar(egresado)) {
+
 								System.out.println("estamos en registrar egresado ");
-								
-								
+
 								msj.info("Egresado registrado satisfactoriamente");
-								
-							}else{
-								
-								
+
+								numeroFichaEgresado = new NumeroFichaEgresado(egresado, numeroFicha);
+
+								if (numerofichaEgresadoDao.registrar(numeroFichaEgresado)) {
+
+									System.out.println("registro ficha y relacion con el egresado ");
+								} else {
+
+									System.out.println("No registro numero de ficha");
+								}
+
+							} else {
+
 								System.out.println("No se pudo registrar egresado ");
+
 								msj.error("No se pudo registrar al egresado");
-								
-							}
-							
-							numeroFicha=new NumeroFicha( programaFormacion, fichaFormacion);
-							
-	                         if(numeroFichaDao.registrar(numeroFicha)){
-								
-								System.out.println("registro numero de ficha ");
-
-							}else {
-								
-								System.out.println("no registro numero de ficha ");
 
 							}
-						
-							
-						}catch(Exception e){
-							
+
+						} catch (Exception e) {
+
 							System.out.println(e.getMessage());
 							System.out.println("No en formacion");
-							
-							
+
 						}
-				}
-				if (valorCelda.equals("Estado")) {
 
-					egresadoEs = true;
-					contador++;
-					
+					}
+					if (valorCelda.equals("Estado")) {
+
+						egresadoEs = true;
+						contador++;
+
+					}
+					if (valorCelda.equals("Ficha de Caracterización:")) {
+
+						nivelFormacion = true;
+
+					}
+
 				}
-				if(valorCelda.equals("Ficha de Caracterización:")){
-					
-					nivelFormacion=true;
-					
+
+				// Recorremos el hashMap y mostramos por pantalla el par valor y
+				// clave
+				Iterator it = mapaEgresados.entrySet().iterator();
+				while (it.hasNext()) {
+					Map.Entry e = (Map.Entry) it.next();
+					System.out.println(e.getKey() + " " + e.getValue().toString());
+
+					System.out.println("tamaño del mapa: " + mapaEgresados.size());
 				}
+			}
+				try{
 				
-			}
-
-			
-
-			// Recorremos el hashMap y mostramos por pantalla el par valor y
-			// clave
-			Iterator it = mapaEgresados.entrySet().iterator();
-			while (it.hasNext()) {
-				Map.Entry e = (Map.Entry) it.next();
-				System.out.println(e.getKey() + " " + e.getValue().toString());
-
-				System.out.println("tamaño del mapa: " + mapaEgresados.size());
-			}
+				
+				if (fil != null)
+					System.out.println("cerro el archivo");
+					fil.close();
+				
+			}catch (Exception e) {
+				
+				e.printStackTrace();
 			}
 
 		} catch (
@@ -468,7 +480,63 @@ public class FileUploadView {
 		} catch (IOException | InvalidFormatException | EncryptedDocumentException e) {
 			System.err.println(e.getMessage());
 		}
-	
-	}
 
 	}
+
+	public TipoTitulacion getTipoTitulacion2() {
+		return tipoTitulacion2;
+	}
+
+	public void setTipoTitulacion2(TipoTitulacion tipoTitulacion2) {
+		this.tipoTitulacion2 = tipoTitulacion2;
+	}
+
+	public NumeroFichaEgresado getNumeroFichaEgresado() {
+		return numeroFichaEgresado;
+	}
+
+	public void setNumeroFichaEgresado(NumeroFichaEgresado numeroFichaEgresado) {
+		this.numeroFichaEgresado = numeroFichaEgresado;
+	}
+
+	public String getNombreFormacion() {
+		return nombreFormacion;
+	}
+
+	public void setNombreFormacion(String nombreFormacion) {
+		this.nombreFormacion = nombreFormacion;
+	}
+
+	public NumerofichaEgresadoDao getNumerofichaEgresadoDao() {
+		return numerofichaEgresadoDao;
+	}
+
+	public void setNumerofichaEgresadoDao(NumerofichaEgresadoDao numerofichaEgresadoDao) {
+		this.numerofichaEgresadoDao = numerofichaEgresadoDao;
+	}
+
+	public ArrayList<DocumentModel> getDocumentList() {
+		return documentList;
+	}
+
+	public void setDocumentList(ArrayList<DocumentModel> documentList) {
+		FileUploadView.documentList = documentList;
+	}
+
+	public UploadedFile getFile() {
+		return file;
+	}
+
+	public void setFile(UploadedFile file) {
+		this.file = file;
+	}
+
+	public Egresado getEgresado() {
+		return egresado;
+	}
+
+	public void setEgresado(Egresado egresado) {
+		this.egresado = egresado;
+	}
+
+}

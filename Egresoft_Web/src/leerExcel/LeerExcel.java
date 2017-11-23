@@ -40,7 +40,7 @@ import mensajes.MessagesView;
 
 @ManagedBean
 @RequestScoped
-
+    // Esta clase es solo para pruebas con excel ***************No realiza ninguna funcionalida en la pagina
 public class LeerExcel {
 
 	Workbook wb;
@@ -359,8 +359,8 @@ public class LeerExcel {
 							
 					
 							System.out.println("estamos en registrar egresado ");
+						
 							//msj.info("Egresado registrado satisfactoriamente");
-							
 							
 							numeroFichaEgresado=new NumeroFichaEgresado(egresado, numeroFicha);
 							
@@ -378,6 +378,7 @@ public class LeerExcel {
 							
 							
 							System.out.println("No se pudo registrar egresado ");
+							
 							//msj.error("No se pudo registrar al egresado");
 							
 						}
