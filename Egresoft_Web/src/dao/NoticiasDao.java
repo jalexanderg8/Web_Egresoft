@@ -64,7 +64,7 @@ public class NoticiasDao {
 					notiEvento.setIdNoticia(resultado.getInt(1));
 					notiEvento.setNombreNoticia(resultado.getString(2));
 					notiEvento.setDescripcionNoticia(resultado.getString(3));
-					notiEvento.setImagenNoticia("/resources/imgBD/"+resultado.getString(4));
+					notiEvento.setImagenNoticia("http://localhost/imgBD/"+resultado.getString(4));
 					
 			    	listaNotiEventos.add(notiEvento);
 					

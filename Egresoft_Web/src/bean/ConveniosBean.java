@@ -64,10 +64,8 @@ public class ConveniosBean {
 	
         
     	try {
-FileOutputStream fos = new FileOutputStream("C:\\Git\\.git\\Web_Egresoft\\Web_Egresoft\\Egresoft_Web\\WebContent\\resources\\imgBD\\"+this.file.getFileName());
-    		//FileOutputStream fos = new FileOutputStream("D:\\RepositorioEgresoft\\Web_Egresoft\\Egresoft_Web\\WebContent\\resources\\imgBD\\"+this.file.getFileName());
-    		//FileOutputStream fos = new FileOutputStream("C:\\Users\\junior\\git\\Web_Egresoft1\\Egresoft_Web\\WebContent\\resources\\imgBD\\"+this.file.getFileName());
     		
+    		  FileOutputStream fos = new FileOutputStream("C:\\xampp\\htdocs\\imgBD\\"+this.file.getFileName());
     		
 			fos.write(file.getContents());
 			fos.flush();

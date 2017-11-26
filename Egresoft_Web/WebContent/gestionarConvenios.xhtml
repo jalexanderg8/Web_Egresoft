@@ -14,12 +14,11 @@
 			<f:metadata>
 				<f:event listener="#{logicaNavegacion.verificarSesionAdmin()}"
 					type="preRenderView"></f:event>		<!-- hace la verificacion de la sesion -->
-			</f:metadata>
-	
-			<f:metadata>
-				<f:event listener="#{conveniosBean.consultar()}"
+					
+						<f:event listener="#{conveniosBean.consultar()}"
 					type="preRenderView"></f:event>			<!-- llena la lista para que el la vea en el datatable -->
 			</f:metadata>
+				
 		</h:head>
 		<h:body>
 

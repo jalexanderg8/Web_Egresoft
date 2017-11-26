@@ -126,7 +126,7 @@ public class AdminDao {
 		public void setListaAdministradores(List<Administrador> listaAdministradores) {
 			this.listaAdministradores = listaAdministradores;
 		}
-		
+		/*
 		public Administrador consultarAdmin(String nombreUsuario, String contrasena) {
 			System.out.println("Entro al dao a buscar un usuario por nombre y contraseña ");
 			Administrador admin = null;
@@ -156,30 +156,27 @@ public class AdminDao {
 				s.close();
 			}
 			return admin;
-		}
-		/*public Administrador consultarAdmin(String Usuario,String Contraseña){
+		}*/
+		
+		//inicio de sesion 
+		public boolean consultarAdmin(String Usuario,String Contraseña){
 			String contraseña="";
 			String usuario="";	
 			Conexion conexion=new Conexion();
 				
 			try {
 				System.out.println("en el try");
-				//PreparedStatement consulta = (PreparedStatement) conexion.getConnection().prepareStatement("SELECT * FROM administrador WHERE nombre_usuario_admin=? AND contrasena_admin=?");
 				PreparedStatement consulta = (PreparedStatement) conexion.getConnection().prepareStatement("SELECT * FROM administrador WHERE nombre_usuario_admin=? AND contrasena_admin=?");
 				consulta.setString(1, Usuario);
 				consulta.setString(2,Contraseña);		
 				ResultSet res = consulta.executeQuery();
 				System.out.println("despues de executeQyery");
-				 //JOptionPane.showMessageDialog(null, " Se ha Eliminado Correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
 				if (res.next())
 				{
 					 usuario=res.getString("nombre_usuario_admin");
 						contraseña=res.getString("contrasena_admin");
-				}				
-				System.out.println("dfespues de asignar valores a variables internas");
-		
+				}						
 				res.close();
-				System.out.println("cerró resultset");
 				conexion.desconectar();
 				System.out.println("cerro la BD");
 
@@ -194,6 +191,6 @@ public class AdminDao {
 				return false;
 			}
 			
-		}*/
+		}
 
 	}

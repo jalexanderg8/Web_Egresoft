@@ -122,18 +122,6 @@ public class EgresadoDao {
 					System.out.println("6");
 					
 					System.out.println("sentencia: "+consulta);
-					String datos="";
-					datos+="tel principal -"+egresado.getTelefonoPrincipal();
-					datos+="tel alterno - "+egresado.getTelefonoAlterno();
-					datos+="email alterno - "+egresado.getEmailAlterno();
-					datos+="modalidad -"+egresado.getModalidad();
-					datos+="residencia - "+egresado.getLugarResidencia();
-					datos+="contrato - "+egresado.getContrasena();
-					datos+="fecha inicio - "+((Date) fechaInicio);
-					datos+="fecha fin - "+((Date) fechaFin);
-					datos+="id - "+egresado.getIdEgresado();
-					System.out.println(datos);
-
 					
 					PreparedStatement statement = (PreparedStatement) conex.getConnection().prepareStatement(consulta);
 
@@ -287,8 +275,8 @@ public class EgresadoDao {
 			}
 			
 		}
-	
-	/*public Egresado consultarEgresado(String Usuario,String Contraseña){
+	// inicio de sesion
+	public boolean consultarEgresado(String Usuario,String Contraseña){
 	String contraseña="";
 	String usuario="";
 	
@@ -334,10 +322,10 @@ public class EgresadoDao {
 		return false;
 	}
 	
-}*/
+}
 
 	
-//CONSULTA PARA EL LOGIN
+/*//CONSULTA PARA EL LOGIN
 	public Egresado consultarEgresado(String emailPrincipal, String contrasena) {
 		System.out.println("Entro al dao a buscar un usuario por nombre y contraseña ");
 		Egresado egre = null;
@@ -367,7 +355,7 @@ public class EgresadoDao {
 			s.close();
 		}
 		return egre;
-	}
+	}*/
 	
 	
 	

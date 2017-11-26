@@ -71,7 +71,7 @@ public class ConveniosDao {
 				objConvenio.setIdConvenio(resultado.getInt(1));
 				objConvenio.setNombrelCovenio(resultado.getString(2));
 				objConvenio.setInfoConvenio(resultado.getString(3));
-				objConvenio.setImagenConvenio("/resources/imgBD/"+resultado.getString(4));
+				objConvenio.setImagenConvenio("http://localhost/imgBD/"+resultado.getString(4));
 				objConvenio.setPersonaContacto(resultado.getString(5));
 				
 				

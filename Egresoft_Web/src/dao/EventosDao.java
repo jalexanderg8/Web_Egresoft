@@ -69,7 +69,7 @@ public class EventosDao {
 				objEvento.setIdEvento(resultado.getInt(1));
 				objEvento.setNombreEvento(resultado.getString(2));
 				objEvento.setUrlRedireccion(resultado.getString(3));
-				objEvento.setImagenEvento("/resources/imgBD/"+resultado.getString(4));
+				objEvento.setImagenEvento("http://localhost/imgBD/"+resultado.getString(4));
 				objEvento.setDescripcionEvento(resultado.getString(5));
 				
 				

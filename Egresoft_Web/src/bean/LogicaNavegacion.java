@@ -22,8 +22,8 @@ public class LogicaNavegacion implements Serializable {
 	
 	AdminDao miAdminDao;
 	EgresadoDao miEgresadoDao;
-	Egresado egre=null;
-	Administrador admin=null;
+	boolean egre=false;
+	boolean admin=false;
 	
 	
 	private String contraseña;
@@ -46,7 +46,8 @@ public class LogicaNavegacion implements Serializable {
 		this.contraseña = contraseña;
 	}
 
-	public String iniciarSesion() throws Exception{
+public String iniciarSesion() throws Exception{
+
 		
 		System.out.println("en iniciar sesion  usuario "+usuario+" contraseña "+contraseña);
 		
@@ -56,10 +57,15 @@ public class LogicaNavegacion implements Serializable {
 		 miEgresadoDao=new EgresadoDao();
 		 miAdminDao=new AdminDao();
 		 
-		  egre=miEgresadoDao.consultarEgresado(usuario,contraseña);
+		 System.out.println("antes de el admin");
 		  admin=miAdminDao.consultarAdmin(usuario,contraseña);
+		  System.out.println("admin: "+admin);
+			 System.out.println("despues  de el admin y antes de egresado");
+		  egre=miEgresadoDao.consultarEgresado(usuario,contraseña);
+		  System.out.println("egre : "+egre);
+
 		 
-		 if (egre!=null) {
+		 if (egre==true) {
 		
 			 System.out.println("en la consulta egresado");
 			 redireccion="indexEgresado";
@@ -68,7 +74,7 @@ public class LogicaNavegacion implements Serializable {
 			 System.out.println("ya metio el usuario egresado");
 
 		 }
-		else if (admin!=null) {
+		else if (admin==true) {
 			 System.out.println("en la consulta admin");
 			 redireccion="indexAdmin";
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("admin", admin);
@@ -99,6 +105,11 @@ public class LogicaNavegacion implements Serializable {
 			 Administrador administrador= (Administrador) context.getExternalContext().getSessionMap().get("admin");	
 			
 				if (administrador==null) {
+					
+					//HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+					//response.sendRedirect("login.jsf");
+					
+					
 					context.getExternalContext().redirect("login.jsf");
 					System.out.println("usuario vacio validacion");
 					System.err.println("usuario admin: "+administrador);
@@ -107,6 +118,9 @@ public class LogicaNavegacion implements Serializable {
 				else{
 					System.err.println("usuario admin: "+administrador);
 
+					//context.getExternalContext().redirect("login.jsf");
+
+					
 					System.out.println("no esta vacio");
 				}
 		
@@ -142,6 +156,7 @@ public class LogicaNavegacion implements Serializable {
 			// TODO: handle exception
 		}
 	}
+
 
 	public void cerrarSesion() {
 
