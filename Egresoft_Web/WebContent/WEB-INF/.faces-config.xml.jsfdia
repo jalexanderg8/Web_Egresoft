@@ -1,2 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<PROCESS model-entity="JSFProcess"/>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#login.xhtml" PATH="/login.xhtml"
+  SHAPE="112,88,50,25" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#login.xhtml:0" NAME="item"
+   PATH="/login.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="indexEgresado::#indexEgresado.xhtml"
+    NAME="output" PATH="/indexEgresado.xhtml"
+    TARGET="rules:#indexEgresado.xhtml" TITLE="indexEgresado" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="indexAdmin::#indexAdmin.xhtml"
+    NAME="output1" PATH="/indexAdmin.xhtml"
+    TARGET="rules:#indexAdmin.xhtml" TITLE="indexAdmin" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#indexAdmin.xhtml" PATH="/indexAdmin.xhtml"
+  SHAPE="440,176,50,25" model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#indexEgresado.xhtml"
+  PATH="/indexEgresado.xhtml" SHAPE="421,37,0,0"
+  model-entity="JSFProcessGroup" persistent="true"/>
+</PROCESS>

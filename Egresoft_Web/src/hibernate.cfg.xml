@@ -11,8 +11,8 @@
         <property name="hibernate.validator.apply_to_ddl">false</property>
         <mapping class="entidades.Egresado"/>
         <mapping class="entidades.Convenio"/>
-        <mapping class="entidades.Vistaegresado"/>
         <mapping class="entidades.Noticia"/>
+        <mapping class="entidades.Vistaegresados"/>
         <mapping class="entidades.NumeroFichaEgresado"/>
         <mapping class="entidades.NumeroFicha"/>
         <mapping class="entidades.ConfirmarEvento"/>

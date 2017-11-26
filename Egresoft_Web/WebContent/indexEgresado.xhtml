@@ -17,6 +17,7 @@
 
 	</f:metadata>
 	<link rel="stylesheet" href="resources/css/main.css" />
+
 </h:head>
 
 <ui:composition xmlns:p="http://primefaces.org/ui"
@@ -72,39 +73,36 @@
 			<br />
 
 			<!-- PORTAL CONVENIOS -->
+			<div class="container">
+				<div class="row">
+					<div id="convenios">
+						<ui:include src="/Egresado_Convenios.xhtml">
+							<ui:define name="convenios_egresado">
+							</ui:define>
+						</ui:include>
+					</div>
+				</div>
+				</div>
 
-			<div id="convenios">
-				<div class="container">
-					<ui:include src="/Egresado_Convenios.xhtml">
-						<ui:define name="convenios_egresado">
+			
+
+			<!--            Eventos-->
+			<div class="container">
+			<div id="eventos">
+				<div class="row">
+					<ui:include src="/Egresado_Eventos.xhtml">
+						<ui:define name="Egresado_Eventos">
+
 						</ui:define>
 					</ui:include>
 				</div>
-
-				<br /> <br /> <br /> <br />
 			</div>
-
-			<!--            Eventos-->
-			<div id="eventos">
-				<div class="container">
-				<ui:include src="/Egresado_Eventos.xhtml">
-					<ui:define name="Egresado_Eventos">
-
-					</ui:define>
-				</ui:include>
-				</div>
 			</div>
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
+		
 
 			<!-- 			NOTICIAS-->
 
+<div class="container">
 			<div id="noticias">
 				<ui:include src="/Egresado_Noticias.xhtml">
 					<ui:define name="Egresado_Noticias">
@@ -112,18 +110,12 @@
 					</ui:define>
 				</ui:include>
 			</div>
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
+			</div>
+
 
 
 			<!-- 	PORTAL DESARROLLADORES-->
-
+	<div class="titulo">
 			<div class="desarrolladores" id="desarrolladores">
 				<h3 class="green-text text-darken-5 center-align">Desarrolladores
 					de Egresoft</h3>
@@ -167,14 +159,7 @@
 
 				</div>
 			</div>
-
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
+</div>
 			<!-- 	PORTAL LABORAL-->
 
 			<div id="P_lABORAL">
@@ -198,7 +183,6 @@
 					</ui:define>
 				</ui:include>
 			</div>
-
 
 			<script type="text/javascript"
 				src="resources/js/jquery-3.2.1.min.js.js"></script>

@@ -31,7 +31,7 @@
 							<div class="input-field col s12 m8 ">
 								<i class="material-icons prefix">account_circle</i>
 
-								<p:inputText id="uno" value="#{egresadoBean.dniEgresado}" required="true">
+								<p:inputText id="uno"   value="#{vistaEgresadoBean.idEgresado}"  required="true">
 
 								</p:inputText>
 								<label for="uno">Numero De Documento</label>
@@ -40,7 +40,7 @@
 
 								<p:commandButton value="Buscar" icon="fa fa-fw fa-search"
 									update=":formularioConsulta:tablaConsulta"
-									actionListener="#{}">
+									actionListener="#{vistaEgresadoBean.bucarEgresado()}">
 
 								</p:commandButton>
 								<p:tooltip for="uno" value="Ingrese un numero de documento"
@@ -58,7 +58,7 @@
 					
 						<p:dataList id="tablaConsulta"
 							emptyMessage="No hay Egresado "
-							value="#{egresadoBean.egresadoAtributos}" var="egre">
+							value="#{vistaEgresadoBean.vistaEgresado}" var="egre">
 							<p:panel>
 							<div class="row">
 								<div class="input-field col s12 m8 ">
@@ -176,50 +176,81 @@
 							</div>
 							<div class="row">
 								<div class="input-field col s12 m8 ">
-									<i class="material-icons prefix">business_center</i>
+									<i class="material-icons prefix">account_balance</i>
 
 									<p:inputText id="once" disabled="true"
+										value="#{egre.tipoTitulacion}">
+
+									</p:inputText>
+									<label class="active" for="once">Tipo Titulacion</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 m8 ">
+									<i class="material-icons prefix">assignment</i>
+
+									<p:inputText id="doce" disabled="true"
+										value="#{egre.nombreFormacion}">
+
+									</p:inputText>
+									<label class="active" for="doce">Nombre de la Formacion</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 m8 ">
+									<i class="material-icons prefix">vpn_key</i>
+
+									<p:inputText id="trece" disabled="true"
+										value="#{egre.numeroDeFicha}">
+
+									</p:inputText>
+									<label class="active" for="trece">Numero de la Ficha</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 m8 ">
+									<i class="material-icons prefix">business_center</i>
+
+									<p:inputText id="catorce" disabled="true"
 										value="#{egre.modalidad}">
 
 									</p:inputText>
-									<label class="active" for="once">Modalidad</label>
+									<label class="active" for="catorce">Modalidad</label>
 								</div>
 							</div>
 							<div class="row">
 								<div class="input-field col s12 m8 ">
 									<i class="material-icons prefix">event_available</i>
 
-									<p:inputText id="doce" disabled="true"
+									<p:inputText id="quince" disabled="true"
 										value="#{egre.fechaInicio}">
 
 									</p:inputText>
-									<label class="active" for="doce">Fecha Inicio
-										Formacion</label>
+									<label class="active" for="quince">Fecha Inicio Formacion</label>
 								</div>
 							</div>
 							<div class="row">
 								<div class="input-field col s12 m8 ">
 									<i class="material-icons prefix">event_busy</i>
 
-									<p:inputText id="trece" disabled="true"
+									<p:inputText id="dieciseis" disabled="true"
 										value="#{egre.fechaFin}">
 
 									</p:inputText>
-									<label class="active" for="trece">Fecha Fin Formacion</label>
+									<label class="active" for="dieciseis">Fecha Fin Formacion</label>
 								</div>
 							</div>
 							<p:spacer width="230px" height="10px"></p:spacer>
 							<p:commandButton value="Modificar" icon="fa fa-fw fa-edit"
 								oncomplete="PF('dialogModificar').show();"
-								update=":formModificar">
-								<f:setPropertyActionListener target="#{egresadoBean.egresado}"
-									value="#{egre}" />
+								update=":formModificar" action="#{vistaEgresadoBean.BuscarEgre()}">
+								
+								
 							</p:commandButton>
 							<p:spacer width="200px" height="10px"></p:spacer>
 							<p:commandButton value="Eliminar" icon="fa fa-fw fa-remove"
 								oncomplete="PF('dialogEliminar').show();" update=":formEliminar">
-								<f:setPropertyActionListener target="#{egresadoBean.egresado}"
-									value="#{egre}" />
+								
 							</p:commandButton>
 							
 							</p:panel>
@@ -231,99 +262,103 @@
 				<p:dialog id="dlgModificar" widgetVar="dialogModificar"
 					resizable="false" showEffect="explode" hideEffect="explode"
 					modal="true">
-					<p:panelGrid columns="6" style="margin: 0 auto;">
+					<p:dataList emptyMessage="No hay Informacion" value="#{vistaEgresadoBean.egresado}" var="egresa">
+					<p:panelGrid columns="2" >
 
 						<p:outputLabel value="tipo de Documento" />
-						<p:inputText value="#{egresadoBean.egresado.tipoDocumento}"
-							required="true">
+						<p:inputText value="#{egresa.tipoDocumento}"
+							required="true" disabled="true">
 
 						</p:inputText>
 
 
 						<p:outputLabel value="Numero de Documento" />
-						<p:inputText value="#{egresadoBean.egresado.idEgresado}"
-							required="true">
+						<p:inputText value="#{egresa.idEgresado}"
+							required="true" disabled="true">
 
 						</p:inputText>
 
 
 						<p:outputLabel value="Nombres" />
-						<p:inputText value="#{egresadoBean.egresado.nombres}"
-							required="true">
+						<p:inputText value="#{egresa.nombres}"
+							required="true" disabled="true">
 
 
 						</p:inputText>
 
 
 						<p:outputLabel value="Apellidos" />
-						<p:inputText value="#{egresadoBean.egresado.apellidos}"
-							required="true">
+						<p:inputText value="#{egresa.apellidos}"
+							required="true" disabled="true">
 
 						</p:inputText>
 
 
 						<p:outputLabel value="Telefono Principal" />
-						<p:inputText value="#{egresadoBean.egresado.telefonoPrincipal}">
+						<p:inputText value="#{egresa.telefonoPrincipal}">
 
 						</p:inputText>
 
 
-						<p:outputLabel value="Telefono Alterno" id="telefonoAlterno" />
-						<p:inputText value="#{egresadoBean.egresado.telefonoAlterno}">
+						<p:outputLabel value="Telefono Alterno" />
+						<p:inputText value="#{egresa.telefonoAlterno}">
 
 						</p:inputText>
 
 						<p:outputLabel value="Correo Principal" />
-						<p:inputText value="#{egresadoBean.egresado.emailPrincipal}"
-							required="true">
+						<p:inputText value="#{egresa.emailPrincipal}"
+							required="true" disabled="true">
 
 						</p:inputText>
 
 
 						<p:outputLabel value="Correo Alterno" />
-						<p:inputText value="#{egresadoBean.egresado.emailAlterno}">
+						<p:inputText value="#{egresa.emailAlterno}">
 
 						</p:inputText>
 
 
 						<p:outputLabel value="Contraseña" />
-						<p:inputText value="#{egresadoBean.egresado.contrasena}">
+						<p:inputText value="#{egresa.contrasena}">
 
 						</p:inputText>
 
 
 						<p:outputLabel value="Ciudad de Residencia" />
-						<p:inputText value="#{egresadoBean.egresado.lugarResidencia}">
+						<p:inputText value="#{egresa.lugarResidencia}">
 
 						</p:inputText>
+						
 
 
 						<p:outputLabel value="Modalidad" />
-						<p:inputText value="#{egresadoBean.egresado.modalidad}">
+						<p:inputText value="#{egresa.modalidad}">
 
 						</p:inputText>
 
 
 						<p:outputLabel value="Fecha Inicio Formacion" />
 						<p:calendar id="fechaInicio"
-							value="#{egresadoBean.egresado.fechaInicio}" pattern="dd-MM-yyyy"
+							value="#{egresa.fechaInicio}" pattern="dd-MM-yyyy"
 							mask="true" />
 
 
 						<p:outputLabel value="Fecha Fin Formacion" />
 						<p:calendar id="fechaFin"
-							value="#{egresadoBean.egresado.fechaFin}" pattern="dd-MM-yyyy"
+							value="#{egresa.fechaFin}" pattern="dd-MM-yyyy"
 							mask="true" />
 
 
-					</p:panelGrid>
+				
 					<p:commandButton value="Guardar"
-						actionListener="#{egresadoBean.editarEgresadoAdmin()}"
+						actionListener="#{vistaEgresadoBean.editar()}"
 						update=":formularioConsulta:tablaConsulta"
 						oncomplete="PF('dialogModificar').hide();" />
 
 					<p:commandButton value="Cancelar"
 						onclick="PF('dialogModificar').hide();" />
+						</p:panelGrid>
+						</p:dataList>
 				</p:dialog>
 			</h:form>
 			<h:form id="formEliminar">
@@ -332,10 +367,12 @@
 						modal="true">
 						<h:outputText value="Desea eliminar este registro?" />
 						<p:commandButton value="SI"
-							actionListener="#{egresadoBean.eliminarEgresado()}"
+							actionListener="#{vistaEgresadoBean.eliminar()}"
 							update=":formularioConsulta:tablaConsulta"
 							oncomplete="PF('dialogEliminar').hide();" />
 						<p:commandButton value="No" onclick="PF('dialogEliminar').hide();" />
+						
+						
 					</p:dialog>
 			</h:form>
 		</div>

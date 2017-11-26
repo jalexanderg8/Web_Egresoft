@@ -2,4 +2,15 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
 
 <hibernate-reverse-engineering>
+  <table-filter match-catalog="egresoft" match-name="administrador"/>
+  <table-filter match-catalog="egresoft" match-name="confirmar_evento"/>
+  <table-filter match-catalog="egresoft" match-name="convenio"/>
+  <table-filter match-catalog="egresoft" match-name="egresado"/>
+  <table-filter match-catalog="egresoft" match-name="evento"/>
+  <table-filter match-catalog="egresoft" match-name="noticia"/>
+  <table-filter match-catalog="egresoft" match-name="numero_ficha"/>
+  <table-filter match-catalog="egresoft" match-name="numero_ficha_egresado"/>
+  <table-filter match-catalog="egresoft" match-name="programa_formacion"/>
+  <table-filter match-catalog="egresoft" match-name="tipo_titulacion"/>
+  <table-filter match-catalog="egresoft" match-name="vistaegresados"/>
 </hibernate-reverse-engineering>

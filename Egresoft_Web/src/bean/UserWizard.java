@@ -92,7 +92,7 @@ public class UserWizard implements Serializable {
 				
 			} else {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
-						"numero no registrado en este sistema... ", "registrese"));
+						"Parce ud no existe en este sistema... ", "registrece"));
 				evento = antes;
 			}
 

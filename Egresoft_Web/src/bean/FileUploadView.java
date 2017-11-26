@@ -43,7 +43,9 @@ import mensajes.MessagesView;
 public class FileUploadView {
 
 	String ruta = "C:\\Servidores_de_Aplicaciones\\wildfly-10.1.0.Final\\standalone\\deployments\\Egresoft_Web.war\\resources\\archivosExcel\\";
+	//String ruta = "C:\\archivoExcel\\";
 
+	
 	Workbook wb;
 	private TipoTitulacion tipoTitulacion;
 	private TipoTitulacion tipoTitulacion2;
@@ -156,6 +158,8 @@ public class FileUploadView {
 		UploadedFile file = event.getFile();
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 		String filePath = ec.getRealPath(String.format("/resources/archivosExcel/%s", file.getFileName()));
+		//String filePath = ec.getRealPath(String.format("/archivoExcel/%s", file.getFileName()));
+
 		try {
 			FileOutputStream fos = new FileOutputStream(filePath);
 			fos.write(file.getContents());

@@ -1,6 +1,11 @@
 *{
 	margin:0;
+	box-sizing: border-box;
 }
+.titulo{
+	padding-top: 5em;
+}
+
 body{
 	display:flex;
 	min-height:100vh;
@@ -86,8 +91,8 @@ background-image: url("imagenes/fondoEgresoft.jpg");
 	color:#ffab40;
 }
 .back{
-	background-image: url("../imagenes/fondoEgresoft.jpg");
-	background-size: 100%;
-	
+	background-image: url("../imagenes/fondo.png");
+	background-size: 35%;
+	 background-repeat: no-repeat;
 }
 

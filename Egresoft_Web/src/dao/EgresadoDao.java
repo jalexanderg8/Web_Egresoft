@@ -440,6 +440,33 @@ public class EgresadoDao {
 	public void setEgresadoMail(Egresado egresadoMail) {
 		this.egresadoMail = egresadoMail;
 	}
+	public void eliminarEgresado(long idEgresado) {
+		
+		Conexion con=new Conexion();
+		System.out.println("estamos en eliminar egresado ");
+		try{
+			
+			String consulta="DELETE FROM egresoft.numero_ficha_egresado WHERE idEgresado="+idEgresado;
+			String consulta1="DELETE FROM egresoft.egresado WHERE idEgresado="+idEgresado;
+			
+			PreparedStatement statement = (PreparedStatement) con.getConnection().prepareStatement(consulta);
+			PreparedStatement statement1 = (PreparedStatement) con.getConnection().prepareStatement(consulta1);
+			
+			statement.executeUpdate();
+			statement1.executeUpdate();
+			
+			statement.close();
+			statement1.close();
+			
+			con.desconectar();
+			System.out.println("realizo la eliminacion");
+			
+		}catch (Exception e) {
+			
+			System.out.println("no realizo la eliminacion"+e.getMessage());
+			
+		}
+	}
 	
 	
 }
