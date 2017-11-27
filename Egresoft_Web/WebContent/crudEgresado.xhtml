@@ -20,10 +20,10 @@
 				la Gestion de Datos de Egresados</h4>
 
 			<br></br>
-			
-				<div class="container">
-                    <h:form>
-                    <p:growl id="message" showDetail="true" />
+
+			<div class="container">
+				<h:form>
+					<p:growl id="message" showDetail="true" />
 					<p:messages id="messages" showDetail="true" autoUpdate="true"
 						closable="true" severity="error,fatal,info,warn" life="5200" />
 					<p:panel>
@@ -31,7 +31,8 @@
 							<div class="input-field col s12 m8 ">
 								<i class="material-icons prefix">account_circle</i>
 
-								<p:inputText id="uno"   value="#{vistaEgresadoBean.idEgresado}"  required="true">
+								<p:inputText id="uno" value="#{vistaEgresadoBean.idEgresado}"
+									required="true">
 
 								</p:inputText>
 								<label for="uno">Numero De Documento</label>
@@ -49,17 +50,22 @@
 
 							</div>
 						</div>
-						
+
 					</p:panel>
-					</h:form>
-					<br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-					<p:spacer width="10px" height="10px"></p:spacer>
-					<h:form id="formularioConsulta">
-					
-						<p:dataList id="tablaConsulta"
-							emptyMessage="No hay Egresado "
-							value="#{vistaEgresadoBean.vistaEgresado}" var="egre">
-							<p:panel>
+				</h:form>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<p:spacer width="10px" height="10px"></p:spacer>
+				<h:form id="formularioConsulta">
+
+					<p:dataList id="tablaConsulta" emptyMessage="No hay Egresado "
+						value="#{vistaEgresadoBean.vistaEgresado}" var="egre">
+						<p:panel>
 							<div class="row">
 								<div class="input-field col s12 m8 ">
 									<i class="material-icons prefix">fingerprint</i>
@@ -148,8 +154,7 @@
 										value="#{egre.emailAlterno}">
 
 									</p:inputText>
-									<label class="active" for="ocho">Email Alterno
-										Egresado</label>
+									<label class="active" for="ocho">Email Alterno Egresado</label>
 								</div>
 							</div>
 							<div class="row">
@@ -226,7 +231,8 @@
 										value="#{egre.fechaInicio}">
 
 									</p:inputText>
-									<label class="active" for="quince">Fecha Inicio Formacion</label>
+									<label class="active" for="quince">Fecha Inicio
+										Formacion</label>
 								</div>
 							</div>
 							<div class="row">
@@ -237,131 +243,138 @@
 										value="#{egre.fechaFin}">
 
 									</p:inputText>
-									<label class="active" for="dieciseis">Fecha Fin Formacion</label>
+									<label class="active" for="dieciseis">Fecha Fin
+										Formacion</label>
 								</div>
 							</div>
 							<p:spacer width="230px" height="10px"></p:spacer>
 							<p:commandButton value="Modificar" icon="fa fa-fw fa-edit"
 								oncomplete="PF('dialogModificar').show();"
-								update=":formModificar" action="#{vistaEgresadoBean.BuscarEgre()}">
-								
-								
+								update=":formModificar"
+								action="#{vistaEgresadoBean.BuscarEgre()}">
+
+
 							</p:commandButton>
 							<p:spacer width="200px" height="10px"></p:spacer>
 							<p:commandButton value="Eliminar" icon="fa fa-fw fa-remove"
 								oncomplete="PF('dialogEliminar').show();" update=":formEliminar">
-								
+
 							</p:commandButton>
-							
-							</p:panel>
+
+						</p:panel>
+					</p:dataList>
+
+				</h:form>
+
+				<h:form id="formModificar">
+					<p:dialog id="dlgModificar" widgetVar="dialogModificar"
+						resizable="false" showEffect="explode" hideEffect="explode"
+						modal="true" >
+						<p:dataList emptyMessage="No hay Informacion"
+							value="#{vistaEgresadoBean.egresado}" var="egresa">
+							<p:panelGrid columns="2" >
+
+								<p:outputLabel value="tipo de Documento" />
+								<p:inputText value="#{egresa.tipoDocumento}" style="width: 400px;" required="true"
+									disabled="true">
+
+								</p:inputText>
+
+
+								<p:outputLabel value="Numero de Documento" />
+								<p:inputText value="#{egresa.idEgresado}" style="width: 400px;" required="true"
+									disabled="true">
+
+								</p:inputText>
+
+
+								<p:outputLabel value="Nombres" />
+								<p:inputText value="#{egresa.nombres}" style="width: 400px;" required="true"
+									disabled="true">
+
+
+								</p:inputText>
+
+
+								<p:outputLabel value="Apellidos" />
+								<p:inputText value="#{egresa.apellidos}" style="width: 400px;" required="true"
+									disabled="true">
+
+								</p:inputText>
+
+
+								<p:outputLabel value="Telefono Principal" />
+								<p:inputText value="#{egresa.telefonoPrincipal}" style="width: 400px;">
+
+								</p:inputText>
+
+
+								<p:outputLabel value="Telefono Alterno" />
+								<p:inputText value="#{egresa.telefonoAlterno}" style="width: 400px;">
+
+								</p:inputText>
+
+								<p:outputLabel value="Correo Principal" />
+								<p:inputText value="#{egresa.emailPrincipal}" style="width: 400px;" required="true">
+
+								</p:inputText>
+
+
+								<p:outputLabel value="Correo Alterno" />
+								<p:inputText value="#{egresa.emailAlterno}" style="width: 400px;">
+
+								</p:inputText>
+
+
+								<p:outputLabel value="Contraseña" />
+								<p:inputText value="#{egresa.contrasena}" style="width: 400px;">
+
+								</p:inputText>
+
+
+								<p:outputLabel value="Ciudad de Residencia" />
+								<p:inputText value="#{egresa.lugarResidencia}" style="width: 400px;">
+
+								</p:inputText>
+								
+								
+
+
+
+								<p:outputLabel value="Modalidad" />
+								<p:selectOneMenu id="modalidad" 
+									value="#{egresa.modalidad}">
+									
+									<f:selectItem itemValue="PRESENCIAL" itemLabel="PRESENCIAL" />
+									<f:selectItem itemValue="COMBINADA" itemLabel="COMBINADA" />
+									<f:selectItem itemValue="VIRTUAL" itemLabel="VIRTUAL" />
+									<f:selectItem itemValue="A DISTANCIA" itemLabel="A DISTANCIA" />
+								</p:selectOneMenu>
+								
+
+								<p:outputLabel value="Fecha Inicio Formacion" />
+								<p:calendar id="fechaInicio" value="#{egresa.fechaInicio}"
+									pattern="dd-MM-yyyy" mask="true" />
+
+
+								<p:outputLabel value="Fecha Fin Formacion" />
+								<p:calendar id="fechaFin" value="#{egresa.fechaFin}"
+									pattern="dd-MM-yyyy" mask="true" />
+
+
+
+								<p:commandButton value="Guardar"
+									actionListener="#{vistaEgresadoBean.editar()}" icon="fa fa-hdd-o"
+									update=":formularioConsulta:tablaConsulta"
+									oncomplete="PF('dialogModificar').hide();" />
+
+								<p:commandButton value="Cancelar" icon="fa fa-window-close"
+									onclick="PF('dialogModificar').hide();" />
+							</p:panelGrid>
 						</p:dataList>
-				
-			</h:form>
-
-			<h:form id="formModificar">
-				<p:dialog id="dlgModificar" widgetVar="dialogModificar"
-					resizable="false" showEffect="explode" hideEffect="explode"
-					modal="true">
-					<p:dataList emptyMessage="No hay Informacion" value="#{vistaEgresadoBean.egresado}" var="egresa">
-					<p:panelGrid columns="2" >
-
-						<p:outputLabel value="tipo de Documento" />
-						<p:inputText value="#{egresa.tipoDocumento}"
-							required="true" disabled="true">
-
-						</p:inputText>
-
-
-						<p:outputLabel value="Numero de Documento" />
-						<p:inputText value="#{egresa.idEgresado}"
-							required="true" disabled="true">
-
-						</p:inputText>
-
-
-						<p:outputLabel value="Nombres" />
-						<p:inputText value="#{egresa.nombres}"
-							required="true" disabled="true">
-
-
-						</p:inputText>
-
-
-						<p:outputLabel value="Apellidos" />
-						<p:inputText value="#{egresa.apellidos}"
-							required="true" disabled="true">
-
-						</p:inputText>
-
-
-						<p:outputLabel value="Telefono Principal" />
-						<p:inputText value="#{egresa.telefonoPrincipal}">
-
-						</p:inputText>
-
-
-						<p:outputLabel value="Telefono Alterno" />
-						<p:inputText value="#{egresa.telefonoAlterno}">
-
-						</p:inputText>
-
-						<p:outputLabel value="Correo Principal" />
-						<p:inputText value="#{egresa.emailPrincipal}"
-							required="true" disabled="true">
-
-						</p:inputText>
-
-
-						<p:outputLabel value="Correo Alterno" />
-						<p:inputText value="#{egresa.emailAlterno}">
-
-						</p:inputText>
-
-
-						<p:outputLabel value="Contraseña" />
-						<p:inputText value="#{egresa.contrasena}">
-
-						</p:inputText>
-
-
-						<p:outputLabel value="Ciudad de Residencia" />
-						<p:inputText value="#{egresa.lugarResidencia}">
-
-						</p:inputText>
-						
-
-
-						<p:outputLabel value="Modalidad" />
-						<p:inputText value="#{egresa.modalidad}">
-
-						</p:inputText>
-
-
-						<p:outputLabel value="Fecha Inicio Formacion" />
-						<p:calendar id="fechaInicio"
-							value="#{egresa.fechaInicio}" pattern="dd-MM-yyyy"
-							mask="true" />
-
-
-						<p:outputLabel value="Fecha Fin Formacion" />
-						<p:calendar id="fechaFin"
-							value="#{egresa.fechaFin}" pattern="dd-MM-yyyy"
-							mask="true" />
-
-
-				
-					<p:commandButton value="Guardar"
-						actionListener="#{vistaEgresadoBean.editar()}"
-						update=":formularioConsulta:tablaConsulta"
-						oncomplete="PF('dialogModificar').hide();" />
-
-					<p:commandButton value="Cancelar"
-						onclick="PF('dialogModificar').hide();" />
-						</p:panelGrid>
-						</p:dataList>
-				</p:dialog>
-			</h:form>
-			<h:form id="formEliminar">
+					</p:dialog>
+				</h:form>
+				<h:form id="formEliminar">
 					<p:dialog id="dlgEliminar" widgetVar="dialogEliminar"
 						resizable="false" showEffect="explode" hideEffect="explode"
 						modal="true">
@@ -371,11 +384,11 @@
 							update=":formularioConsulta:tablaConsulta"
 							oncomplete="PF('dialogEliminar').hide();" />
 						<p:commandButton value="No" onclick="PF('dialogEliminar').hide();" />
-						
-						
+
+
 					</p:dialog>
-			</h:form>
-		</div>
+				</h:form>
+			</div>
 
 			<!--  <script type="text/javascript"
 				src="resources/js/jquery-3.2.1.min.js.js"></script> -->

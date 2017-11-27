@@ -8,6 +8,7 @@
 	template="/templates/templateUsuario/UsuarioTemplate.xhtml">
 	<ui:define name="content">
 		<h:head></h:head>
+
 		<h:body>
 			<div class="container-fluid">
 
@@ -72,7 +73,7 @@
 													<h:outputText value="Correo Alterno:" />
 													<p:inputText id="correo"
 														value="#{egresadoBean.egresado.emailAlterno}"
-														placeholder="correo" 
+														placeholder="Correo Alterno"
 														title="El campo correo es requerido ejemplo: xxxx@domio.xx"
 														label="El campo correo es requerido ejemplo: xxxx@domio.xx">
 														<f:validateRegex
@@ -82,7 +83,7 @@
 													<h:outputText value="Teléfono Principal: " />
 													<p:inputText id="telefonoPrincipal"
 														value="#{egresadoBean.egresado.telefonoPrincipal}"
-														placeholder="telefono" 
+														placeholder="Numero de Celular Principal"
 														title="El telefono es requerido debe empezar por 3 y tener un total de 10 digitos"
 														label="El telefono es requerido debe empezar por 3
                                                      y tener un total de 10 digitos">
@@ -92,7 +93,7 @@
 													<h:outputText value="Teléfono Alterno: " />
 													<p:inputText id="telefonoAlterno"
 														value="#{egresadoBean.egresado.telefonoAlterno}"
-														placeholder="telefono" 
+														placeholder="Numero de Celular alterno"
 														title="El telefono es requerido debe empezar por 3 y tener un total de 10 digitos"
 														label="El telefono es requerido debe empezar por 3
                                                      y tener un total de 10 digitos">
@@ -100,25 +101,40 @@
 													</p:inputText>
 
 
-													<h:outputText value="Lugar de Residencia: " />
+													<h:outputText value="Ciudad de Residencia: " />
 													<p:inputText
 														value="#{egresadoBean.egresado.lugarResidencia}"
-														placeholder="residencia" />
-														
+														placeholder="Ciudad de Residencia" />
+
 													<h:outputText value="Modalidad de la Formacion " />
-													<p:inputText
-														value="#{egresadoBean.egresado.modalidad}"
-														placeholder="modalidad" />
+													<p:selectOneMenu id="modalidad" required="true"
+														value="#{egresadoBean.egresado.modalidad}">
+														<f:selectItem itemValue=""
+															itemLabel="Seleccione Modalidad" />
+														<f:selectItem itemValue="PRESENCIAL"
+															itemLabel="PRESENCIAL" />
+														<f:selectItem itemValue="COMBINADA" itemLabel="COMBINADA" />
+														<f:selectItem itemValue="VIRTUAL" itemLabel="VIRTUAL" />
+														<f:selectItem itemValue="A DISTANCIA"
+															itemLabel="A DISTANCIA" />
+													</p:selectOneMenu>
 
 
-													<h:outputText value="Fecha Inicio Formacion " />
-													<p:calendar id="botonInicio" required="true"
-														value="#{egresadoBean.egresado.fechaInicio}"
-														showOn="button" />
-
-													<h:outputText value="Fecha Fin Formacion " />
-													<p:calendar id="botonFin" required="true"
-														value="#{egresadoBean.egresado.fechaFin}" showOn="button" />
+													<h:outputText value="Fecha inicio de la formacion" />
+													<p:calendar id="fechaInicio"
+														value="#{egresadoBean.egresado.fechaInicio}" 
+														monthNavigator="true" pattern="yyyy-MM-dd" locale="es"
+														 yearNavigator="true" yearRange="2000:2030"
+														effect="fold"  />
+																										
+											
+													<h:outputText value="Fecha Fin Formacion "  />
+													<p:calendar id="fechaFin" 
+														value="#{egresadoBean.egresado.fechaFin}" locale="es"
+														 monthNavigator="true" pattern="yyyy-MM-dd"
+														 yearNavigator="true" yearRange="2000:2030"
+														 effect="fold"  />
+													
 
 
 												</h:panelGrid>
@@ -138,27 +154,27 @@
 												<h:panelGrid columns="2" cellpadding="5">
 
 													<h:outputText value="Contraseña: " size="20"
-														required="true"
-														label="El campo Password es requerido, y Requiere una cadena de 6 a 
-                                                      20 caracteres con al menos un dígito, una letra mayúscula, una letra minúscula y un símbolo especial (@ # $%)" />
-													<h:inputSecret id="password"
-														title="El campo Password es requerido, y Requiere una cadena de 6 a 20 caracteres con al menos un dígito, una letra mayúscula, una letra minúscula y un símbolo especial (@ # $%)"
-														value="#{egresadoBean.egresado.contrasena}" size="20"
-														required="true"
-														label="El campo Contraseña es requerido, y Requiere una cadena de 6 a 20 caracteres con al menos un dígito, una letra mayúscula, una letra minúscula y un símbolo especial (@ # $%)">
+														required="true" />
 
-													</h:inputSecret>
+													<p:password id="password" feedback="true"
+														promptLabel="Ingrese una Contraseña" weakLabel="Debil"
+														goodLabel="Medio" strongLabel="Fuerte"
+														value="#{egresadoBean.egresado.contrasena}" size="20"
+														required="true">
+
+													</p:password>
 													<h:message for="password" style="color:red"></h:message>
 													<br />
 
 													<h:outputText value="Confirmar Contraseña: " />
-													<h:inputSecret id="confirmar"
+													<p:password id="confirmar" feedback="true"
+														promptLabel="Ingrese una Contraseña" weakLabel="Debil"
+														goodLabel="Medio" strongLabel="Fuerte"
 														value="#{userWizard.segundaContraseña}" size="20"
-														required="true"
-														title="El campo Password es requerido, y Requiere una cadena de 6 a 20 caracteres con al menos un dígito, una letra mayúscula, una letra minúscula y un símbolo especial (@ # $%)"
-														label="El campo Confirmar Contraseña es requerido, y Requiere una cadena de 6 a 20 caracteres con al menos un dígito, una letra mayúscula, una letra minúscula y un símbolo especial (@ # $%)">
+														required="true">
+														
 
-													</h:inputSecret>
+													</p:password>
 													<h:message for="confirmar" style="color:red"></h:message>
 
 												</h:panelGrid>
@@ -191,10 +207,9 @@
 												<h:inputText
 													value="#{egresadoBean.egresado.telefonoAlterno}"
 													styleClass="outputLabel" disabled="true" />
-													
+
 												<h:outputText value="6. Modalidad: " />
-												<h:inputText
-													value="#{egresadoBean.egresado.modalidad}"
+												<h:inputText value="#{egresadoBean.egresado.modalidad}"
 													styleClass="outputLabel" disabled="true" />
 
 											</h:panelGrid>
@@ -239,9 +254,10 @@
 				</p:panel>
 			</div>
 
-			<!--  <script type="text/javascript"
+			<!-- <script type="text/javascript"
 				src="resources/js/jquery-3.2.1.min.js.js"></script> -->
 			<script type="text/javascript" src="resources/js/materialize.js"></script>
+
 		</h:body>
 	</ui:define>
 </ui:composition>
