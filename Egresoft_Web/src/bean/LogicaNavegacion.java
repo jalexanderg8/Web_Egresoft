@@ -12,6 +12,7 @@ import dao.AdminDao;
 import dao.EgresadoDao;
 import entidades.Administrador;
 import entidades.Egresado;
+import mensajes.MessagesView;
 
 
 @ManagedBean
@@ -21,7 +22,10 @@ public class LogicaNavegacion implements Serializable {
 
 	
 	AdminDao miAdminDao;
+	Egresado egresado;
+	Administrador administrador;
 	EgresadoDao miEgresadoDao;
+	private MessagesView msj = new MessagesView();
 	boolean egre=false;
 	boolean admin=false;
 	
@@ -69,7 +73,7 @@ public String iniciarSesion() throws Exception{
 		
 			 System.out.println("en la consulta egresado");
 			 redireccion="indexEgresado";
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("egresado", egre);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("egresado", egre);			
 			
 			 System.out.println("ya metio el usuario egresado");
 
@@ -78,7 +82,7 @@ public String iniciarSesion() throws Exception{
 			 System.out.println("en la consulta admin");
 			 redireccion="indexAdmin";
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("admin", admin);
-			 
+			
 			 System.out.println("ya metio el usuarioa dministrador");
 			
 		}
@@ -172,4 +176,12 @@ public String iniciarSesion() throws Exception{
 			// TODO: handle exception
 		}
 	
+	}
+
+	public MessagesView getMsj() {
+		return msj;
+	}
+
+	public void setMsj(MessagesView msj) {
+		this.msj = msj;
 	}}

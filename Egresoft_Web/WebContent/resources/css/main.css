@@ -60,7 +60,7 @@ background-image: url("imagenes/fondoEgresoft.jpg");
   font-feature-settings: 'liga';
 }
 .iniciar{
-	 margin-left: 210px;
+	 margin-left: 185px;
 }
 #cerrar{
 	margin-right:30px;
@@ -95,4 +95,10 @@ background-image: url("imagenes/fondoEgresoft.jpg");
 	background-size: 35%;
 	 background-repeat: no-repeat;
 }
-
+.even {
+color: #333333;
+font-family: 'Lucida Console', Monaco, monospace;
+}
+#chipUno{
+	margin-left: 50px;
+}

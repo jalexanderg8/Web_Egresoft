@@ -1,15 +1,19 @@
 package bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.model.SelectItem;
 
 import dao.AdminDao;
 import dao.ProgramaDao;
+import dao.TipoTitulacionDao;
 import entidades.Administrador;
 import entidades.ProgramaFormacion;
+import entidades.TipoTitulacion;
 import mensajes.MessagesView;
 
 
@@ -26,6 +30,7 @@ public class NombreFormacionBean implements Serializable{
 		private List<ProgramaFormacion>listaProgramasFormacion;
 		private ProgramaDao proDao;
 		private MessagesView msj = new MessagesView();
+		private List<SelectItem>listaFormaciones;
 		
 		
 		public ProgramaFormacion getProgramaFormacion() {
@@ -94,6 +99,25 @@ public class NombreFormacionBean implements Serializable{
 
 		public void setMsj(MessagesView msj) {
 			this.msj = msj;
+		}
+
+		public List<SelectItem> getListaFormaciones() {
+			
+			this.listaFormaciones=new ArrayList<SelectItem>();
+			ProgramaDao t=new ProgramaDao();
+			List<ProgramaFormacion> p=t.listaProgramasFormacion();
+			listaFormaciones.clear();
+			
+			for(ProgramaFormacion programa:p){
+				
+				SelectItem tipoItem=new SelectItem(programa.getNombreFormacion());
+				this.listaFormaciones.add(tipoItem);
+			}
+			return listaFormaciones;
+		}
+
+		public void setListaFormaciones(List<SelectItem> listaFormaciones) {
+			this.listaFormaciones = listaFormaciones;
 		}
 
 		

@@ -25,29 +25,30 @@
 	<ui:define name="content">
 
 		<h:body>
-
+		<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" severity="error,fatal,info,warn" life="5200" />
 			<div class="row">
 				<div class="slider">
 					<ul class="slides">
 						<li><img src="resources/imagenes/Fachada.png" />
 							<div class="caption center-align">
-								<h3 class="teal-text text-accent-2">Eventos</h3>
+								<h1 class="orange-text orange-darken-2">Eventos</h1>
 							</div></li>
 						<li><img src="resources/imagenes/Lego2.png" />
 							<div class="caption center-align">
-								<h3 class="teal-text text-accent-2">Noticias</h3>
+								<h1 class="orange-text orange-darken-2">Noticias</h1>
 							</div></li>
 						<li><img src="resources/imagenes/Vive digital1.png" />
 							<div class="caption center-align">
-								<h3 class="teal-text text-accent-2">Convenios</h3>
+								<h1 class="orange-text orange-darken-2">Convenios</h1>
 							</div></li>
 						<li><img src="resources/imagenes/Sala instructores.png" />
 							<div class="caption center-align">
-								<h3 class="teal-text text-accent-2">Portales</h3>
+								<h1 class="orange-text orange-darken-2">Portales</h1>
 							</div></li>
 						<li><img src="resources/imagenes/Lego3.png" />
 							<div class="caption center-align">
-								<h3 class="teal-text text-accent-2">Egresados</h3>
+								<h1 class="orange-text orange-darken-2">Egresados</h1>
 							</div></li>
 					</ul>
 				</div>
@@ -82,84 +83,53 @@
 						</ui:include>
 					</div>
 				</div>
-				</div>
+			</div>
 
-			
+
 
 			<!--            Eventos-->
 			<div class="container">
-			<div id="eventos">
-				<div class="row">
-					<ui:include src="/Egresado_Eventos.xhtml">
-						<ui:define name="Egresado_Eventos">
+				<div id="eventos">
+					<div class="row">
+						<ui:include src="/Egresado_Eventos.xhtml">
+							<ui:define name="Egresado_Eventos">
+
+							</ui:define>
+						</ui:include>
+					</div>
+				</div>
+			</div>
+
+
+			<!-- 			NOTICIAS-->
+
+			<div class="container">
+				<div id="noticias">
+					<ui:include src="/Egresado_Noticias.xhtml">
+						<ui:define name="Egresado_Noticias">
 
 						</ui:define>
 					</ui:include>
 				</div>
 			</div>
-			</div>
-		
-
-			<!-- 			NOTICIAS-->
-
-<div class="container">
-			<div id="noticias">
-				<ui:include src="/Egresado_Noticias.xhtml">
-					<ui:define name="Egresado_Noticias">
-
-					</ui:define>
-				</ui:include>
-			</div>
-			</div>
 
 
 
 			<!-- 	PORTAL DESARROLLADORES-->
-	<div class="titulo">
-			<div class="desarrolladores" id="desarrolladores">
-				<h3 class="green-text text-darken-5 center-align">Desarrolladores
-					de Egresoft</h3>
-				<br /> <br />
-				<div class="row">
-					<div class="col s12 m4">
-						<div class="center promo">
-							<img src="resources/imagenes/img3.jpg"
-								class=" responsive-img circle" />
-							<h5>Jhon Jairo Hincapie</h5>
-							<p>Desarrollador</p>
-
-						</div>
-					</div>
-					<div class="col s12 m4">
-						<div class="center promo">
-							<img src="resources/imagenes/img2.jpg"
-								class=" responsive-img circle" />
-							<h5>Jaime Alexander Gomez</h5>
-							<p>Scrum Master</p>
-
-						</div>
-					</div>
-					<div class="col s12 m4">
-						<div class="center promo">
-							<img src="resources/imagenes/img1.jpg"
-								class=" responsive-img circle" />
-							<h5>Miguel Angel Henao hOYOS</h5>
-							<p>Desarrollador</p>
-
-						</div>
-					</div>
-					<div class="col s12 m4">
-						<div class="center">
-							<a href=""><img src="resources/imagenes/iconoAndroid.png"
-								alt="" /></a>
-							<p:link>descarga nuestra app</p:link>
-
-						</div>
-					</div>
-
-				</div>
+			<div id="desarrolladores">
+			
+			<ui:include src="/EgresadoDesarrolladores.xhtml" >
+			<ui:define name="desarrolladores">
+			
+			</ui:define>
+			</ui:include>
 			</div>
-</div>
+			<br />
+			<br />
+			<br />
+			<br />
+			
+			
 			<!-- 	PORTAL LABORAL-->
 
 			<div id="P_lABORAL">
@@ -187,6 +157,10 @@
 			<script type="text/javascript"
 				src="resources/js/jquery-3.2.1.min.js.js"></script>
 			<script type="text/javascript" src="resources/js/materialize.js"></script>
+			<script>
+			$('#chipUno').addClass("orange accent-3");
+
+			</script>
 		</h:body>
 	</ui:define>
 </ui:composition>

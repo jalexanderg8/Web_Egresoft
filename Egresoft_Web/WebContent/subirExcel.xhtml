@@ -20,7 +20,7 @@
 		<h:body>
 			<div class="container">
 
-				<h3>Carga de Base de Datos</h3>
+				<h4 class="green-text text-darken-5 center-align">Cargar base de datos</h4>
 
 					<br />
 					<br></br>
@@ -54,11 +54,11 @@
 
 
 
-							<p:column headerText="Nombre de Documento">
+							<p:column headerText="Nombre del Documento">
 								<h:outputText value="#{row.documentName}" />
 							</p:column>
 
-							<p:column headerText="Accion">
+							<p:column headerText="Acción">
 								<p:commandButton icon="fa fa-fw fa-remove"
 									value="Eliminar Archivo"
 									actionListener="#{fileUploadView.removeRow(row)}"
@@ -75,6 +75,7 @@
 			</div>
 			<!-- <script type="text/javascript" src="resources/js/jquery-3.2.1.min.js"></script> -->
 			<script type="text/javascript" src="resources/js/materialize.js"></script>
+		
 		</h:body>
 	</ui:define>
 </ui:composition>

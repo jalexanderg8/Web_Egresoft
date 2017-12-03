@@ -1,5 +1,5 @@
 package entidades;
-// Generated 25/11/2017 09:07:42 PM by Hibernate Tools 5.2.3.Final
+// Generated 3/12/2017 09:41:36 AM by Hibernate Tools 5.2.3.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -29,9 +29,8 @@ public class Evento implements java.io.Serializable {
 	public Evento() {
 	}
 
-	public Evento(String nombreEvento, String urlRedireccion, String imagenEvento, String descripcionEvento) {
+	public Evento(String nombreEvento, String imagenEvento, String descripcionEvento) {
 		this.nombreEvento = nombreEvento;
-		this.urlRedireccion = urlRedireccion;
 		this.imagenEvento = imagenEvento;
 		this.descripcionEvento = descripcionEvento;
 	}
@@ -66,7 +65,7 @@ public class Evento implements java.io.Serializable {
 		this.nombreEvento = nombreEvento;
 	}
 
-	@Column(name = "url_redireccion", nullable = false, length = 45)
+	@Column(name = "url_redireccion", length = 155)
 	public String getUrlRedireccion() {
 		return this.urlRedireccion;
 	}

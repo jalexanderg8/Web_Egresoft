@@ -1,5 +1,5 @@
 package entidades;
-// Generated 25/11/2017 09:07:42 PM by Hibernate Tools 5.2.3.Final
+// Generated 3/12/2017 09:41:36 AM by Hibernate Tools 5.2.3.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -191,7 +191,7 @@ public class VistaegresadosId implements java.io.Serializable {
 		this.numeroDeFicha = numeroDeFicha;
 	}
 
-	@Column(name = "nombre_formacion", nullable = false, length = 55)
+	@Column(name = "nombre_formacion", nullable = false, length = 105)
 	public String getNombreFormacion() {
 		return this.nombreFormacion;
 	}

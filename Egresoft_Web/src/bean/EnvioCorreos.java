@@ -28,6 +28,7 @@ import org.primefaces.component.api.UIData;
 
 import dao.EgresadoDao;
 import entidades.Egresado;
+import entidades.VistaegresadosId;
 import mensajes.MessagesView;
 import vo.CorreoVo;
 
@@ -232,7 +233,36 @@ public class EnvioCorreos implements Serializable {
 		this.msj = msj;
 	}
 
-	public void addCorreo(Egresado egre) {
+	public void addCorreo(VistaegresadosId egre) {
+
+		try {
+			//if (correoSeleccionado) {
+				//mapaCorreos.put(egresadoMail.getEmailPrincipal(), correoSeleccionado);
+				String summary = correoSeleccionado ? "Checked" : "Unchecked";
+				
+				if(summary.equals("Checked")){
+					System.out.println("entro a colocar un egresado en el mapa "+ egre.toString());
+					mapaCorreos.put(egre.getIdEgresado(), egre.getEmailPrincipal());
+					System.out.println("datos del mapa:");
+					imprimirMapa();
+				}else{
+					if(mapaCorreos.containsKey(egre.getIdEgresado())){
+						System.out.println("entro a remover un egresado en el mapa "+ egre.toString());
+						mapaCorreos.remove(egre.getIdEgresado());
+						System.out.println("datos del mapa:");
+						imprimirMapa();
+					}
+				}
+				msj.info("usuario seleccionado " + egre.getNombres() + " " + summary);
+			//}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	public void adicionarCorreo(Egresado egre) {
 
 		try {
 			//if (correoSeleccionado) {
@@ -319,5 +349,23 @@ public class EnvioCorreos implements Serializable {
 	public void setListaCorreos(List<Egresado> listaCorreos) {
 		this.listaCorreos = listaCorreos;
 	}
+
+	public Egresado getEgresadoMail() {
+		return egresadoMail;
+	}
+
+	public void setEgresadoMail(Egresado egresadoMail) {
+		this.egresadoMail = egresadoMail;
+	}
+
+	public boolean isSelectAllInvoices() {
+		return selectAllInvoices;
+	}
+
+	public void setSelectAllInvoices(boolean selectAllInvoices) {
+		this.selectAllInvoices = selectAllInvoices;
+	}
+	
+	
 
 }

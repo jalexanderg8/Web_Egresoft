@@ -26,29 +26,31 @@
 			</div>
 			
 			</div>
+			<p:messages autoUpdate="true" severity="error,fatal,info,warn"
+								closable="true" life="2000"></p:messages>
 				<h:panelGrid>
 
 
 
 					<h:form enctype="multipart/form-data">
-						<p:growl id="messages" showDetail="true" />
+						
 						<br></br>
 						<br></br>
 						<p:outputLabel>Imagen</p:outputLabel>
 						<p:spacer width="100px" height="10px"></p:spacer>
 						<p:fileUpload value="#{eventoBean.file}" mode="simple"
-							skinSimple="true" label="Escoger imagen" />
+							skinSimple="true" label="Seleccioné imagen" />
 
 						<br></br>
 						<br></br>
 						<p:outputLabel>Nombre del evento: </p:outputLabel>
-						<p:inputTextarea rows="1"
+						<p:inputTextarea rows="1" required="true" requiredMessage="Campo nombre del evento es obligatorio"
 							value="#{eventoBean.objEvento.nombreEvento}"></p:inputTextarea>
 
 						<br></br>
 						<br></br>
-						<p:outputLabel>Descripcion : </p:outputLabel>
-						<p:inputTextarea rows="1"
+						<p:outputLabel>Descripción : </p:outputLabel>
+						<p:inputTextarea rows="1" required="true" requiredMessage="Campo descrición del evento es obligatorio"
 							value="#{eventoBean.objEvento.descripcionEvento}"></p:inputTextarea>
 
 						<br></br>
@@ -64,7 +66,7 @@
 						<p:commandButton ajax="false" value="Guardar"
 							icon="fa fa-floppy-o" action="#{eventoBean.guardar()}"></p:commandButton>
 						<p:spacer width="50px" height="10px"></p:spacer>
-						<p:commandButton value="Cancelar" icon="fa fa-times-circle-o"></p:commandButton>
+						<p:button value="Cancelar" outcome="indexAdmin.jsf" icon="fa fa-times-circle-o"></p:button>
 
 					</h:form>
 				</h:panelGrid>
@@ -96,7 +98,7 @@
 
 						<p:column>
 							<f:facet name="header">
-								<h:outputText value="descripcion  de evento"></h:outputText>
+								<h:outputText value="descripción  del evento"></h:outputText>
 							</f:facet>
 							<p:outputLabel value="#{evento.descripcionEvento}"></p:outputLabel>
 						</p:column>
@@ -111,7 +113,7 @@
 
 						<p:column>
 							<f:facet name="header">
-								<h:outputText value="elimnar"></h:outputText>
+								<h:outputText value="eliminar"></h:outputText>
 							</f:facet>
 
 							<p:commandButton update="tabla"
@@ -127,6 +129,7 @@
 			<script type="text/javascript"
 				src="resources/js/jquery-3.2.1.min.js.js"></script>
 			<script type="text/javascript" src="resources/js/materialize.js"></script>
+		
 		</h:body>
 
 	</ui:define>

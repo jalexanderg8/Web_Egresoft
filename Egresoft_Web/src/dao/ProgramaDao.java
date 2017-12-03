@@ -18,7 +18,7 @@ public class ProgramaDao {
 		List<ProgramaFormacion> listaProgramasFormacion = null;
 		Session s = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = s.beginTransaction();
-		String consulta = "FROM Programa_formacion";
+		String consulta = "FROM ProgramaFormacion";
 
 		try {
 

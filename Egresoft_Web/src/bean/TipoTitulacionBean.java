@@ -1,11 +1,15 @@
 package bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.model.SelectItem;
+
+import org.hibernate.sql.Select;
 
 import dao.ProgramaDao;
 import dao.TipoTitulacionDao;
@@ -18,16 +22,15 @@ import mensajes.MessagesView;
 
 public class TipoTitulacionBean implements Serializable{
 	
-	@ManagedProperty("#{programaFormacionBean}")
-	private NombreFormacionBean nombreFormacionBean;
-
+	
 		private TipoTitulacion tipoTitulacion=new TipoTitulacion();
 		private List<TipoTitulacion>listaTipoTitulaciones;
 		private TipoTitulacionDao tipoDao;
 		private MessagesView msj = new MessagesView();
-		
+		private List<SelectItem>ListaTitulaciones;
 		
 
+		
 		public TipoTitulacion getTipoTitulacion() {
 			return tipoTitulacion;
 		}
@@ -94,6 +97,25 @@ public class TipoTitulacionBean implements Serializable{
 
 		public void setMsj(MessagesView msj) {
 			this.msj = msj;
+		}
+
+		public List<SelectItem> getListaTitulaciones() {
+			
+			this.ListaTitulaciones=new ArrayList<SelectItem>();
+			TipoTitulacionDao t=new TipoTitulacionDao();
+			List<TipoTitulacion> p=t.listaTipoTitulaciones();
+			ListaTitulaciones.clear();
+			
+			for(TipoTitulacion tipo:p){
+				
+				SelectItem tipoItem=new SelectItem(tipo.getTipoTitulacion());
+				this.ListaTitulaciones.add(tipoItem);
+			}
+			return ListaTitulaciones;
+		}
+
+		public void setListaTitulaciones(List<SelectItem> listaTitulaciones) {
+			ListaTitulaciones = listaTitulaciones;
 		}
 
 

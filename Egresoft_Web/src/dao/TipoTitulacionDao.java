@@ -17,7 +17,7 @@ public class TipoTitulacionDao {
 			List<TipoTitulacion> listaTipoTitulaciones = null;
 			Session s = HibernateUtil.getSessionFactory().openSession();
 			Transaction t = s.beginTransaction();
-			String consulta = "FROM Tipo_titulacion";
+			String consulta = "FROM TipoTitulacion";
 
 			try {
 
@@ -121,6 +121,8 @@ public class TipoTitulacionDao {
 			}
 			return tipoTitulacion;
 		}
+		
+		
 		
 		
 	}

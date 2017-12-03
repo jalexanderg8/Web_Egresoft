@@ -1,5 +1,9 @@
 package bean;
 
+import java.io.Serializable;
+import java.sql.SQLException;
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -12,25 +16,25 @@ import mensajes.MessagesView;
 
 @ManagedBean(name = "vistaEgresadoBean", eager = true)
 @ViewScoped
-public class VistaEgresadoBean {
+public class VistaEgresadoBean implements Serializable {
 
 	private long idEgresado;
-
+	private List<VistaegresadosId> listaVista;
 	private MessagesView msj = new MessagesView();
 	private Egresado egresado;
-
 	private VistaegresadosId vistaEgresado;
-	VistaEgresadoDao v = new VistaEgresadoDao();
-	EgresadoDao e = new EgresadoDao();
+	VistaEgresadoDao v;
+	EgresadoDao e;
 
 	public VistaegresadosId bucarEgresado() throws Exception {
 
 		try {
+			v = new VistaEgresadoDao();
 			vistaEgresado = v.consultarDoc(idEgresado);
 
 			if (vistaEgresado != null) {
 
-				msj.info("Consula OK ");
+				msj.info("Consulta OK ");
 
 				return vistaEgresado;
 			} else {
@@ -48,7 +52,7 @@ public class VistaEgresadoBean {
 	public Egresado BuscarEgre() {
 
 		try {
-
+			e=new EgresadoDao();
 			egresado = e.buscarEgresado(idEgresado);
 
 			if (egresado != null) {
@@ -83,7 +87,6 @@ public class VistaEgresadoBean {
 	}
 
 	public void eliminar() {
-		
 
 		try {
 			e = new EgresadoDao();
@@ -127,6 +130,17 @@ public class VistaEgresadoBean {
 
 	public void setEgresado(Egresado egresado) {
 		this.egresado = egresado;
+	}
+
+	public List<VistaegresadosId> getListaVista() throws SQLException {
+
+		v = new VistaEgresadoDao();
+		listaVista = v.listaDeVista();
+		return listaVista;
+	}
+
+	public void setListaVista(List<VistaegresadosId> listaVista) {
+		this.listaVista = listaVista;
 	}
 
 }

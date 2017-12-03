@@ -1,5 +1,5 @@
 package entidades;
-// Generated 25/11/2017 09:07:42 PM by Hibernate Tools 5.2.3.Final
+// Generated 3/12/2017 09:41:36 AM by Hibernate Tools 5.2.3.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -41,7 +41,7 @@ public class Vistaegresados implements java.io.Serializable {
 			@AttributeOverride(name = "fechaInicio", column = @Column(name = "fecha_inicio", length = 10)),
 			@AttributeOverride(name = "fechaFin", column = @Column(name = "fecha_fin", length = 10)),
 			@AttributeOverride(name = "numeroDeFicha", column = @Column(name = "numero_de_ficha", nullable = false, length = 45)),
-			@AttributeOverride(name = "nombreFormacion", column = @Column(name = "nombre_formacion", nullable = false, length = 55)),
+			@AttributeOverride(name = "nombreFormacion", column = @Column(name = "nombre_formacion", nullable = false, length = 105)),
 			@AttributeOverride(name = "tipoTitulacion", column = @Column(name = "tipo_titulacion", nullable = false, length = 45)) })
 	public VistaegresadosId getId() {
 		return this.id;

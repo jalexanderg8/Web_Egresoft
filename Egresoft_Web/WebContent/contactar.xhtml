@@ -8,9 +8,10 @@
 	template="/templates/templateUsuario/UsuarioTemplate.xhtml">
 	<ui:define name="content">
 		<h:head></h:head>
-		<h:body>
+		<h:body class="back">
+		
 			<div class="container">
-				<h3 class="center-align">Contáctenos</h3>
+				<h3 class="green-text text-darken-5 center-align">Contáctenos</h3>
 
 				<h:form id="myform" enctype="multipart/form-data">
 
@@ -23,7 +24,7 @@
 					<p:panelGrid columns="2">
 						<p:outputLabel value="Para:" />
 						<p:inputText value="#{correoBean.correo.para}" required="true" disabled="true" id="para"
-							validatorMessage="e-mail… incorrecto, si va a colocar varios separelos por coma y sin espacio">
+							validatorMessage="E-mail… Incorrecto, si va a colocar varios sepárelo por coma y sin espacio">
 							<f:validateRegex
 								pattern="^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$" />
 								
@@ -43,8 +44,7 @@
 					<br></br>
 					<br></br>
 					<br></br>
-					<br></br>
-					<br></br>
+					
 					<div class="center-align">
 						<p:commandButton value="Enviar" icon="fa fa-paper-plane" update="myform"
 							action="#{correoBean.enviarCorreo()}" />
@@ -59,6 +59,7 @@
 			</div>
 			<script type="text/javascript" src="resources/js/jquery-3.2.1.min.js"></script>
 			<script type="text/javascript" src="resources/js/materialize.js"></script>
+			
 		</h:body>
 	</ui:define>
 </ui:composition>

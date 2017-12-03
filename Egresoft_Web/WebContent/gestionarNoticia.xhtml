@@ -24,6 +24,8 @@
 					<img src="resources/imagenes/LOGO VERDE.png" style="width: 100px'" />
 					<h1 class="green-text text-darken-5">Gestionar Noticias</h1>
 				</div>
+				<p:messages autoUpdate="true" severity="error,fatal,info,warn"
+								closable="true" life="2000"></p:messages>
 				<h:panelGrid>
 
 
@@ -35,18 +37,18 @@
 						<p:outputLabel>Imagen</p:outputLabel>
 						<p:spacer width="100px" height="10px"></p:spacer>
 						<p:fileUpload value="#{noticiasBean.file}" mode="simple"
-							skinSimple="true" label="Escoger imagen" />
+							skinSimple="true" label="Seleccioné imagen" />
 
 						<br></br>
 						<br></br>
 						<p:outputLabel>Nombre de la Noticia: </p:outputLabel>
-						<p:inputTextarea rows="1"
+						<p:inputTextarea rows="1" required="true" requiredMessage="Campo nombre noticia es obligatorio"
 							value="#{noticiasBean.objNoticia.nombreNoticia}"></p:inputTextarea>
 
 						<br></br>
 						<br></br>
-						<p:outputLabel>Descripcion: </p:outputLabel>
-						<p:inputTextarea rows="1"
+						<p:outputLabel>Descripción: </p:outputLabel>
+						<p:inputTextarea rows="1" required="true" requiredMessage="Campo descripción de la noticia es obligatorio"
 							value="#{noticiasBean.objNoticia.descripcionNoticia}"></p:inputTextarea>
 
 						<br></br>
@@ -87,14 +89,14 @@
 						</p:column>
 						<p:column>
 							<f:facet name="header">
-								<h:outputText value="descripcion  de noticia"></h:outputText>
+								<h:outputText value="descripción de la  noticia"></h:outputText>
 							</f:facet>
 							<p:outputLabel value="#{noticia.descripcionNoticia}"></p:outputLabel>
 						</p:column>
 
 						<p:column>
 							<f:facet name="header">
-								<h:outputText value="elimnar"></h:outputText>
+								<h:outputText value="eliminar"></h:outputText>
 							</f:facet>
 							<p:commandButton update="tabla"
 								style="background: #F39C12 ; width:60px; height:60px;"
@@ -109,6 +111,7 @@
 			<script type="text/javascript"
 				src="resources/js/jquery-3.2.1.min.js.js"></script>
 			<script type="text/javascript" src="resources/js/materialize.js"></script>
+		
 		</h:body>
 	</ui:define>
 </ui:composition>

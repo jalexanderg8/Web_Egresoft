@@ -325,8 +325,8 @@ public class EgresadoDao {
 }
 
 	
-/*//CONSULTA PARA EL LOGIN
-	public Egresado consultarEgresado(String emailPrincipal, String contrasena) {
+
+	public Egresado iniciarEgresado(String emailPrincipal, String contrasena) {
 		System.out.println("Entro al dao a buscar un usuario por nombre y contraseña ");
 		Egresado egre = null;
 		
@@ -335,6 +335,7 @@ public class EgresadoDao {
 		System.out.println("Abro conexion para buscar");
 		try {
 			t = s.beginTransaction();
+			System.out.println("se realiza la consulta");
 			String sql = "SELECT * FROM egresado WHERE email_principal = :email_principal and contrasena = :contrasena ";
 			SQLQuery query = s.createSQLQuery(sql);
 			query.addEntity(Egresado.class);
@@ -355,7 +356,7 @@ public class EgresadoDao {
 			s.close();
 		}
 		return egre;
-	}*/
+	}
 	
 	
 	
@@ -455,6 +456,7 @@ public class EgresadoDao {
 			
 		}
 	}
+	
 	
 	
 }

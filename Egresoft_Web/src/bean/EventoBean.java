@@ -17,6 +17,7 @@ import dao.ConveniosDao;
 import dao.EventosDao;
 import entidades.Convenio;
 import entidades.Evento;
+import mensajes.MessagesView;
 
 
 
@@ -27,10 +28,8 @@ public class EventoBean {
 
 	
      EventosDao miEventoDao=new EventosDao();
-	public static ArrayList<Evento> ListaEventos;;
-
-	
-    
+	public static ArrayList<Evento> ListaEventos;
+	MessagesView msj=new MessagesView();
 	private Evento ObjEvento=new Evento();
 	private UploadedFile file;	
 
@@ -89,7 +88,7 @@ public class EventoBean {
     	//contemplar validaciones de las fotos que si hay error muestre algun mensaje
     	//consultar();
     	
-    	
+    	msj.info("Evento registrado satisfactoriamente");
     	//return "gestionarConvenios.jsf";
     		   	
     }
@@ -112,7 +111,7 @@ public class EventoBean {
     	
     	miEventoDao.eliminar(evento);
     	ListaEventos.remove(evento);
-    	
+    	msj.info("Evento eliminado satisfactoriamente");
     	
     }
     

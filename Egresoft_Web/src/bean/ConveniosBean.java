@@ -15,6 +15,7 @@ import org.primefaces.model.UploadedFile;
 
 import dao.ConveniosDao;
 import entidades.Convenio;
+import mensajes.MessagesView;
 
 
 
@@ -31,6 +32,7 @@ public class ConveniosBean {
     
 	private Convenio ObjConvenio=new Convenio();
 	private UploadedFile file;	
+	private MessagesView msj=new MessagesView();
 
 	public ConveniosBean() {}
 	
@@ -88,10 +90,11 @@ public class ConveniosBean {
     	
     	
     	//return "gestionarConvenios.jsf";
-    		   	
+    	msj.info("Convenio registrado satisfactoriamente");   	
     }
     
-    public  void consultar(){
+   
+	public  void consultar(){
     	System.err.println("en guardar ");
     	this.ListaConvenios=new ArrayList<Convenio>();
     	System.out.println("la lista antes de consultar esta asi: "+ListaConvenios.size());
@@ -100,7 +103,7 @@ public class ConveniosBean {
     	System.out.println("la lista despues de consultar quedo asi: "+ListaConvenios.size());
     	
     	//return "convenios.jsf";
-
+    	
     	
     }
    
@@ -109,9 +112,19 @@ public class ConveniosBean {
     	
     miConvenioDao.eliminar(convenioo);	
     	ListaConvenios.remove(convenioo);
+    	msj.info("Convenio eliminado satisfactoriamente");
+    	
     	
     	return "gestionarConvenios.jsf";
     }
+
+	public MessagesView getMsj() {
+		return msj;
+	}
+
+	public void setMsj(MessagesView msj) {
+		this.msj = msj;
+	}
 
 
 }

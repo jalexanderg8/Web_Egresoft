@@ -17,7 +17,7 @@
 		<h:body>
 			<br></br>
 			<h4 class="green-text text-darken-5 center-align">Bienvenido a
-				la Gestion de Datos de Egresados</h4>
+				la gestión de datos de egresados</h4>
 
 			<br></br>
 
@@ -63,7 +63,7 @@
 				<p:spacer width="10px" height="10px"></p:spacer>
 				<h:form id="formularioConsulta">
 
-					<p:dataList id="tablaConsulta" emptyMessage="No hay Egresado "
+					<p:dataList id="tablaConsulta" emptyMessage="No hay Egresados "
 						value="#{vistaEgresadoBean.vistaEgresado}" var="egre">
 						<p:panel>
 							<div class="row">
@@ -74,7 +74,7 @@
 										value="#{egre.tipoDocumento}">
 
 									</p:inputText>
-									<label class="active" for="uno">Tipo De Documento</label>
+									<label class="active" for="uno">Tipo de Documento</label>
 								</div>
 
 
@@ -87,7 +87,7 @@
 										value="#{egre.idEgresado}">
 
 									</p:inputText>
-									<label class="active" for="dos">Numero De Documento</label>
+									<label class="active" for="dos">Numero de Documento</label>
 								</div>
 							</div>
 							<div class="row">
@@ -130,7 +130,7 @@
 										value="#{egre.telefonoPrincipal}">
 
 									</p:inputText>
-									<label class="active" for="seix">Numero De Telefono
+									<label class="active" for="seix">Numero de Teléfono
 										Egresado</label>
 								</div>
 							</div>
@@ -187,7 +187,7 @@
 										value="#{egre.tipoTitulacion}">
 
 									</p:inputText>
-									<label class="active" for="once">Tipo Titulacion</label>
+									<label class="active" for="once">Tipo Titulación</label>
 								</div>
 							</div>
 							<div class="row">
@@ -198,7 +198,7 @@
 										value="#{egre.nombreFormacion}">
 
 									</p:inputText>
-									<label class="active" for="doce">Nombre de la Formacion</label>
+									<label class="active" for="doce">Nombre de la Formación</label>
 								</div>
 							</div>
 							<div class="row">
@@ -232,7 +232,7 @@
 
 									</p:inputText>
 									<label class="active" for="quince">Fecha Inicio
-										Formacion</label>
+										Formación</label>
 								</div>
 							</div>
 							<div class="row">
@@ -244,7 +244,7 @@
 
 									</p:inputText>
 									<label class="active" for="dieciseis">Fecha Fin
-										Formacion</label>
+										Formación</label>
 								</div>
 							</div>
 							<p:spacer width="230px" height="10px"></p:spacer>
@@ -270,7 +270,7 @@
 					<p:dialog id="dlgModificar" widgetVar="dialogModificar"
 						resizable="false" showEffect="explode" hideEffect="explode"
 						modal="true" >
-						<p:dataList emptyMessage="No hay Informacion"
+						<p:dataList emptyMessage="No hay Información"
 							value="#{vistaEgresadoBean.egresado}" var="egresa">
 							<p:panelGrid columns="2" >
 
@@ -303,13 +303,13 @@
 								</p:inputText>
 
 
-								<p:outputLabel value="Telefono Principal" />
+								<p:outputLabel value="Teléfono Principal" />
 								<p:inputText value="#{egresa.telefonoPrincipal}" style="width: 400px;">
 
 								</p:inputText>
 
 
-								<p:outputLabel value="Telefono Alterno" />
+								<p:outputLabel value="Teléfono Alterno" />
 								<p:inputText value="#{egresa.telefonoAlterno}" style="width: 400px;">
 
 								</p:inputText>
@@ -344,7 +344,7 @@
 								<p:outputLabel value="Modalidad" />
 								<p:selectOneMenu id="modalidad" 
 									value="#{egresa.modalidad}">
-									
+									<f:selectItem itemValue="" itemLabel="Seleccione"/>
 									<f:selectItem itemValue="PRESENCIAL" itemLabel="PRESENCIAL" />
 									<f:selectItem itemValue="COMBINADA" itemLabel="COMBINADA" />
 									<f:selectItem itemValue="VIRTUAL" itemLabel="VIRTUAL" />
@@ -352,12 +352,12 @@
 								</p:selectOneMenu>
 								
 
-								<p:outputLabel value="Fecha Inicio Formacion" />
+								<p:outputLabel value="Fecha Inicio Formación" />
 								<p:calendar id="fechaInicio" value="#{egresa.fechaInicio}"
 									pattern="dd-MM-yyyy" mask="true" />
 
 
-								<p:outputLabel value="Fecha Fin Formacion" />
+								<p:outputLabel value="Fecha Fin Formación" />
 								<p:calendar id="fechaFin" value="#{egresa.fechaFin}"
 									pattern="dd-MM-yyyy" mask="true" />
 
@@ -378,7 +378,8 @@
 					<p:dialog id="dlgEliminar" widgetVar="dialogEliminar"
 						resizable="false" showEffect="explode" hideEffect="explode"
 						modal="true">
-						<h:outputText value="Desea eliminar este registro?" />
+						<h:outputText value="¿Desea eliminar este registro?" />
+						<br></br>
 						<p:commandButton value="SI"
 							actionListener="#{vistaEgresadoBean.eliminar()}"
 							update=":formularioConsulta:tablaConsulta"
@@ -393,6 +394,7 @@
 			<!--  <script type="text/javascript"
 				src="resources/js/jquery-3.2.1.min.js.js"></script> -->
 			<script type="text/javascript" src="resources/js/materialize.js"></script>
+			
 		</h:body>
 	</ui:define>
 </ui:composition>

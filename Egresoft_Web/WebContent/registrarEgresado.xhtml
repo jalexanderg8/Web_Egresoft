@@ -18,12 +18,14 @@
 						<h:form>
 
 							<p:growl id="growl" sticky="true" showDetail="true" />
+							<p:messages autoUpdate="true" severity="error,fatal,info,warn"
+								closable="true" life="2000"></p:messages>
 
 							<p:wizard flowListener="#{userWizard.onFlowProcess}"
 								nextLabel="Siguiente" backLabel="Atras">
 								<p:tab id="personal" title="Verificación de Identidad">
 									<p:panel header="Verificación de Identidad">
-										<p:messages />
+
 										<h:panelGrid columns="2" columnClasses="label, value">
 
 											<p:fieldset legend="Verificación" toggleable="true"
@@ -33,21 +35,21 @@
 														height="90px" />
 												</center>
 												<p:ajax event="toggle"
-													listener="#{fieldsetView.handleToggle}" update="" />
+													listener="#{fieldsetView.handleToggle}" />
 												<h:panelGrid columns="2" cellpadding="5">
 
 													<h:outputText value="Numero de Documento: *" />
 													<p:inputText id="numeroDocumento"
 														value="#{egresadoBean.egresado.idEgresado}"
 														placeholder="cedula" required="true"
-														title="el campo de la cedula es requerido"
-														label="El campo del documento  es requerido">
-														<f:validateLongRange minimum="1000000"
-															maximum="9999999999999"></f:validateLongRange>
+														validatorMessage="ingrese un documento valido">
+														<f:validateLength minimum="5" maximum="15" />
+
 													</p:inputText>
 													<p:tooltip for="numeroDocumento"
-														value="Ingrese un numero de documento" showEffect="clip"
-														hideEffect="explode" data-position="left" />
+														value="Ingrese un numero de documento"
+														showEffect="explode" hideEffect="explode"
+														data-position="left" />
 
 												</h:panelGrid>
 											</p:fieldset>
@@ -60,44 +62,31 @@
 								</p:tab>
 
 								<p:tab id="Estudio" title="Actualizar Datos">
+
 									<p:panel header="Actualizar Datos">
-										<p:messages id="messages" showDetail="true" autoUpdate="true"
-											closable="true" severity="error,fatal,info,warn" life="200" />
 										<h:panelGrid columns="2" columnClasses="label, value">
 											<p:fieldset legend="Actualizar" toggleable="true"
 												toggleSpeed="500">
 												<p:ajax event="toggle"
-													listener="#{fieldsetView.handleToggle}" update="" />
+													listener="#{fieldsetView.handleToggle}" />
 												<h:panelGrid columns="2" cellpadding="5">
 
 													<h:outputText value="Correo Alterno:" />
 													<p:inputText id="correo"
 														value="#{egresadoBean.egresado.emailAlterno}"
-														placeholder="Correo Alterno"
-														title="El campo correo es requerido ejemplo: xxxx@domio.xx"
-														label="El campo correo es requerido ejemplo: xxxx@domio.xx">
-														<f:validateRegex
-															pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$" />
+														placeholder="Correo Alterno">
 													</p:inputText>
 
 													<h:outputText value="Teléfono Principal: " />
 													<p:inputText id="telefonoPrincipal"
 														value="#{egresadoBean.egresado.telefonoPrincipal}"
-														placeholder="Numero de Celular Principal"
-														title="El telefono es requerido debe empezar por 3 y tener un total de 10 digitos"
-														label="El telefono es requerido debe empezar por 3
-                                                     y tener un total de 10 digitos">
-														<f:validateRegex pattern="^[3][0-9]{9}$" />
+														placeholder="Numero de Celular Principal">
 													</p:inputText>
 
 													<h:outputText value="Teléfono Alterno: " />
 													<p:inputText id="telefonoAlterno"
 														value="#{egresadoBean.egresado.telefonoAlterno}"
-														placeholder="Numero de Celular alterno"
-														title="El telefono es requerido debe empezar por 3 y tener un total de 10 digitos"
-														label="El telefono es requerido debe empezar por 3
-                                                     y tener un total de 10 digitos">
-														<f:validateRegex pattern="^[3][0-9]{9}$" />
+														placeholder="Numero de Celular alterno">
 													</p:inputText>
 
 
@@ -106,8 +95,10 @@
 														value="#{egresadoBean.egresado.lugarResidencia}"
 														placeholder="Ciudad de Residencia" />
 
+
 													<h:outputText value="Modalidad de la Formacion " />
 													<p:selectOneMenu id="modalidad" required="true"
+														requiredMessage="Selecione una modalidad"
 														value="#{egresadoBean.egresado.modalidad}">
 														<f:selectItem itemValue=""
 															itemLabel="Seleccione Modalidad" />
@@ -117,24 +108,34 @@
 														<f:selectItem itemValue="VIRTUAL" itemLabel="VIRTUAL" />
 														<f:selectItem itemValue="A DISTANCIA"
 															itemLabel="A DISTANCIA" />
+														<p:message for="modalidad"
+															style="width:300px; height:30px; margin-bottom:5px"></p:message>
 													</p:selectOneMenu>
 
 
-													<h:outputText value="Fecha inicio de la formacion" />
-													<p:calendar id="fechaInicio"
-														value="#{egresadoBean.egresado.fechaInicio}" 
+
+													<h:outputText value="Fecha inicio de la formación" />
+													<p:calendar id="fechaInicio" required="true"
+														requiredMessage="Seleccione una fecha Valida"
+														value="#{egresadoBean.egresado.fechaInicio}"
 														monthNavigator="true" pattern="yyyy-MM-dd" locale="es"
-														 yearNavigator="true" yearRange="2000:2030"
-														effect="fold"  />
-																										
-											
-													<h:outputText value="Fecha Fin Formacion "  />
-													<p:calendar id="fechaFin" 
+														yearNavigator="true" yearRange="2000:2030" effect="fadeIn">
+														<p:message for="fechaInicio"
+															style="width:250px; height:30px; margin-bottom:5px"></p:message>
+													</p:calendar>
+
+												
+
+
+													<h:outputText value="Fecha Fin formación " />
+													<p:calendar id="fechaFin" required="true"
+														requiredMessage="Seleccione una fecha Valida" 
 														value="#{egresadoBean.egresado.fechaFin}" locale="es"
-														 monthNavigator="true" pattern="yyyy-MM-dd"
-														 yearNavigator="true" yearRange="2000:2030"
-														 effect="fold"  />
-													
+														monthNavigator="true" pattern="yyyy-MM-dd"
+														yearNavigator="true" yearRange="2000:2030" effect="fadeIn">
+														<p:message for="fechaFin"
+															style="width:250px; height:30px; margin-bottom:5px"></p:message>
+													</p:calendar>
 
 
 												</h:panelGrid>
@@ -145,7 +146,6 @@
 
 								<p:tab id="contraseña" title="Modificar Contraseña">
 									<p:panel header="Modificar Contraseña">
-										<p:messages />
 										<h:panelGrid columns="2" columnClasses="label, value">
 											<p:fieldset legend="Contraseña" toggleable="true"
 												toggleSpeed="500">
@@ -172,7 +172,7 @@
 														goodLabel="Medio" strongLabel="Fuerte"
 														value="#{userWizard.segundaContraseña}" size="20"
 														required="true">
-														
+
 
 													</p:password>
 													<h:message for="confirmar" style="color:red"></h:message>
@@ -198,12 +198,12 @@
 												<h:inputText value="#{egresadoBean.egresado.emailAlterno}"
 													styleClass="outputLabel" disabled="true" />
 
-												<h:outputText value="4. Telefono Principal: " />
+												<h:outputText value="4. Teléfono Principal: " />
 												<h:inputText
 													value="#{egresadoBean.egresado.telefonoPrincipal}"
 													styleClass="outputLabel" disabled="true" />
 
-												<h:outputText value="5. Telefono Alterno: " />
+												<h:outputText value="5. Teléfono Alterno: " />
 												<h:inputText
 													value="#{egresadoBean.egresado.telefonoAlterno}"
 													styleClass="outputLabel" disabled="true" />
@@ -229,11 +229,11 @@
 												<h:inputText value="#{userWizard.segundaContraseña}"
 													styleClass="outputLabel" disabled="true" />
 
-												<h:outputText value="10. Fecha Inicio Formacion: " />
+												<h:outputText value="10. Fecha Inicio Formación: " />
 												<h:inputText value="#{egresadoBean.egresado.fechaInicio}"
 													styleClass="outputLabel" disabled="true" />
 
-												<h:outputText value="11. Fecha Fin Formacion: " />
+												<h:outputText value="11. Fecha Fin Formación: " />
 												<h:inputText value="#{egresadoBean.egresado.fechaFin}"
 													styleClass="outputLabel" disabled="true" />
 
@@ -257,6 +257,18 @@
 			<!-- <script type="text/javascript"
 				src="resources/js/jquery-3.2.1.min.js.js"></script> -->
 			<script type="text/javascript" src="resources/js/materialize.js"></script>
+			<script>
+			 $('.datepicker').pickadate({
+				    selectMonths: true, // Creates a dropdown to control month
+				    selectYears: 15, // Creates a dropdown of 15 years to control year,
+				    today: 'Today',
+				    clear: 'Clear',
+				    close: 'Ok',
+				    closeOnSelect: false // Close upon selecting a date,
+				  });
+
+
+			</script>
 
 		</h:body>
 	</ui:define>

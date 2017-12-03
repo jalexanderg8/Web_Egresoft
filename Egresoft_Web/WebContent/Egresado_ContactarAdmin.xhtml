@@ -1,78 +1,82 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-      xmlns:ui="http://java.sun.com/jsf/facelets" 
-      xmlns:h="http://java.sun.com/jsf/html" 
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 
-		<h:head></h:head>
-<h:body background="resources/imagenes/logoFondo.png">
+<h:head></h:head>
+<h:body>
+	<section class="back">
+	<div class="titulo">
 
-      			<div class="titulo">
-      
 		<div class="container">
-				<h3 class="center-align">Contáctenos</h3>
+			<h3 class="green-text text-darken-5 center-align">Contáctenos</h3>
 
-				<h:form id="myform" enctype="multipart/form-data">
+			<h:form id="myform" enctype="multipart/form-data">
 
-					<p:growl id="messages1" showDetail="true" />
-					<p:messages id="messages" showDetail="true" autoUpdate="true"
-						closable="true" severity="error,fatal,info,warn" life="5200" />
+				<p:growl id="messages1" showDetail="true" />
+				<p:messages id="messages" showDetail="true" autoUpdate="true"
+					closable="true" severity="error,fatal,info,warn" life="5200" />
 
-					<p:panelGrid columns="2">
-						<p:outputLabel value="Para:" />
-						<p:inputText value="#{correoBean.correo.para}" required="true" disabled="true"
-							validatorMessage="e-mail… incorrecto, si va a colocar varios separelos por coma y sin espacio">
-							<f:validateRegex
-								pattern="^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$" />
-						</p:inputText>
+				<p:panelGrid columns="2">
+					<p:outputLabel value="Para:" />
+					<p:inputText value="#{correoBean.correo.para}" required="true"
+						disabled="true"
+						validatorMessage="e-mail… incorrecto, si va a colocar varios sepárelos por coma y sin espacio">
+						<f:validateRegex
+							pattern="^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$" />
+					</p:inputText>
 
-						<p:outputLabel value="Asunto:" />
-						<p:inputText value="#{correoBean.correo.asunto}" required="true" />
+					<p:outputLabel value="Asunto:" />
+					<p:inputText value="#{correoBean.correo.asunto}" required="true" />
 
-						<p:outputLabel value="Cuerpo del mensaje:" />
-						<p:inputTextarea value="#{correoBean.correo.cuerpo}"
-							required="true" />
+					<p:outputLabel value="Cuerpo del mensaje:" />
+					<p:inputTextarea value="#{correoBean.correo.cuerpo}"
+						required="true" />
 
-					</p:panelGrid>
-					<br></br>
-					<br></br>
-					<br></br>
-					<br></br>
-					<br></br>
-					<br></br>
-					<div class="center-align">
-						<p:commandButton value="Enviar"
-							action="#{correoBean.enviarCorreo()}" />
-						<p:spacer width="50" height="10" />
-						<p:button value="Cancelar" outcome="index.jsf"  />
-					</div>
-					<br></br>
-					<br></br>
-					<br></br>
-				</h:form>
-			</div>
-      
-      
-         <!-- INFORMACION CARLOS ARTURO -->
-   
-    
-    <h3 class="center-align">Administrador del Sistema</h3>
-    <h5 class="center-align">Carlos Arturo Valencia Montoya</h5>
-    <br />
-    <h6 class="center align">Aseguramiento par de la calidad</h6>
-    <p class="center-align">Telefono : 7461417 ext 62673</p>
-    <p class="center-align">Celular : 3206879782</p>
-    <p class="center-align">Email : cvalenciam@sena.edu.co</p>
-    
-   
-    
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.2938797679853!2d-75.67047268523825!3d4.5410251967007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e38f5aaa70689d1%3A0x46074d66ee20f3a2!2sCentro+de+Comercio+y+Turismo+SENA+Gal%C3%A1n!5e0!3m2!1ses!2sco!4v1505704899660" width="1380" height="450" style="border:0"/>
-    </div>
- 
-    
-     <ui:insert name="Egresado_ContactarAdmin" />
-   </h:body>
-   
+				</p:panelGrid>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<div class="center-align">
+					<p:commandButton value="Enviar"
+						action="#{correoBean.enviarCorreo()}" />
+					<p:spacer width="50" height="10" />
+					<p:button value="Cancelar" outcome="index.jsf" />
+				</div>
+				<br></br>
+				<br></br>
+				<br></br>
+			</h:form>
+		</div>
+
+
+		<!-- INFORMACION CARLOS ARTURO -->
+
+
+		<h3 class="green-text text-darken-5 center-align">Administrador del Sistema</h3>
+		
+		<br />
+		<h6 class="green-text text-darken-5 center-align">Aseguramiento par de la calidad</h6>
+		<p class="green-text text-darken-5 center-align">Teléfono : 7461417 Ext. 62673</p>
+		<p class="green-text text-darken-5 center-align">Celular : 3206879782</p>
+		<br /><br></br>
+
+
+
+		<iframe
+			src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.2938797679853!2d-75.67047268523825!3d4.5410251967007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e38f5aaa70689d1%3A0x46074d66ee20f3a2!2sCentro+de+Comercio+y+Turismo+SENA+Gal%C3%A1n!5e0!3m2!1ses!2sco!4v1505704899660"
+			width="1380" height="450" style="border: 0" />
+	</div>
+
+
+	<ui:insert name="Egresado_ContactarAdmin" />
+	</section>
+</h:body>
+
 </html>

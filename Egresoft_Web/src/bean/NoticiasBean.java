@@ -14,6 +14,7 @@ import org.primefaces.model.UploadedFile;
 import dao.NoticiasDao;
 import entidades.Evento;
 import entidades.Noticia;
+import mensajes.MessagesView;
 
 @ManagedBean
 @SessionScoped
@@ -21,8 +22,8 @@ import entidades.Noticia;
 public class NoticiasBean {
 
 	NoticiasDao noticiaDao = new NoticiasDao();
-	public static ArrayList<Noticia> ListaNoticias;;
-
+	public static ArrayList<Noticia> ListaNoticias;
+	MessagesView msj=new MessagesView();
 	private Noticia ObjNoticia = new Noticia();
 	private UploadedFile file;
 
@@ -77,6 +78,7 @@ public class NoticiasBean {
 
 		noticiaDao.guardarNotiEvento(this.ObjNoticia, this.file.getFileName());
 
+		msj.info("Noticia registrada exitosamente");
 		// contemplar validaciones de las fotos que si hay error muestre algun
 		// mensaje
 		// consultar();
@@ -101,6 +103,7 @@ public class NoticiasBean {
 
 		noticiaDao.eliminar(noticia);
 		ListaNoticias.remove(noticia);
+		msj.info("Noticia eliminada exitosamente");
 
 	}
 
