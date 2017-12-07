@@ -12,6 +12,7 @@ import org.primefaces.event.FlowEvent;
 
 import dao.EgresadoDao;
 import entidades.Egresado;
+import mensajes.MessagesView;
 
 @ManagedBean
 @ViewScoped
@@ -28,6 +29,8 @@ public class UserWizard implements Serializable {
 	public static String primeraContraseña = null;
 	public String segundaContraseña=null;
 	private static boolean verificado = false;
+	private MessagesView msj=new MessagesView();
+	private Egresado egresadoAtributos;
 
 	private boolean pasar;
 

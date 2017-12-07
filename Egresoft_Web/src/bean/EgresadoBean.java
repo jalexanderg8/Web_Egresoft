@@ -3,12 +3,16 @@ package bean;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -278,6 +282,7 @@ public class EgresadoBean implements Serializable {
 		}
 	}
 
+	
 	public void eliminarEgresado() {
 
 		try {
@@ -298,6 +303,24 @@ public class EgresadoBean implements Serializable {
 
 	public void setEgreDao(EgresadoDao daoEgresado) {
 		this.daoEgresado = daoEgresado;
+	}
+	
+	
+	public void validarCelular(FacesContext arg0, UIComponent arg1, Object arg2) throws ValidatorException {
+		
+		if (((String) arg2).length() != 0) {
+		
+			String cadenaCelular = (String) arg2;
+
+			Pattern pat = Pattern.compile("^[3][0-9]{9}$");
+			Matcher mat = pat.matcher(cadenaCelular);
+
+			if (!mat.matches()) {
+				throw new ValidatorException(
+						new FacesMessage("Ingrese un numero valido"));
+			}
+		}
+		
 	}
 
 }

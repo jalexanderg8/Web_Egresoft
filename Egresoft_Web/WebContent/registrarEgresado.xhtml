@@ -16,9 +16,7 @@
 
 					<p:layoutUnit position="center">
 						<h:form>
-
-							<p:growl id="growl" sticky="true" showDetail="true" />
-							<p:messages autoUpdate="true" severity="error,fatal,info,warn"
+						 <p:messages autoUpdate="true" showDetail="false"
 								closable="true" life="2000"></p:messages>
 
 							<p:wizard flowListener="#{userWizard.onFlowProcess}"
@@ -38,12 +36,13 @@
 													listener="#{fieldsetView.handleToggle}" />
 												<h:panelGrid columns="2" cellpadding="5">
 
-													<h:outputText value="Numero de Documento: *" />
-													<p:inputText id="numeroDocumento"
-														value="#{egresadoBean.egresado.idEgresado}"
-														placeholder="cedula" required="true"
-														validatorMessage="ingrese un documento valido">
-														<f:validateLength minimum="5" maximum="15" />
+													<h:outputText  value="Numero de Documento: *" />
+													<p:inputText  id="numeroDocumento" required="true" 
+														value="#{egresadoBean.egresado.idEgresado}" 
+														placeholder="cedula" label="ingrese un numero de documento valido"  >
+														<f:validateLength minimum="5" maximum="20"></f:validateLength>
+														<p:message for="numeroDocumento" showDetail="false"
+															style="width:30px; height:30px; margin-bottom:5px"></p:message>
 
 													</p:inputText>
 													<p:tooltip for="numeroDocumento"
@@ -73,32 +72,46 @@
 
 													<h:outputText value="Correo Alterno:" />
 													<p:inputText id="correo"
+														validator="#{validadoresBean.correo}"
 														value="#{egresadoBean.egresado.emailAlterno}"
 														placeholder="Correo Alterno">
+														
+															<p:message for="correo"
+															style="width:350px; height:30px; margin-bottom:5px"></p:message>
 													</p:inputText>
 
 													<h:outputText value="Teléfono Principal: " />
-													<p:inputText id="telefonoPrincipal"
+													<p:inputText id="telefonoPrincipal" 
+														validator="#{validadoresBean.celular}"
 														value="#{egresadoBean.egresado.telefonoPrincipal}"
 														placeholder="Numero de Celular Principal">
+														<p:message for="telefonoPrincipal"
+															style="width:350px; height:30px; margin-bottom:5px"></p:message>
 													</p:inputText>
 
 													<h:outputText value="Teléfono Alterno: " />
 													<p:inputText id="telefonoAlterno"
+													validator="#{validadoresBean.celular}"
 														value="#{egresadoBean.egresado.telefonoAlterno}"
 														placeholder="Numero de Celular alterno">
+														<p:message for="telefonoAlterno" 
+															style="width:350px; height:30px; margin-bottom:5px"></p:message>
 													</p:inputText>
 
 
 													<h:outputText value="Ciudad de Residencia: " />
-													<p:inputText
-														value="#{egresadoBean.egresado.lugarResidencia}"
-														placeholder="Ciudad de Residencia" />
+													<p:inputText id="ciudad"  
+													validator="#{validadoresBean.ciudad}"
+														value="#{egresadoBean.egresado.lugarResidencia}" 
+														placeholder="Ciudad de Residencia" >
+														<p:message for="ciudad"
+															style="width:250px; height:30px; margin-bottom:5px"></p:message>
+														</p:inputText>
 
-
+													
 													<h:outputText value="Modalidad de la Formacion " />
 													<p:selectOneMenu id="modalidad" required="true"
-														requiredMessage="Selecione una modalidad"
+														requiredMessage="Seleccione una modalidad"
 														value="#{egresadoBean.egresado.modalidad}">
 														<f:selectItem itemValue=""
 															itemLabel="Seleccione Modalidad" />
@@ -108,33 +121,32 @@
 														<f:selectItem itemValue="VIRTUAL" itemLabel="VIRTUAL" />
 														<f:selectItem itemValue="A DISTANCIA"
 															itemLabel="A DISTANCIA" />
-														<p:message for="modalidad"
-															style="width:300px; height:30px; margin-bottom:5px"></p:message>
 													</p:selectOneMenu>
-
+													
+													
 
 
 													<h:outputText value="Fecha inicio de la formación" />
-													<p:calendar id="fechaInicio" required="true"
+													<p:calendar id="fechaInicio" required="true" 
 														requiredMessage="Seleccione una fecha Valida"
 														value="#{egresadoBean.egresado.fechaInicio}"
 														monthNavigator="true" pattern="yyyy-MM-dd" locale="es"
 														yearNavigator="true" yearRange="2000:2030" effect="fadeIn">
-														<p:message for="fechaInicio"
-															style="width:250px; height:30px; margin-bottom:5px"></p:message>
+														<p:message for="fechaInicio" showDetail="false"
+															style="width:30px; height:30px; margin-bottom:5px"></p:message>
 													</p:calendar>
 
 												
 
 
 													<h:outputText value="Fecha Fin formación " />
-													<p:calendar id="fechaFin" required="true"
+													<p:calendar id="fechaFin" required="true" 
 														requiredMessage="Seleccione una fecha Valida" 
 														value="#{egresadoBean.egresado.fechaFin}" locale="es"
 														monthNavigator="true" pattern="yyyy-MM-dd"
 														yearNavigator="true" yearRange="2000:2030" effect="fadeIn">
-														<p:message for="fechaFin"
-															style="width:250px; height:30px; margin-bottom:5px"></p:message>
+														<p:message for="fechaFin" showDetail="false"
+															style="width:30px; height:30px; margin-bottom:5px"></p:message>
 													</p:calendar>
 
 
@@ -257,18 +269,6 @@
 			<!-- <script type="text/javascript"
 				src="resources/js/jquery-3.2.1.min.js.js"></script> -->
 			<script type="text/javascript" src="resources/js/materialize.js"></script>
-			<script>
-			 $('.datepicker').pickadate({
-				    selectMonths: true, // Creates a dropdown to control month
-				    selectYears: 15, // Creates a dropdown of 15 years to control year,
-				    today: 'Today',
-				    clear: 'Clear',
-				    close: 'Ok',
-				    closeOnSelect: false // Close upon selecting a date,
-				  });
-
-
-			</script>
 
 		</h:body>
 	</ui:define>

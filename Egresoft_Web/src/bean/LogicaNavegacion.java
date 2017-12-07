@@ -15,6 +15,7 @@ import entidades.Egresado;
 import mensajes.MessagesView;
 
 
+@SuppressWarnings("serial")
 @ManagedBean
 @ViewScoped
 @RequestScoped
@@ -22,7 +23,8 @@ public class LogicaNavegacion implements Serializable {
 
 	
 	AdminDao miAdminDao;
-	Egresado egresado;
+	private Egresado egresado;
+	private Egresado egreEvento;
 	Administrador administrador;
 	EgresadoDao miEgresadoDao;
 	private MessagesView msj = new MessagesView();
@@ -160,6 +162,8 @@ public String iniciarSesion() throws Exception{
 			// TODO: handle exception
 		}
 	}
+	
+	
 
 
 	public void cerrarSesion() {
@@ -184,4 +188,21 @@ public String iniciarSesion() throws Exception{
 
 	public void setMsj(MessagesView msj) {
 		this.msj = msj;
-	}}
+	}
+
+	public Egresado getEgresado() {
+		return egresado;
+	}
+
+	public void setEgresado(Egresado egresado) {
+		this.egresado = egresado;
+	}
+
+	public Egresado getEgreEvento() {
+		return egreEvento;
+	}
+
+	public void setEgreEvento(Egresado egreEvento) {
+		this.egreEvento = egreEvento;
+	}
+	}

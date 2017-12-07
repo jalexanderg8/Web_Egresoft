@@ -27,9 +27,6 @@ public class ConveniosBean {
 	
 	ConveniosDao miConvenioDao=new ConveniosDao();
 	public static ArrayList<Convenio> ListaConvenios;;
-
-	
-    
 	private Convenio ObjConvenio=new Convenio();
 	private UploadedFile file;	
 	private MessagesView msj=new MessagesView();
@@ -62,8 +59,7 @@ public class ConveniosBean {
 
 	public void guardar(){
     	System.out.println("en guardar"+file.getContents()); 
-    	System.out.println("en guardar"+file.getFileName()); 
-	
+    	System.out.println("en guardar"+file.getFileName()); 	
         
     	try {
     		

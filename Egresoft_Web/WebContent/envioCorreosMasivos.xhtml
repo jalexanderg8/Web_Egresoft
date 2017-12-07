@@ -2,9 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-
+	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:composition xmlns:p="http://primefaces.org/ui"
 	template="/templates/templateAdministrador/AdminTemplate.xhtml">
@@ -15,12 +13,11 @@
 					type="preRenderView"></f:event>
 			</f:metadata>
 		</h:head>
+
 		<h:body>
+
 			<h4 class="green-text text-darken-5 center-align">Bienvenido a
 				Enviar correos a egresados</h4>
-
-
-			
 
 			<h:form id="formulario">
 				<div class="container-fluid">
@@ -28,49 +25,59 @@
 					<p:messages id="messages" showDetail="true" autoUpdate="true"
 						closable="true" severity="error,fatal,info,warn" life="5200" />
 
+					<p:dataTable id="tablaEgre" value="#{vistaEgresadoBean.listaVista}"
+						var="vista" emptyMessage="No hay Egresados
+						Registrados"
+						rowKey="#{vista.idEgresado}" paginator="true"
+						paginatorPosition="top" rows="25" style="margin-bottom:0">
 
-					<p:dataTable id="tablaEgre" value="#{envioCorreos.listaEgresados}" var="egre"
-						
-						emptyMessage="No hay Egresados
-						Registrados" rowKey="#{egre.idEgresado}"
-						paginator="true" paginatorPosition="top" rows="25">
-						
-						<p:ajax event="rowSelect"/>	
+						<p:ajax event="rowSelect" />
 
-						 <f:facet name="header">Envio de Correos</f:facet>
+						<f:facet name="header">
+            			Envío de Correos
+        				</f:facet>
 
-						<p:column headerText="Numero de cedula"
-							filterBy="#{egre.idEgresado}">
-							<p:outputLabel value="#{egre.idEgresado}" />
+
+						<p:column headerText="Numero de cedula" width="8%"
+							filterBy="#{vista.idEgresado}">
+							<p:outputLabel value="#{vista.idEgresado}" />
 						</p:column>
 
-						<p:column headerText="Nombres Completos"
-							filterBy="#{egre.nombres}" >
-							<p:outputLabel value="#{egre.nombres}" />
+						<p:column headerText="Nombres" width="15%"
+							filterBy="#{vista.nombres}">
+							<p:outputLabel value="#{vista.nombres}" />
 						</p:column>
 
-						<p:column headerText="Apellidos Completos"
-							filterBy="#{egre.apellidos}">
-							<p:outputLabel value="#{egre.apellidos}" />
+						<p:column headerText="Titulación" width="8%"
+							filterBy="#{vista.tipoTitulacion}">
+							<p:outputLabel value="#{vista.tipoTitulacion}" />
 						</p:column>
 
-						<p:column headerText="Correo" filterBy="#{egre.emailPrincipal}">
-							<p:outputLabel value="#{egre.emailPrincipal}" />
+						<p:column headerText="Nombre Formación" width="30%"
+							filterBy="#{vista.nombreFormacion}">
+							<p:outputLabel value="#{vista.nombreFormacion}" />
 						</p:column>
-						 <p:column id="uno" width="5%" 
-						 headerText="X" selectionMode="multiple"
-						 style="width:25px;text-align:center" >
-						 <p:selectBooleanCheckbox 
-						 value="#{envioCorreos.correoSeleccionado}"
-						 widgetVar="uno" >
-						 
-						 <p:ajax listener="#{envioCorreos.addCorreo(egre)}"/>
-						 </p:selectBooleanCheckbox>
-						 </p:column>
-						
-				</p:dataTable>
-					<br></br>
-					<br></br>
+
+						<p:column headerText="Numero de Ficha" width="8%"
+							filterBy="#{vista.numeroDeFicha}">
+							<p:outputLabel value="#{vista.numeroDeFicha}" />
+						</p:column>
+
+						<p:column headerText="Correo" width="20%"
+							filterBy="#{vista.emailPrincipal}">
+							<p:outputLabel value="#{vista.emailPrincipal}"
+								style="text-color:red" />
+						</p:column>
+
+						<p:column width="5%" headerText="X" style="text-align:center">
+							<p:selectBooleanCheckbox
+								value="#{envioCorreos.correoSeleccionado}">
+								<p:ajax listener="#{envioCorreos.addCorreo(vista)}" />
+							</p:selectBooleanCheckbox>
+						</p:column>
+
+					</p:dataTable>
+					<br></br> <br></br>
 				</div>
 				<div class="container">
 
@@ -100,8 +107,7 @@
 						invalidFileMessage="Solamente esta permitido cargar archivos con extensión .gif, .jpg, .png, .doc, .docx, .xls, .xlsx, .pdf, .ppt . pptx" />
 
 
-					<br></br>
-					<br></br>
+					<br></br> <br></br>
 					<div class="center-align">
 						<p:commandButton value="Enviar Correo" class="button big"
 							icon="fa fa-rocket" actionListener="#{envioCorreos.enviar()}">
@@ -113,18 +119,15 @@
 
 						</p:button>
 					</div>
-
-
 				</div>
-
-
-
 			</h:form>
 			<br></br>
 			<!--  <script type="text/javascript"
 				src="resources/js/jquery-3.2.1.min.js.js"></script>  -->
 			<script type="text/javascript" src="resources/js/materialize.js"></script>
+
 		</h:body>
 	</ui:define>
 </ui:composition>
+
 </html>

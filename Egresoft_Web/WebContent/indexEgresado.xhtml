@@ -25,7 +25,7 @@
 	<ui:define name="content">
 
 		<h:body>
-		<p:messages id="messages" showDetail="true" autoUpdate="true"
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
 				closable="true" severity="error,fatal,info,warn" life="5200" />
 			<div class="row">
 				<div class="slider">
@@ -99,7 +99,7 @@
 					</div>
 				</div>
 			</div>
-
+			
 
 			<!-- 			NOTICIAS-->
 
@@ -112,24 +112,23 @@
 					</ui:include>
 				</div>
 			</div>
-
-
+			
 
 			<!-- 	PORTAL DESARROLLADORES-->
 			<div id="desarrolladores">
-			
-			<ui:include src="/EgresadoDesarrolladores.xhtml" >
-			<ui:define name="desarrolladores">
-			
-			</ui:define>
-			</ui:include>
+
+				<ui:include src="/EgresadoDesarrolladores.xhtml">
+					<ui:define name="desarrolladores">
+
+					</ui:define>
+				</ui:include>
 			</div>
 			<br />
 			<br />
 			<br />
 			<br />
-			
-			
+
+
 			<!-- 	PORTAL LABORAL-->
 
 			<div id="P_lABORAL">
@@ -154,8 +153,8 @@
 				</ui:include>
 			</div>
 
-			<script type="text/javascript"
-				src="resources/js/jquery-3.2.1.min.js.js"></script>
+			<!-- <script type="text/javascript"
+				src="resources/js/jquery-3.2.1.min.js.js"></script> -->
 			<script type="text/javascript" src="resources/js/materialize.js"></script>
 			<script>
 			$('#chipUno').addClass("orange accent-3");

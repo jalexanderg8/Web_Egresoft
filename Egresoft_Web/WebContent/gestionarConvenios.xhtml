@@ -28,17 +28,16 @@
 			<img src="resources/imagenes/LOGO AZUL.png" style="width: 100px'" />
 			<h1 class="green-text text-darken-5">Gestionar Convenios</h1>
 			</div>
-			<p:messages autoUpdate="true" severity="error,fatal,info,warn"
-								closable="true" life="2000"></p:messages>
+			
 			<h:panelGrid>
 			
 				<h:form enctype="multipart/form-data">
-					
+					<p:growl id="messages" autoUpdate="true" sticky="true"  />
 					<br></br><br></br>
 					<p:outputLabel>Imagen</p:outputLabel>
 					<p:spacer width="100px" height="10px"></p:spacer>
 					<p:fileUpload value="#{conveniosBean.file}" mode="simple" 
-					 skinSimple="true" label="Seleccioné imagen"  />
+					 skinSimple="true" label="seleccione imagen"  />
 					
 					<br></br><br></br>
 					<p:outputLabel>Nombre del Convenio: </p:outputLabel>
@@ -58,7 +57,7 @@
 					<br></br><br></br>
 					
 					<p:spacer width="350px" height="10px"></p:spacer>
-					<p:commandButton ajax="false" value="Guardar" icon="fa fa-floppy-o"
+					<p:commandButton ajax="false" value="Guardar" icon="fa fa-floppy-o" update="messages"
 						action="#{conveniosBean.guardar()}"></p:commandButton>
 						<p:spacer width="50px" height="10px"></p:spacer>
 					<p:button value="Cancelar" outcome="indexAdmin.jsf"  icon="fa fa-times-circle-o"></p:button>
@@ -69,7 +68,7 @@
 			</h:panelGrid>
 
 			<h:form>
-				<p:dataTable id="tabla" bodyrows="3" border="6"
+				<p:dataTable id="tabla" bodyrows="3" border="6" 
 					value="#{conveniosBean.listaConvenios}" var="convenio"
 					rendered="#{conveniosBean.listaConvenios.size()>=0 eq true}"
 					emptyMessage="No hay convenios registrados">
@@ -112,7 +111,7 @@
 						<center>
 							<p:commandButton
 								style="background: #F39C12 ; width:60px; height:60px;"
-								update="tabla"
+								update="tabla" 
 								actionListener="#{conveniosBean.eliminar(convenio)}"
 								icon="fa fa-bitbucket"></p:commandButton>
 
